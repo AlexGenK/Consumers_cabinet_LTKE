@@ -26,7 +26,7 @@ class ConsumersController < ApplicationController
                                       :dog_gas_num, :dog_gas_date,
                                       :energy_consumer, :gas_consumer,
                                       :manager_en_username, :manager_gas_username,
-                                      :client_username)
+                                      :client_username, :address)
   end
 
 end
