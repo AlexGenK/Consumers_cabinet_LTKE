@@ -9,6 +9,8 @@
 		<tr>
 			<th>#</th>
 			<th>Найменування</th>
+			<th class="text-center">Е/енергія</th>
+			<th class="text-center">Газ</th>
 			<th class="text-center">Надійшов запит</th>
 			<th class="text-right">ЕДРПОУ</th>
 			<th class="text-right">Код 1С</th>
@@ -20,6 +22,20 @@
 		<tr>
 			<td><%= n += 1 %></td>
 			<td><%= consumer.name %></td>
+			<td class="text-center">
+				<% if consumer.energy_consumer %>
+					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
+						&nbsp; &nbsp; <i class="fas fa-plug"></i> &nbsp; &nbsp;
+					<% end %>
+				<% end %>
+			</td>
+			<td class="text-center">
+				<% if consumer.gas_consumer %>
+					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
+						&nbsp; &nbsp; <i class="fas fa-burn"></i> &nbsp; &nbsp; 
+					<% end %>
+				<% end %>
+			</td>
 			<td></td>
 			<td class="text-right"><%= consumer.edrpou  %></td>
 			<td class="text-right"><%= consumer.onec_id %></td>
