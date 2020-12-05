@@ -1,0 +1,65 @@
+<%= form_for consumer do |f| %>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :name,"Найменування" %>
+		<%= f.text_field :name, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-8">
+		<%= f.label :full_name,"Повне найменування" %>
+		<%= f.text_field :full_name, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :director_name,"Директор" %>
+		<%= f.text_field :director_name, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :engineer_name,"Головний енергетик" %>
+		<%= f.text_field :engineer_name, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-3">
+		<%= f.label :edrpou,"Код ЕДРПОУ" %>
+		<%= f.text_field :edrpou, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :onec_id, "Номер 1С" %>
+		<%= f.number_field :onec_id, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :energy_consumer, "Споживач ел/ен." %>
+		<%= f.check_box :energy_consumer, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :gas_consumer, "Споживач газу" %>
+		<%= f.check_box :gas_consumer, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-3">
+		<%= f.label :dog_en_num, "Договір ел/енергія" %>
+		<%= f.text_field :dog_en_num, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :dog_en_date, "від" %>
+		<%= f.date_field :dog_en_date, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :dog_gas_num, "Договір газ" %>
+		<%= f.text_field :dog_gas_num, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-3">
+		<%= f.label :dog_gas_date, "від" %>
+		<%= f.date_field :dog_gas_date, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-3">
+		<%= f.button type: 'submit', class: "btn btn-outline-dark btn-block" do %>
+			<i class="fas fa-save"></i> Сохранить
+		<% end %>
+		</div>
+	</div>
+<% end %>
