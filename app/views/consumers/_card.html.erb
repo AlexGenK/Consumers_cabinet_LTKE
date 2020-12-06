@@ -1,0 +1,55 @@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title"><%= consumer.name %></h5>
+		<div class="row">
+			<div class="col-md-7">
+				<b>Повне найменування:</b><i> <%= consumer.full_name %></i>
+			</div>
+			<div class="col-md-5">
+				<b>Адреса:</b><i> <%= consumer.address %></i>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %></i>
+			</div>
+			<div class="col-md-2">
+				<b>Код 1С:</b><i> <%= consumer.onec_id %></i>
+			</div>
+			<div class="col-md-4">
+				<% if consumer.energy_consumer %>
+					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date.strftime('%d.%m.%Y')}" %></i><br>
+				<% end %>
+				<% if consumer.gas_consumer %>
+					<b>Договір газ:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date.strftime('%d.%m.%Y')}" %></i>
+				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<b>Директор:</b><i> <%= consumer.director_name %></i>
+			</div>
+			<div class="col-md-6">
+				<b>Головний енергетик:</b><i> <%= consumer.engineer_name %></i>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">
+				<%= link_to consumers_path, class: "btn btn-outline-dark btn-block" do %>
+					<i class="fas fa-undo-alt"></i> Повернутись
+				<% end %>
+			</div>
+			<div class="col-md-2">
+				<%= link_to edit_consumer_path(consumer), class: "btn btn-outline-dark btn-block" do %>
+					<i class="fas fa-edit"></i> Редагувати
+				<% end %>
+			</div>
+			<div class="col-md-2">
+				<%= link_to consumer, method: :delete, data: {confirm: "Ви впевнені що хочете видалити #{consumer.name}?"}, class: "btn btn-outline-danger btn-block" do %>
+					<i class="fas fa-times"></i> Видалити
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
