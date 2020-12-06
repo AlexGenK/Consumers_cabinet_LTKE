@@ -18,7 +18,13 @@ class ConsumersController < ApplicationController
     end
   end
 
+  def destroy
+    Consumer.find(params[:id]).destroy
+    redirect_to consumers_path
+  end
+
 	private
+
 	def consumer_params
     params.require(:consumer).permit(:name, :full_name, :edrpou, :onec_id,
                                       :director_name, :engineer_name,
