@@ -10,8 +10,8 @@
 	<tbody>
 		<% @en_payments.each do |payment| %>
 			<tr>
-				<td><%= payment.day %></td>
-				<td><%= payment.percent %></td>
+				<td class="text-center"><%= payment.day %></td>
+				<td class="text-center"><%= payment.percent %></td>
 				<td class='text-right'>
 					<div class="btn-group">
 					<%= link_to edit_consumer_en_payment_path(@consumer, payment), 
@@ -25,7 +25,9 @@
 					<% end %>
 					</div>
 				</td>
-			<tr>
+			</tr>
 		<% end %>
 	</tbody>
 </table>
+<h5>Додати платіж</h5>
+<%= render 'form' %>
