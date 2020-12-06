@@ -1,4 +1,5 @@
 class ConsumersController < ApplicationController
+  before_action :set_consumer, only: [:edit, :update, :destroy]
 
 	def index
 		@consumers=Consumer.order(:name)
@@ -18,8 +19,20 @@ class ConsumersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @consumer.update(consumer_params)
+      redirect_to consumers_path, notice: "Споживач #{@consumer.name} успішно відредагований"
+    else
+      flash[:alert] = 'Неможливо відредагувати споживача'
+      render :edit
+    end
+  end
+
   def destroy
-    Consumer.find(params[:id]).destroy
+    @consumer.destroy
     redirect_to consumers_path
   end
 
@@ -33,6 +46,10 @@ class ConsumersController < ApplicationController
                                       :energy_consumer, :gas_consumer,
                                       :manager_en_username, :manager_gas_username,
                                       :client_username, :address)
+  end
+
+  def set_consumer
+    @consumer = Consumer.find(params[:id])
   end
 
 end
