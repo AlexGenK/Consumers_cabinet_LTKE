@@ -1,6 +1,6 @@
 class EnPaymentsController < ApplicationController
   before_action :set_consumer
-  before_action :set_en_payment, only: [:destroy]
+  before_action :set_en_payment, only: [:destroy, :edit, :update]
 
   def index
     @en_payments = @consumer.en_payments.all.order(:day)
@@ -16,6 +16,18 @@ class EnPaymentsController < ApplicationController
   def destroy
     flash[:alert] = 'Неможливо видалити платіж' unless @en_payment.destroy
     redirect_to consumer_en_payments_path(@consumer)
+  end
+
+  def edit
+  end
+
+  def update
+    if @en_payment.update(en_payment_params)
+      redirect_to consumer_en_payments_path(@consumer)
+    else
+      flash[:alert] = 'Неможливо відредагувати платіж'
+      render :edit
+    end
   end
 
   private
