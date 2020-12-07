@@ -14,3 +14,22 @@
     <a class="nav-link active" href="#">Запити</a>
   </li>
 </ul>
+<h6>Історія запитів</h6>
+<table class="table table-striped table-sm">
+  <thead>
+    <th class="text-center">Дата</th>
+    <th>Запит</th>
+    <th>Статус</th>
+    <th>Коментар</th>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td class="text-center"><%= message.created_at %></td>
+        <td><%= message.text %></td>
+        <td><%= message.state %></td>
+        <td><%= message.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
