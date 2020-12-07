@@ -1,6 +1,20 @@
 <%= render './consumers/card', consumer: @consumer %>
-<h5>Поточний місяць</h5>
-<h5>Графік оплати</h5>
+<br>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Поточний місяць</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Попередні періоди</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Заявка</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Запити</a>
+  </li>
+</ul>
+<h6>Графік оплати</h6>
 <table class="table table-striped table-sm">
 	<thead>
 		<th class="text-center">Дата місяця</th>
@@ -29,5 +43,5 @@
 		<% end %>
 	</tbody>
 </table>
-<h5>Додати платіж</h5>
+<h6>Додати платіж</h6>
 <%= render 'form' %>
