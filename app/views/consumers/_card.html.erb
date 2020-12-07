@@ -2,23 +2,17 @@
 	<div class="card-body">
 		<h5 class="card-title"><%= consumer.name %></h5>
 		<div class="row">
-			<div class="col-md-7">
-				<b>Повне найменування:</b><i> <%= consumer.full_name %></i>
-			</div>
-			<div class="col-md-5">
+			<div class="col-md-12">
+				<b>Повне найменування:</b><i> <%= consumer.full_name %>&nbsp; &nbsp;</i>
 				<b>Адреса:</b><i> <%= consumer.address %></i>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %></i>
-			</div>
-			<div class="col-md-2">
-				<b>Код 1С:</b><i> <%= consumer.onec_id %></i>
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-12">
+				<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %>&nbsp; &nbsp;</i>
+				<b>Код 1С:</b><i> <%= consumer.onec_id %>&nbsp; &nbsp;</i>
 				<% if consumer.energy_consumer %>
-					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date.strftime('%d.%m.%Y')}" %></i><br>
+					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
 				<% end %>
 				<% if consumer.gas_consumer %>
 					<b>Договір газ:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date.strftime('%d.%m.%Y')}" %></i>
@@ -26,10 +20,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-5">
-				<b>Директор:</b><i> <%= consumer.director_name %></i>
-			</div>
-			<div class="col-md-6">
+			<div class="col-md-12">
+				<b>Директор:</b><i> <%= consumer.director_name %>&nbsp; &nbsp;</i>
 				<b>Головний енергетик:</b><i> <%= consumer.engineer_name %></i>
 			</div>
 		</div>
