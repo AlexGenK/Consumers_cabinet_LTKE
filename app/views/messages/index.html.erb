@@ -41,7 +41,7 @@
       <thead>
         <th class="text-center">Дата</th>
         <th>Запит</th>
-        <th>Статус</th>
+        <th class="text-center">Статус</th>
         <th>Коментар</th>
         <th></th>
       </thead>
@@ -50,7 +50,18 @@
           <tr>
             <td class="text-center"><%= message.created_at.strftime('%d.%m.%Y') %></td>
             <td><%= truncate(message.text, length: 52) %></td>
-            <td><%= message.state %></td>
+            <td class="text-center">
+              <% case message.state %>
+              <% when 0 %>
+                <span class="badge badge-light">Відправлено</span>
+              <% when 1 %>
+                <span class="badge badge-primary">Прийнято</span>
+              <% when 2 %>
+                <span class="badge badge-success">Виконано</span>
+              <% when 3 %>
+                <span class="badge badge-danger">Не виконано</span>
+              <% end %>              
+            </td>
             <td><%= message.comment %></td>
             <td class='text-right'>
               <div class="btn-group">
