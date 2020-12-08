@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_consumer
-  before_action :set_message, only: [:destroy]
+  before_action :set_message, only: [:destroy, :edit, :update]
 
   def index
     @messages = @consumer.messages.all.order(created_at: :desc).first(100)
@@ -18,6 +18,18 @@ class MessagesController < ApplicationController
     redirect_to consumer_messages_path(@consumer)
   end
 
+  def edit
+  end
+
+  def update
+    if @message.update(message_params)
+      redirect_to consumer_messages_path(@consumer)
+    else
+      flash[:alert] = 'Неможливо відредагувати запит'
+      render :edit
+    end
+  end
+
   private
 
   def set_consumer
@@ -29,6 +41,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:text, :comments, :state)
+    params.require(:message).permit(:text, :comment, :state)
   end
 end
