@@ -1,10 +1,12 @@
 <h6><%= "Редагування запиту від #{@message.created_at.strftime('%d.%m.%Y')}" %></h6>
 <%= form_for [@consumer, @message] do |f| %>
-	<div class="form-row">
-			<div class="form-group col-md-12">
-				<%= f.text_area :text, class: "form-control" %>
-			</div>			
-	</div>
+	<fieldset disabled>
+		<div class="form-row">
+				<div class="form-group col-md-12">
+					<%= f.text_area :text, class: "form-control" %>
+				</div>			
+		</div>
+	</fieldset>
 	<div class="form-row">
 		<div class="form-group col-md-2">
 			<%= f.label :state, "Статус" %><br>
