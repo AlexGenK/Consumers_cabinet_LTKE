@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_200026) do
+ActiveRecord::Schema.define(version: 2020_12_09_205724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,61 @@ ActiveRecord::Schema.define(version: 2020_12_08_200026) do
     t.string "address"
   end
 
+  create_table "en_bids", force: :cascade do |t|
+    t.integer "jan_a_1"
+    t.integer "jan_a_2"
+    t.integer "jan_b_1"
+    t.integer "jan_b_2"
+    t.integer "feb_a_1"
+    t.integer "feb_a_2"
+    t.integer "feb_b_1"
+    t.integer "feb_b_2"
+    t.integer "mar_a_1"
+    t.integer "mar_a_2"
+    t.integer "mar_b_1"
+    t.integer "mar_b_2"
+    t.integer "apr_a_1"
+    t.integer "apr_a_2"
+    t.integer "apr_b_1"
+    t.integer "apr_b_2"
+    t.integer "may_a_1"
+    t.integer "may_a_2"
+    t.integer "may_b_1"
+    t.integer "may_b_2"
+    t.integer "jun_a_1"
+    t.integer "jun_a_2"
+    t.integer "jun_b_1"
+    t.integer "jun_b_2"
+    t.integer "jul_a_1"
+    t.integer "jul_a_2"
+    t.integer "jul_b_1"
+    t.integer "jul_b_2"
+    t.integer "aug_a_1"
+    t.integer "aug_a_2"
+    t.integer "aug_b_1"
+    t.integer "aug_b_2"
+    t.integer "sep_a_1"
+    t.integer "sep_a_2"
+    t.integer "sep_b_1"
+    t.integer "sep_b_2"
+    t.integer "okt_a_1"
+    t.integer "okt_a_2"
+    t.integer "okt_b_1"
+    t.integer "okt_b_2"
+    t.integer "nov_a_1"
+    t.integer "nov_a_2"
+    t.integer "nov_b_1"
+    t.integer "nov_b_2"
+    t.integer "dec_a_1"
+    t.integer "dec_a_2"
+    t.integer "dec_b_1"
+    t.integer "dec_b_2"
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_en_bids_on_consumer_id"
+  end
+
   create_table "en_payments", force: :cascade do |t|
     t.integer "day"
     t.integer "percent"
@@ -57,6 +112,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_200026) do
     t.index ["consumer_id"], name: "index_messages_on_consumer_id"
   end
 
+  add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
   add_foreign_key "messages", "consumers"
 end
