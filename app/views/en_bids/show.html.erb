@@ -14,3 +14,113 @@
     <a class="nav-link" href="<%= consumer_messages_path(@consumer) %>">Запити</a>
   </li>
 </ul>
+<br>
+<table class="table table-bordered table-striped table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th></th>
+      <th colspan="2" class="text-center">1 клас</th>
+      <th colspan="2" class="text-center">2 клас</th>
+    </tr>
+    <tr>
+      <th>Період</th>
+      <th class="text-center">Група А, кВт*год</th>
+      <th class="text-center">Група Б, кВт*год</th>
+      <th class="text-center">Група А, кВт*год</th>
+      <th class="text-center">Група Б, кВт*год</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Січень</th>
+      <td><%= @en_bid.dec_a_1 %></td>
+      <td><%= @en_bid.dec_b_1 %></td>
+      <td><%= @en_bid.dec_a_2 %></td>
+      <td><%= @en_bid.dec_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Лютий</th>
+      <td><%= @en_bid.feb_a_1 %></td>
+      <td><%= @en_bid.feb_b_1 %></td>
+      <td><%= @en_bid.feb_a_2 %></td>
+      <td><%= @en_bid.feb_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Березень</th>
+      <td><%= @en_bid.mar_a_1 %></td>
+      <td><%= @en_bid.mar_b_1 %></td>
+      <td><%= @en_bid.mar_a_2 %></td>
+      <td><%= @en_bid.mar_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Квітень</th>
+      <td><%= @en_bid.apr_a_1 %></td>
+      <td><%= @en_bid.apr_b_1 %></td>
+      <td><%= @en_bid.apr_a_2 %></td>
+      <td><%= @en_bid.apr_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Травень</th>
+      <td><%= @en_bid.may_a_1 %></td>
+      <td><%= @en_bid.may_b_1 %></td>
+      <td><%= @en_bid.may_a_2 %></td>
+      <td><%= @en_bid.may_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Червень</th>
+      <td><%= @en_bid.jun_a_1 %></td>
+      <td><%= @en_bid.jun_b_1 %></td>
+      <td><%= @en_bid.jun_a_2 %></td>
+      <td><%= @en_bid.jun_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Липень</th>
+      <td><%= @en_bid.jul_a_1 %></td>
+      <td><%= @en_bid.jul_b_1 %></td>
+      <td><%= @en_bid.jul_a_2 %></td>
+      <td><%= @en_bid.jul_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Серпень</th>
+      <td><%= @en_bid.aug_a_1 %></td>
+      <td><%= @en_bid.aug_b_1 %></td>
+      <td><%= @en_bid.aug_a_2 %></td>
+      <td><%= @en_bid.aug_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Вересень</th>
+      <td><%= @en_bid.sep_a_1 %></td>
+      <td><%= @en_bid.sep_b_1 %></td>
+      <td><%= @en_bid.sep_a_2 %></td>
+      <td><%= @en_bid.sep_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Жовтень</th>
+      <td><%= @en_bid.okt_a_1 %></td>
+      <td><%= @en_bid.okt_b_1 %></td>
+      <td><%= @en_bid.okt_a_2 %></td>
+      <td><%= @en_bid.okt_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Листопад</th>
+      <td><%= @en_bid.nov_a_1 %></td>
+      <td><%= @en_bid.nov_b_1 %></td>
+      <td><%= @en_bid.nov_a_2 %></td>
+      <td><%= @en_bid.nov_b_2 %></td>
+    </tr>
+    <tr>
+      <th>Грудень</th>
+      <td><%= @en_bid.dec_a_1 %></td>
+      <td><%= @en_bid.dec_b_1 %></td>
+      <td><%= @en_bid.dec_a_2 %></td>
+      <td><%= @en_bid.dec_b_2 %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to edit_consumer_en_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
+      <i class="fas fa-edit"></i> Редагувати
+    <% end %>
+  </div>
+</div>
