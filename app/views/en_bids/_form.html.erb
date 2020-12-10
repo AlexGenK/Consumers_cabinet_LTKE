@@ -1,0 +1,116 @@
+<%= form_for @en_bid, url: consumer_en_bid_path do |f| %>
+<table class="table table-bordered table-striped table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th></th>
+      <th colspan="2" class="text-center">1 клас</th>
+      <th colspan="2" class="text-center">2 клас</th>
+    </tr>
+    <tr>
+      <th>Період</th>
+      <th class="text-center">Група А, кВт*год</th>
+      <th class="text-center">Група Б, кВт*год</th>
+      <th class="text-center">Група А, кВт*год</th>
+      <th class="text-center">Група Б, кВт*год</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Січень</th>
+      <td><%= f.number_field :jan_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :jan_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :jan_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :jan_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Лютий</th>
+      <td><%= f.number_field :feb_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :feb_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :feb_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :feb_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Березень</th>
+      <td><%= f.number_field :mar_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :mar_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :mar_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :mar_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Квітень</th>
+      <td><%= f.number_field :apr_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :apr_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :apr_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :apr_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Травень</th>
+      <td><%= f.number_field :may_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :may_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :may_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :may_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Червень</th>
+      <td><%= f.number_field :jun_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :jun_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :jun_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :jun_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Липень</th>
+      <td><%= f.number_field :jul_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :jul_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :jul_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :jul_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Серпень</th>
+      <td><%= f.number_field :aug_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :aug_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :aug_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :aug_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Вересень</th>
+      <td><%= f.number_field :sep_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :sep_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :sep_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :sep_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Жовтень</th>
+      <td><%= f.number_field :okt_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :okt_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :okt_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :okt_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Листопад</th>
+      <td><%= f.number_field :nov_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :nov_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :nov_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :nov_b_2, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Грудень</th>
+      <td><%= f.number_field :dec_a_1, class: "form-control" %></td>
+      <td><%= f.number_field :dec_b_1, class: "form-control" %></td>
+      <td><%= f.number_field :dec_a_2, class: "form-control" %></td>
+      <td><%= f.number_field :dec_b_2, class: "form-control" %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="form-row">
+		<div class="col-md-3">
+			<%= f.button type: 'submit', class: "btn btn-outline-dark btn-block" do %>
+				<i class="fas fa-save"></i> Зберегти
+			<% end %>
+		</div>
+		<div class="col-md-3">
+			<%= link_to :back, class: "btn btn-outline-dark btn-block" do %>
+				<i class="fas fa-undo-alt"></i> Повернутись
+			<% end %>
+		</div>
+	</div>
+<% end %>
