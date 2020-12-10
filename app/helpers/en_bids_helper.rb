@@ -1,0 +1,2 @@
+module EnBidsHelper
+end

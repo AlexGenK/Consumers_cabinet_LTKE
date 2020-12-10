@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :consumers do
   	resources :en_payments
   	resources :messages
+  	resource :en_bid
   end
 
   root to: 'consumers#index'
