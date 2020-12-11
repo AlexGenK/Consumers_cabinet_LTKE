@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :consumers do
   	resources :en_payments
   	resources :messages
+  	resources :previous_en_consumptions
   	resource :en_bid
   end
 
