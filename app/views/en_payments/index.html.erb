@@ -1,19 +1,6 @@
 <%= render './consumers/card', consumer: @consumer %>
 <br>
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="<%= consumer_en_payments_path(@consumer) %>">Поточний місяць</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= consumer_previous_en_consumptions_path(@consumer) %>">Попередні періоди</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= consumer_en_bid_path(@consumer) %>">Заявка</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= consumer_messages_path(@consumer) %>">Запити</a>
-  </li>
-</ul>
+<%= render './entab', active: 1 %>
 <h6>Графік оплати</h6>
 <table class="table table-striped table-sm">
 	<thead>
