@@ -36,7 +36,11 @@
 					<% end %>
 				<% end %>
 			</td>
-			<td></td>
+			<td class="text-center">
+				<% if consumer.has_new_message? %>
+					<i class="fas fa-check"></i>
+				<% end %>
+			</td>
 			<td class="text-right"><%= consumer.edrpou  %></td>
 			<td class="text-right"><%= consumer.onec_id %></td>
 		</tr>
