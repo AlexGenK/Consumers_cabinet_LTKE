@@ -12,10 +12,10 @@
 				<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %>&nbsp; &nbsp;</i>
 				<b>Код 1С:</b><i> <%= consumer.onec_id %>&nbsp; &nbsp;</i>
 				<% if consumer.energy_consumer %>
-					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
+					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date&.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
 				<% end %>
 				<% if consumer.gas_consumer %>
-					<b>Договір газ:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date.strftime('%d.%m.%Y')}" %></i>
+					<b>Договір газ:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date&.strftime('%d.%m.%Y')}" %></i>
 				<% end %>
 			</div>
 		</div>
