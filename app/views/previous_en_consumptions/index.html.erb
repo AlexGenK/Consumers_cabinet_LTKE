@@ -1,3 +1,30 @@
 <%= render './consumers/card', consumer: @consumer %>
 <br>
 <%= render './entab', active: 2 %>
+<br>
+<table class="table table-striped table-sm">
+  <thead>
+    <th class="text-center">Період</th>
+    <th class="text-center">Сальдо на початок періоду, грн. з ПДВ</th>
+    <th class="text-center">Фактичний обсяг, кВт*год</th>
+    <th class="text-center">Ціна, грн. без ПДВ</th>
+    <th class="text-center">Вартість, грн. без ПДВ</th>
+    <th class="text-center">Вартість, грн. з ПДВ</th>
+    <th class="text-center">Оплачено, грн.</th>
+    <th class="text-center">Сальдо на кінець періоду, грн. з ПДВ</th>
+  </thead>
+  <tbody>
+  <% @previous_en_consumptions.each do |consumption| %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

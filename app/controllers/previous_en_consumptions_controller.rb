@@ -2,7 +2,7 @@ class PreviousEnConsumptionsController < ApplicationController
 	before_action :set_consumer
 
 	def index
-		
+		@previous_en_consumptions = @consumer.previous_en_consumption.all.order(date: :desc)
 	end
 
 	private
