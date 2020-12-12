@@ -3,6 +3,7 @@ class EnPaymentsController < ApplicationController
   before_action :set_en_payment, only: [:destroy, :edit, :update]
 
   def index
+    @current_en_consumption = @consumer.current_en_consumption
     @en_payments = @consumer.en_payments.all.order(:day)
     @en_payment = @consumer.en_payments.new
   end

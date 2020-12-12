@@ -1,6 +1,29 @@
 <%= render './consumers/card', consumer: @consumer %>
 <br>
 <%= render './entab', active: 1 %>
+<br>
+<h6>Розрахунки за <%= l(DateTime.now, format: '%B %Y') %> р.</h6>
+<table class="table table-striped table-sm">
+	<thead>
+		<th class="text-center">Сальдо на початок періоду, грн. з ПДВ</th>
+		<th class="text-center">Замовлений обсяг, кВт*год.</th>
+		<th class="text-center">Планова ціна, грн. без ПДВ</th>
+		<th class="text-center">Вартість, грн. без ПДВ</th>
+		<th class="text-center">Вартість, грн. з ПДВ</th>
+		<th class="text-center">Оплачено, грн.</th>
+		<th class="text-center">Сальдо на кінець періоду, грн. з ПДВ</th>
+	</thead>
+	<tbody>
+		<td class='text-right'><%= @current_en_consumption&.opening_balance %></td>
+		<td class='text-right'><%= @current_en_consumption&.power %></td>
+		<td class='text-right'><%= @current_en_consumption&.tariff %></td>
+		<td class='text-right'><%= @current_en_consumption&.cost %></td>
+		<td class='text-right'><%= @current_en_consumption&.cost_val %></td>
+		<td class='text-right'><%= @current_en_consumption&.money %></td>
+		<td class='text-right'><%= @current_en_consumption&.closing_balance %></td>
+	</tbody>
+</table>
+
 <h6>Графік оплати</h6>
 <table class="table table-striped table-sm">
 	<thead>
