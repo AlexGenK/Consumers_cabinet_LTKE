@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_143017) do
+ActiveRecord::Schema.define(version: 2020_12_12_155010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 2020_12_11_143017) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "address"
+  end
+
+  create_table "current_en_consumptions", force: :cascade do |t|
+    t.date "date"
+    t.decimal "opening_balance", precision: 13, scale: 2
+    t.integer "power"
+    t.decimal "tariff", precision: 10, scale: 5
+    t.decimal "cost", precision: 13, scale: 2
+    t.decimal "cost_val", precision: 13, scale: 2
+    t.decimal "money", precision: 13, scale: 2
+    t.decimal "closing_balance", precision: 13, scale: 2
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_current_en_consumptions_on_consumer_id"
   end
 
   create_table "en_bids", force: :cascade do |t|
@@ -127,6 +142,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_143017) do
     t.index ["consumer_id"], name: "index_previous_en_consumptions_on_consumer_id"
   end
 
+  add_foreign_key "current_en_consumptions", "consumers"
   add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
   add_foreign_key "messages", "consumers"
