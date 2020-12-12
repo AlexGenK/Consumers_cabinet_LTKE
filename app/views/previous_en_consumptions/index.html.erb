@@ -16,14 +16,14 @@
   <tbody>
   <% @previous_en_consumptions.each do |consumption| %>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>consumption&.date.strftime('%d.%m.%Y')</td>
+      <td>consumption.opening_balance</td>
+      <td>consumption.power</td>
+      <td>consumption.tariff</td>
+      <td>consumption.cost</td>
+      <td>consumption.cost_val</td>
+      <td>consumption.money</td>
+      <td>consumption.closing_balance</td>
     </tr>
   <% end %>
   </tbody>
