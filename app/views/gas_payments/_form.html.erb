@@ -1,0 +1,17 @@
+<%= form_for [@consumer, @gas_payment] do |f| %>
+	<div class="form-row align-items-end">
+			<div class="col-auto">
+				<%= f.label :day, "Дата:" %>
+				<%= f.number_field :day, class: "form-control" %>
+			</div>
+			<div class="col-auto">
+				<%= f.label :percent, "Відсоток:" %>
+				<%= f.number_field :percent, class: "form-control" %>
+			</div>
+			<div class="col-auto">
+				<%= f.button type: 'submit', class: "btn btn-outline-dark" do %>
+					<i class="fas fa-save"></i> Зберегти
+				<% end %>
+			</div>
+	</div>
+<% end %>
