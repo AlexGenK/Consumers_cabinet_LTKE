@@ -10,12 +10,20 @@ class MessagesController < ApplicationController
   def create
     @message = @consumer.messages.new(message_params)
     flash[:alert] = 'Неможливо створити запит' unless @message.save
-    redirect_to consumer_messages_path(@consumer)
+    if params[:cab] == 'gas'
+      redirect_to consumer_messages_path(@consumer, cab: 'gas')
+    else
+      redirect_to consumer_messages_path(@consumer)
+    end
   end
 
   def destroy
     flash[:alert] = 'Неможливо видалити запит' unless @message.destroy
-    redirect_to consumer_messages_path(@consumer)
+    if params[:cab] == 'gas'
+      redirect_to consumer_messages_path(@consumer, cab: 'gas')
+    else
+      redirect_to consumer_messages_path(@consumer)
+    end
   end
 
   def edit
@@ -23,7 +31,11 @@ class MessagesController < ApplicationController
 
   def update
     if @message.update(message_params)
-      redirect_to consumer_messages_path(@consumer)
+      if params[:cab] == 'gas'
+        redirect_to consumer_messages_path(@consumer, cab: 'gas')
+      else
+        redirect_to consumer_messages_path(@consumer)
+      end
     else
       flash[:alert] = 'Неможливо відредагувати запит'
       render :edit
