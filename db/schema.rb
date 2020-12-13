@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_155010) do
+ActiveRecord::Schema.define(version: 2020_12_13_180239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,15 @@ ActiveRecord::Schema.define(version: 2020_12_12_155010) do
     t.index ["consumer_id"], name: "index_en_payments_on_consumer_id"
   end
 
+  create_table "gas_payments", force: :cascade do |t|
+    t.integer "day"
+    t.integer "percent"
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_gas_payments_on_consumer_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "text"
     t.text "comment"
@@ -145,6 +154,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_155010) do
   add_foreign_key "current_en_consumptions", "consumers"
   add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
+  add_foreign_key "gas_payments", "consumers"
   add_foreign_key "messages", "consumers"
   add_foreign_key "previous_en_consumptions", "consumers"
 end
