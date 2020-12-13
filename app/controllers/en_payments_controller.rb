@@ -10,7 +10,11 @@ class EnPaymentsController < ApplicationController
 
   def create
     @en_payment = @consumer.en_payments.new(en_payment_params)
-    flash[:alert] = 'Неможливо створити платіж' unless @en_payment.save
+    if (@consumer.en_payments.sum(:percent) + @en_payment.percent.to_i) > 100
+      flash[:alert] = 'Неможливо створити платіж. Планові платежі перевищили 100%'
+    else
+      flash[:alert] = 'Неможливо створити платіж. Введіть коректні значення' unless @en_payment.save
+    end
     redirect_to consumer_en_payments_path(@consumer)
   end
 
