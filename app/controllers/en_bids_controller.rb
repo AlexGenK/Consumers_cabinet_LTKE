@@ -10,6 +10,7 @@ class EnBidsController < ApplicationController
 
   def update
     if @en_bid.update(en_bid_params)
+      flash[:alert] = nil
       redirect_to consumer_en_bid_path(@consumer)
     else
       flash[:alert] = 'Неможливо відредагувати заявку'
