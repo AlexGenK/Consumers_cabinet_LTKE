@@ -5,6 +5,8 @@ class Consumer < ApplicationRecord
 	has_many :previous_en_consumption
 	has_one :current_en_consumption
 
+	validates :name, :onec_id, presence: true, uniqueness: true
+
 	def has_new_message?
 		self.messages.where("state = 0").count > 0
 	end

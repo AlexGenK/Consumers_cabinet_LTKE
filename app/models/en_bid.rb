@@ -12,5 +12,5 @@ class EnBid < ApplicationRecord
             :okt_a_1, :okt_b_1, :okt_a_2, :okt_b_2,
             :nov_a_1, :nov_b_1, :nov_a_2, :nov_b_2,
             :dec_a_1, :dec_b_1, :dec_a_2, :dec_b_2,
-            numericality: { less_than: 2147483647, greater_than_or_equal_to: 0 }  
+            numericality: { less_than: 2147483647, greater_than_or_equal_to: 0 }
 end
