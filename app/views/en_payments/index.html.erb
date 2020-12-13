@@ -52,7 +52,7 @@
 							<%= link_to [@consumer, payment], method: :delete, 
 								class: "btn btn-outline-danger btn-sm",
 								data: {confirm: "Ви впевнені що хочете видалити плановий платіж?"} do %>
-								&nbsp<i class="fas fa-times test-delete-payment"></i>
+								<i class="fas fa-times test-delete-payment">&nbsp</i>
 							<% end %>
 							</div>
 						</td>
@@ -62,5 +62,12 @@
 		</table>
 		<h6>Додати платіж</h6>
 		<%= render 'form' %>
+	</div>
+	<div class='col-sm-3'>
+		<br>
+		<b>Поточна заборгованість:</b>
+		<br>
+		<br>
+		<a href="#" class="btn btn-outline-dark btn-block"><i class="fas fa-file-download"></i> Сформувати рахунок</a>
 	</div>
 </div>
