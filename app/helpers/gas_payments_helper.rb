@@ -1,0 +1,2 @@
+module GasPaymentsHelper
+end
