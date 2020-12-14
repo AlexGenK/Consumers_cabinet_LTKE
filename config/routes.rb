@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :gas_payments
     resources :previous_gas_consumptions
+    resource  :gas_bid
   end
 
   root to: 'consumers#index'

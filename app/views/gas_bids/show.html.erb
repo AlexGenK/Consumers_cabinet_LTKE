@@ -1,0 +1,73 @@
+<%= render './consumers/card', consumer: @consumer, style: 'gas' %>
+<br>
+<%= render './gastab', active: 3 %>
+<br>
+<div class='row'>
+<div class='col-md-5'>
+<table class="table table-bordered table-striped table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>Період</th>
+      <th class="text-center">Об`єм, м3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Січень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.jan, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Лютий</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.feb, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Березень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.mar, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Квітень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.apr, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Травень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.may, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Червень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.jun, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Липень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.jul, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Серпень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.aug, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Вересень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.sep, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Жовтень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.okt, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Листопад</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.nov, delimiter: " ") %></td>
+    </tr>
+    <tr>
+      <th>Грудень</th>
+      <td class="text-right"><%= number_with_delimiter(@gas_bid.dec, delimiter: " ") %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to edit_consumer_gas_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
+      <i class="fas fa-edit"></i> Редагувати
+    <% end %>
+  </div>
+</div>
