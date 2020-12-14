@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     resources :en_payments
     resources :previous_en_consumptions
     resource  :en_bid
-    resource  :current_en_consumptions
 
     resources :gas_payments
   end

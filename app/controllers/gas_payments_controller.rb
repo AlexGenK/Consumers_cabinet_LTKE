@@ -3,7 +3,7 @@ class GasPaymentsController < ApplicationController
   before_action :set_gas_payment, only: [:destroy, :edit, :update]
 
   def index
-    # @current_gas_consumption = @consumer.current_gas_consumption
+    @current_gas_consumption = @consumer.current_gas_consumption
     @gas_payments = @consumer.gas_payments.all.order(:day)
     @gas_payment = @consumer.gas_payments.new
   end
