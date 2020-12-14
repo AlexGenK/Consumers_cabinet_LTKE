@@ -1,0 +1,76 @@
+<%= form_for @gas_bid, url: consumer_gas_bid_path do |f| %>
+<div class="row">
+<div class="col-md-5">
+<table class="table table-bordered table-striped table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th class="text-center">Період</th>
+      <th class="text-center">Об`єм, м3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Січень</th>
+      <td><%= f.number_field :jan, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Лютий</th>
+      <td><%= f.number_field :feb, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Березень</th>
+      <td><%= f.number_field :mar, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Квітень</th>
+      <td><%= f.number_field :apr, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Травень</th>
+      <td><%= f.number_field :may, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Червень</th>
+      <td><%= f.number_field :jun, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Липень</th>
+      <td><%= f.number_field :jul, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Серпень</th>
+      <td><%= f.number_field :aug, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Вересень</th>
+      <td><%= f.number_field :sep, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Жовтень</th>
+      <td><%= f.number_field :okt, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Листопад</th>
+      <td><%= f.number_field :nov, class: "form-control" %></td>
+    </tr>
+    <tr>
+      <th>Грудень</th>
+      <td><%= f.number_field :dec, class: "form-control" %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="form-row">
+		<div class="col-md-3">
+			<%= f.button type: 'submit', class: "btn btn-outline-dark btn-block" do %>
+				<i class="fas fa-save"></i> Зберегти
+			<% end %>
+		</div>
+		<div class="col-md-3">
+			<%= link_to :back, class: "btn btn-outline-dark btn-block" do %>
+				<i class="fas fa-undo-alt"></i> Повернутись
+			<% end %>
+		</div>
+	</div>
+<% end %>
