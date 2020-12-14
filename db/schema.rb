@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_170146) do
+ActiveRecord::Schema.define(version: 2020_12_14_173522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,25 @@ ActiveRecord::Schema.define(version: 2020_12_14_170146) do
     t.index ["consumer_id"], name: "index_en_payments_on_consumer_id"
   end
 
+  create_table "gas_bids", force: :cascade do |t|
+    t.integer "jan", default: 0
+    t.integer "feb", default: 0
+    t.integer "mar", default: 0
+    t.integer "apr", default: 0
+    t.integer "may", default: 0
+    t.integer "jun", default: 0
+    t.integer "jul", default: 0
+    t.integer "aug", default: 0
+    t.integer "sep", default: 0
+    t.integer "okt", default: 0
+    t.integer "nov", default: 0
+    t.integer "dec", default: 0
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_gas_bids_on_consumer_id"
+  end
+
   create_table "gas_payments", force: :cascade do |t|
     t.integer "day"
     t.integer "percent"
@@ -185,6 +204,7 @@ ActiveRecord::Schema.define(version: 2020_12_14_170146) do
   add_foreign_key "current_gas_consumptions", "consumers"
   add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
+  add_foreign_key "gas_bids", "consumers"
   add_foreign_key "gas_payments", "consumers"
   add_foreign_key "messages", "consumers"
   add_foreign_key "previous_en_consumptions", "consumers"

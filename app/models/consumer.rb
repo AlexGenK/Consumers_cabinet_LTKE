@@ -5,6 +5,7 @@ class Consumer < ApplicationRecord
 	has_one  :current_en_consumption
 
 	has_many :gas_payments
+	has_one  :en_bid
 	has_many :previous_gas_consumption
 	has_one  :current_gas_consumption
 
