@@ -1,0 +1,31 @@
+<%= render './consumers/card', consumer: @consumer, style: 'gas' %>
+<br>
+<%= render './gastab', active: 2 %>
+<br>
+<table class="table table-striped table-sm">
+  <thead>
+    <th class="text-center">Період</th>
+    <th class="text-center">Сальдо на початок періоду, грн. з ПДВ</th>
+    <th class="text-center">Фактичний обсяг, м3</th>
+    <th class="text-center">Ціна, грн. без ПДВ</th>
+    <th class="text-center">Вартість, грн. без ПДВ</th>
+    <th class="text-center">Вартість, грн. з ПДВ</th>
+    <th class="text-center">Оплачено, грн.</th>
+    <th class="text-center">Сальдо на кінець періоду, грн. з ПДВ</th>
+  </thead>
+  <tbody>
+  <% @previous_gas_consumptions.each do |consumption| %>
+    <tr>
+      <td>consumption&.date.strftime('%d.%m.%Y')</td>
+      <td>consumption.opening_balance</td>
+      <td>consumption.volume</td>
+      <td>consumption.tariff</td>
+      <td>consumption.cost</td>
+      <td>consumption.cost_val</td>
+      <td>consumption.money</td>
+      <td>consumption.closing_balance</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<a href="#" class="btn btn-outline-dark"><i class="fas fa-file-download"></i> Отримати акт за <%= l(Date.today.months_ago(1), format: '%B %Y') %> р.</a>

@@ -3,7 +3,7 @@
     <a class="nav-link <%= 'active' if active == 1 %>" href="<%= consumer_gas_payments_path(@consumer) %>">Поточний місяць</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 2 %>" href="#">Попередні періоди</a>
+    <a class="nav-link <%= 'active' if active == 2 %>" href="<%= consumer_previous_gas_consumptions_path(@consumer) %>">Попередні періоди</a>
   </li>
   <li class="nav-item">
     <a class="nav-link <%= 'active' if active == 3 %> " href="#">Заявка</a>
