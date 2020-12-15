@@ -12,5 +12,9 @@ Rails.application.routes.draw do
     resource  :gas_bid
   end
 
+  namespace :admin do
+    resource :receiver, controller: 'receiver', only: ['edit', 'update']
+  end
+
   root to: 'consumers#index'
 end
