@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :en_payments
     resources :previous_en_consumptions
     resource  :en_bid
+    resource  :en_invoice, only: [:show]
 
     resources :gas_payments
     resources :previous_gas_consumptions
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resource :receiver, controller: 'receiver', only: ['edit', 'update']
+    resource :receiver, controller: 'receiver', only: [:edit, :update]
   end
 
   root to: 'consumers#index'

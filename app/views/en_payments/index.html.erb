@@ -68,6 +68,9 @@
 		<b>Поточна заборгованість:</b>
 		<br>
 		<br>
-		<a href="#" class="btn btn-outline-dark btn-block"><i class="fas fa-file-download"></i> Сформувати рахунок</a>
+		<%= link_to consumer_en_invoice_path(@consumer), 
+			class: "btn btn-outline-dark btn-block" do %>
+			<i class="fas fa-file-download"></i> Сформувати рахунок
+		<% end %>
 	</div>
 </div>
