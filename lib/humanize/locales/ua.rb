@@ -21,7 +21,7 @@ module Humanize
         iteration += 1
       end
 
-      correct_lots(parts)
+      correct_finance(correct_lots(parts))
     end
 
     private
@@ -46,6 +46,16 @@ module Humanize
       end
 
       parts.split(' ').reverse
+    end
+
+    def correct_finance(parts)
+      case parts[0]
+        when 'один'
+          parts[0] = 'одна'
+        when 'два'
+          parts[0] = 'дві'
+        end
+      parts
     end
   end
 end
