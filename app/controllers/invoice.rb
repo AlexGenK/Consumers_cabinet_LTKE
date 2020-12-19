@@ -11,12 +11,20 @@ class Invoice < ApplicationController
       :bold => Rails.root.join("app/assets/fonts/SegoeUI-Bold.ttf"),
     })
     pdf.font 'Segoe UI'
-    # document header
     if args[:style] == 'gas'
-    	pdf.text "Рахунок на оплату газу б/н від #{l(now, format: '%-d %B %Y')} р.", size: 14, style: :bold
+    	units = 'тис. м3'
+    	product = 'газ'
+    	dog_num = @consumer.dog_gas_num
+    	dog_date = @consumer.dog_gas_date
     else
-    	pdf.text "Рахунок на оплату електроенергії б/н від #{l(now, format: '%-d %B %Y')} р.", size: 14, style: :bold
+    	units = 'тис.кВт.год'
+    	product = 'електроенергію'
+    	dog_num = @consumer.dog_en_num
+    	dog_date = @consumer.dog_en_date
     end
+
+    # document header
+    pdf.text "Рахунок на оплату б/н від #{l(now, format: '%-d %B %Y')} р.", size: 14, style: :bold
     pdf.stroke_horizontal_rule
     pdf.move_down 10
     y = pdf.cursor
@@ -49,12 +57,12 @@ class Invoice < ApplicationController
       pdf.text 'Договір:'
     end
     pdf.bounding_box([105, y], width: 435) do
-      pdf.text "№#{@consumer.dog_en_num} від #{@consumer.dog_en_date.strftime('%d.%m.%Y')} р."
+      pdf.text "№#{dog_num} від #{dog_date.strftime('%d.%m.%Y')} р."
     end
     pdf.move_down 10
     # table
     data = [['№', 'Товари (роботи, послуги)', 'Кіл-сть', 'Од.', 'Ціна без ПДВ', 'Сума без ПДВ'],
-            ['1', 'Доплата за електроенергію у листопаді 2020', '449,35929', 'тис.кВт.год', '1 825,98', '820 519,24']]
+            ['1', "Доплата за #{product} у #{UA_MONTHS_MIS[Time.current.month]} #{Time.current.year} р.", '449,35929', units, '1 825,98', '820 519,24']]
     pdf.table(data, column_widths: [30, 235, 80, 45, 70, 80]) do
       row(0).columns(0..5).align = :center
       row(0).columns(0..5).background_color = "F0F0F0"
