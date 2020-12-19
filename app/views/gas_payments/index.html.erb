@@ -68,8 +68,8 @@
 		<b>Поточна заборгованість:</b>
 		<br>
 		<br>
-		<%= link_to consumer_gas_invoice_path(@consumer), 
-			class: "btn btn-outline-dark btn-block" do %>
+		<%= link_to consumer_gas_invoice_path(@consumer, :format => :pdf), 
+		class: "btn btn-outline-dark btn-block", target: :_blank do %>
 			<i class="fas fa-file-download"></i> Сформувати рахунок
 		<% end %>
 	</div>

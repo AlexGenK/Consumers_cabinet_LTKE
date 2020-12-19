@@ -1,4 +1,4 @@
-class EnInvoicesController < ApplicationController
+class EnInvoicesController < Invoice
   before_action :set_consumer
   
   def show
@@ -14,14 +14,6 @@ class EnInvoicesController < ApplicationController
   end
 
   private
-
-  def pdf_form
-    pdf = Prawn::Document.new
-    pdf.font Rails.root.join("app/assets/fonts/SegoeUI.ttf")
-    pdf.text "Рахунок-фактура споживача електроенергії #{@consumer.name}"
-    pdf.text DateTime.now.strftime('Сгенеровано %F в %T')
-    return pdf
-  end
 
   def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
