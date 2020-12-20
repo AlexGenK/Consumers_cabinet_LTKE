@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'cabinet.ltke@gmail.com'
+  default from: ENV['CONSUMERS_CABINET_LTKE_EMAIL']
   layout 'mailer'
 end
