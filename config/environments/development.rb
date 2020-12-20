@@ -37,8 +37,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
-  host = 'ltke.com.ua'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_url_options = { host: ENV['CONSUMERS_CABINET_LTKE_HOST'] }
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
