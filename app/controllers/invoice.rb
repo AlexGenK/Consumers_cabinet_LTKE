@@ -59,7 +59,7 @@ class Invoice < ApplicationController
       pdf.text 'Договір:'
     end
     pdf.bounding_box([105, y], width: 435) do
-      pdf.text "№#{dog_num} від #{dog_date.strftime('%d.%m.%Y')} р."
+      pdf.text "№#{dog_num} від #{dog_date&.strftime('%d.%m.%Y')} р."
     end
     pdf.move_down 10
     # table
