@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resource :receiver, controller: 'receiver', only: [:edit, :update]
+
+    get 'filling_consumers',  to: 'filling_consumers#set_params'
+    post 'filling_consumers', to: 'filling_consumers#start'
   end
 
   root to: 'consumers#index'

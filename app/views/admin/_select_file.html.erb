@@ -1,0 +1,17 @@
+<%= form_tag(operation, multipart: true) do %>
+	<div class='custom-file'>
+  	<%= file_field_tag :datafile, class: 'custom-file-input' %>
+  	<%= label_tag :datafile, 'Виберіть файл для імпорту', class: 'custom-file-label' %>
+	</div>
+	<br>
+	<br>
+  	<%= button_tag 'імпортувати', class: 'btn btn-outline-primary', 
+  	data: { disable_with: '<span class="spinner-border spinner-border-sm"></span> Зачекайте...'.html_safe} %>
+<% end %>
+
+<script>
+$('#datafile').on('change',function(){
+    var fileName = $(this).val().replace(/^.*[\\\/]/, '');
+    $(this).next('.custom-file-label').html(fileName);
+})
+</script>
