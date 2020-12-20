@@ -9,7 +9,11 @@ class MessagesController < ApplicationController
 
   def create
     @message = @consumer.messages.new(message_params)
-    flash[:alert] = 'Неможливо створити запит' unless @message.save
+    if @message.save
+      MessageMailer.with(consumer: @consumer).new_message_email.deliver_now
+    else
+      flash[:alert] = 'Неможливо створити запит'
+    end
     if params[:cab] == 'gas'
       redirect_to consumer_messages_path(@consumer, cab: 'gas')
     else
