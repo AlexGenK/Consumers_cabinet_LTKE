@@ -1,4 +1,5 @@
 class Admin::ReceiverController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_receiver
 
   def edit
