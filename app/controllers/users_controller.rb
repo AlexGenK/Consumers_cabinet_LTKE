@@ -6,6 +6,24 @@ class UsersController < ApplicationController
     @users = User.order(:name)
   end
 
+  def edit
+  end
+
+  def update
+    if (@user.admin_role?) && (User.where(admin_role: true).count <= 1) && (user_params[:admin_role] == "0")
+      flash[:alert] = 'Невозможно удалить последнего администратора'
+      redirect_to users_path
+    else
+      if @user.update(user_params)
+        flash[:notice] = "Пользователь #{@user.name} был успешно отредактрован" 
+        redirect_to users_path
+      else
+        flash[:alert] = 'Невозможно отредактировать пользователя'
+        render :edit
+      end
+    end
+  end
+
   def destroy
     if (@user.admin_role?) && (User.where(admin_role: true).count <= 1)
       flash[:alert] = 'Неможливо видалити останнього адміністратора'
