@@ -2,8 +2,17 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_user, only: [:update, :destroy, :edit]
 
-	 def index
+	def index
     @users = User.order(:name)
+  end
+
+  def destroy
+    if (@user.admin_role?) && (User.where(admin_role: true).count <= 1)
+      flash[:alert] = 'Неможливо видалити останнього адміністратора'
+    else
+      @user.destroy ? flash[:notice] = 'Користувач був успішно видалений' : flash[:alert] = 'Неможливо видалити цього користувача'
+    end
+    redirect_to users_path
   end
 
   private
