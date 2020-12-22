@@ -3,7 +3,7 @@
 		<div class="form-group col-md-4">
 		<%= f.label :name,"Найменування" %>
 		<%= f.text_field :name, class: "form-control" %>
-		<div class="invalid-feedback">має бути унікальним</div>
+		<div class="invalid-feedback">вже існує</div>
 		</div>
 		<div class="form-group col-md-8">
 		<%= f.label :full_name,"Повне найменування" %>
@@ -32,7 +32,7 @@
 		<div class="form-group col-md-3">
 		<%= f.label :onec_id, "Номер 1С" %>
 		<%= f.number_field :onec_id, class: "form-control" %>
-		<div class="invalid-feedback">має бути унікальним</div>
+		<div class="invalid-feedback">вже існує</div>
 		</div>
 		<div class="form-group col-md-3">
 		<%= f.label :energy_consumer, "Споживач ел/ен." %>
