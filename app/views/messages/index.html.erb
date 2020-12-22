@@ -1,4 +1,4 @@
-<%= render './consumers/card', consumer: @consumer, style: params[:cab]%>
+<%= render './consumers/card', consumer: @consumer, manager: @manager, style: params[:cab]%>
 <br>
 <% if params[:cab] == 'gas' %>
   <%= render './gastab', active: 4 %>

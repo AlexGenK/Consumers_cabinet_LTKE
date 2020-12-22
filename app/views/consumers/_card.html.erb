@@ -19,21 +19,35 @@
 			<div class="col-md-12">
 				<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %>&nbsp; &nbsp;</i>
 				<b>Код 1С:</b><i> <%= consumer.onec_id %>&nbsp; &nbsp;</i>
-				<% if consumer.energy_consumer %>
-					<b>Договір eл.ен:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date&.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
+				<% if consumer.energy_consumer && style == 'energy' %>
+					<b>Договір з постачання єлектроєнергіі:</b><i> <%= "№#{consumer.dog_en_num} від #{consumer.dog_en_date&.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
 				<% end %>
-				<% if consumer.gas_consumer %>
-					<b>Договір газ:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date&.strftime('%d.%m.%Y')}" %></i>
+				<% if consumer.gas_consumer && style == 'gas' %>
+					<b>Договір з постачання газу:</b><i> <%= "№#{consumer.dog_gas_num} від #{consumer.dog_gas_date&.strftime('%d.%m.%Y')}" %></i>
 				<% end %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<b>Директор:</b><i> <%= consumer.director_name %>&nbsp; &nbsp;</i>
-				<b>Головний енергетик:</b><i> <%= consumer.engineer_name %></i>
+				<b>Головний енергетик:</b><i> <%= consumer.engineer_name %>&nbsp; &nbsp;</i>
+				<b>Клієнт:</b><i> <%= consumer.client_username %></i>
 			</div>
 		</div>
-		<br>
+		<div class="row">
+			<div class="col-md-12">
+				<% if style == 'gas' %>
+					<b>Менеджер по газу:</b><i> <%= manager&.name %>&nbsp; &nbsp;</i>
+					<b>E-mail:</b><i> <%= manager&.email %>&nbsp; &nbsp;</i>
+					<b>Телефон:</b><i> <%= manager&.phone %></i>
+				<% else %>
+					<b>Менеджер по ел/енергії:</b><i> <%= manager&.name %>&nbsp; &nbsp;</i>
+					<b>E-mail:</b><i> <%= manager&.email %>&nbsp; &nbsp;</i>
+					<b>Телефон:</b><i> <%= manager&.phone %></i>
+				<% end %>
+			</div>
+		</div>
+		<br />
 		<div class="row">
 			<div class="col-md-2">
 				<%= link_to consumers_path, class: "btn btn-outline-dark btn-block" do %>

@@ -23,6 +23,7 @@ class EnBidsController < ApplicationController
 
   def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
+    @manager = User.find_by(name: @consumer.manager_en_username)
   end
 
   def set_en_bid

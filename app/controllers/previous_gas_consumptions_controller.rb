@@ -10,5 +10,6 @@ class PreviousGasConsumptionsController < ApplicationController
 
 	def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
+    @manager = User.find_by(name: @consumer.manager_gas_username)
   end
 end
