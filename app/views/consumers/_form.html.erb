@@ -62,13 +62,28 @@
 		</div>
 	</div>
 	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :client_username, "Клієнт" %>
+		<%= f.select :client_username, @clients, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :manager_en_username, "Менеджер по ел/енергії" %>
+		<%= f.select :manager_en_username, @managers, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :manager_gas_username, "Менеджер по газу" %>
+		<%= f.select :manager_gas_username, @managers, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+		</div>
+	</div>
+	<br />
+	<div class="form-row">
 		<div class="col-md-3">
 			<%= f.button type: 'submit', class: "btn btn-outline-dark btn-block" do %>
 				<i class="fas fa-save"></i> Зберегти
 			<% end %>
 		</div>
 		<div class="col-md-3">
-			<%= link_to :back, class: "btn btn-outline-dark btn-block" do %>
+			<%= link_to :back, class: "btn btn-outline-secondary btn-block" do %>
 				<i class="fas fa-undo-alt"></i> Повернутись
 			<% end %>
 		</div>
