@@ -10,7 +10,7 @@
 			<th>#</th>
 			<th>Найменування</th>
 			<th class="text-center">Е/енергія</th>
-			<th class="text-center">Газ</th>
+			<th class="text-center">&nbsp;&nbsp;&nbsp;Газ&nbsp;&nbsp;&nbsp;</th>
 			<th class="text-center">Надійшов запит</th>
 			<th class="text-right">ЕДРПОУ</th>
 			<th class="text-right">Код 1С</th>
@@ -26,14 +26,14 @@
 			<td class="text-center">
 				<% if consumer.energy_consumer %>
 					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
-						&nbsp; &nbsp; <i class="fas fa-plug"></i> &nbsp; &nbsp;
+						&nbsp;&nbsp;<span class="fas fa-plug"></span>&nbsp;&nbsp;
 					<% end %>
 				<% end %>
 			</td>
 			<td class="text-center">
 				<% if consumer.gas_consumer %>
 					<%= link_to consumer_gas_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
-						&nbsp; &nbsp; <i class="fas fa-burn"></i> &nbsp; &nbsp; 
+						&nbsp;&nbsp;<span class="fas fa-burn"></span>&nbsp;&nbsp;
 					<% end %>
 				<% end %>
 			</td>
@@ -53,7 +53,7 @@
 					<%= link_to consumer, method: :delete, 
 						class: "btn btn-outline-danger btn-sm",
 						data: {confirm: "Ви впевнені що хочете видалити споживача?"} do %>
-						&nbsp<i class="fas fa-times test-delete-payment"></i>
+						<i class="fas fa-times test-delete-payment">&nbsp;</i>
 					<% end %>
 					</div>
 				</td>
