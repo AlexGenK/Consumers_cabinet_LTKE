@@ -22,7 +22,7 @@
 		<% @consumers.each do |consumer| %>
 		<tr>
 			<td><%= n += 1 %></td>
-			<td><%= consumer.name %></td>
+			<td><%= truncate(consumer.name, length: 50) %></td>
 			<td class="text-center">
 				<% if consumer.energy_consumer %>
 					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
