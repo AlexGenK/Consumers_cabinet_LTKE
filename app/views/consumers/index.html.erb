@@ -52,7 +52,7 @@
 					<% end %>
 					<%= link_to consumer, method: :delete, 
 						class: "btn btn-outline-danger btn-sm",
-						data: {confirm: "Ви впевнені що хочете видалити споживача?"} do %>
+						data: {confirm: "Ви впевнені що хочете видалити споживача #{consumer.name}?"} do %>
 						<i class="fas fa-times test-delete-payment">&nbsp;</i>
 					<% end %>
 					</div>
