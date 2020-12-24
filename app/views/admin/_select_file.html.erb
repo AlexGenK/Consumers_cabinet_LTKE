@@ -10,6 +10,12 @@
 <% end %>
 
 <script>
+document.querySelector('.custom-file-input').addEventListener('change',function(e){
+  var fileName = document.getElementById("datafile").files[0].name;
+  var nextSibling = e.target.nextElementSibling
+  nextSibling.innerText = fileName
+});
+
 $('#datafile').on('change',function(){
     var fileName = $(this).val().replace(/^.*[\\\/]/, '');
     $(this).next('.custom-file-label').html(fileName);
