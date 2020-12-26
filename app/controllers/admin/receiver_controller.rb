@@ -1,6 +1,6 @@
 class Admin::ReceiverController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_receiver
+  load_and_authorize_resource
 
   def edit
   end

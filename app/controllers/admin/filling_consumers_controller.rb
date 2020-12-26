@@ -1,7 +1,7 @@
 class Admin::FillingConsumersController < ApplicationController
 	require 'csv'
-  before_action :authenticate_user!
 	skip_before_action :verify_authenticity_token
+  authorize_resource :class => false
 
   def set_params
   end
