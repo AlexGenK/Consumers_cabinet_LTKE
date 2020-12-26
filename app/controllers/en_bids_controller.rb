@@ -1,7 +1,7 @@
 class EnBidsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_consumer
   before_action :set_en_bid
+  load_and_authorize_resource
 
   def show
   end

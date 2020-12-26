@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!
 	before_action :set_user, only: [:update, :destroy, :edit]
+  load_and_authorize_resource
 
 	def index
     @users = User.order(:name)

@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_consumer
   before_action :set_message, only: [:destroy, :edit, :update]
+  load_and_authorize_resource
 
   def index
     @messages = @consumer.messages.all.order(created_at: :desc).first(100)

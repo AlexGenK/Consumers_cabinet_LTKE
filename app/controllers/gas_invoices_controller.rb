@@ -1,6 +1,6 @@
 class GasInvoicesController < Invoice
-  before_action :authenticate_user!
 	before_action :set_consumer
+  load_and_authorize_resource
 	
 	def show
 		respond_to do |format|

@@ -1,6 +1,6 @@
 class PreviousGasConsumptionsController < ApplicationController
-	before_action :authenticate_user!
 	before_action :set_consumer
+	load_and_authorize_resource
 
 	def index
 		@previous_gas_consumptions = @consumer.previous_gas_consumption.all.order(date: :desc)

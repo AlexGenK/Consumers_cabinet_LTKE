@@ -1,7 +1,7 @@
 class EnPaymentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_consumer
   before_action :set_en_payment, only: [:destroy, :edit, :update]
+  load_and_authorize_resource
 
   def index
     @current_en_consumption = @consumer.current_en_consumption

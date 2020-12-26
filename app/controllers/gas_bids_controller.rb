@@ -1,7 +1,7 @@
 class GasBidsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_consumer
   before_action :set_gas_bid
+  load_and_authorize_resource
 
   def show
   end
