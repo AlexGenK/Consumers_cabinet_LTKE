@@ -64,10 +64,12 @@
 </table>
 </div>
 </div>
-<div class="row">
-  <div class="col-md-2">
-    <%= link_to edit_consumer_gas_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
-      <i class="fas fa-edit"></i> Редагувати
-    <% end %>
+<% if can? :manage, GasBid %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to edit_consumer_gas_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
+        <i class="fas fa-edit"></i> Редагувати
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

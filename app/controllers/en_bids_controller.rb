@@ -1,6 +1,8 @@
 class EnBidsController < ApplicationController
   before_action :set_consumer
   before_action :set_en_bid
+  before_action :detect_invalid_user
+  rescue_from ActiveRecord::RecordNotFound, with: :denied_action
   load_and_authorize_resource
 
   def show
@@ -44,5 +46,19 @@ class EnBidsController < ApplicationController
                                    :okt_a_1, :okt_b_1, :okt_a_2, :okt_b_2,
                                    :nov_a_1, :nov_b_1, :nov_a_2, :nov_b_2,
                                    :dec_a_1, :dec_b_1, :dec_a_2, :dec_b_2)
+  end
+
+  def detect_invalid_user
+    unless current_user.admin_role?
+      if current_user.manager_role?
+        denied_action if @consumer.manager_en_username != current_user.name
+      else
+        denied_action if @consumer.client_username != current_user.name
+      end
+    end
+  end
+
+  def denied_action
+    redirect_to :consumers, alert: "Спроба отримати доступ до споживача, що Вам не належить або не існує"
   end
 end

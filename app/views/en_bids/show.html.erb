@@ -104,10 +104,12 @@
     </tr>
   </tbody>
 </table>
-<div class="row">
-  <div class="col-md-2">
-    <%= link_to edit_consumer_en_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
-      <i class="fas fa-edit"></i> Редагувати
-    <% end %>
+<% if can? :manage, EnBid %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to edit_consumer_en_bid_path(@consumer), class: "btn btn-outline-dark btn-block" do %>
+        <i class="fas fa-edit"></i> Редагувати
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

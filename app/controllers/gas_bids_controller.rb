@@ -1,6 +1,8 @@
 class GasBidsController < ApplicationController
   before_action :set_consumer
   before_action :set_gas_bid
+  before_action :detect_invalid_user
+  rescue_from ActiveRecord::RecordNotFound, with: :denied_action
   load_and_authorize_resource
 
   def show
@@ -34,5 +36,19 @@ class GasBidsController < ApplicationController
   def gas_bid_params
     params.require(:gas_bid).permit(:jan, :feb, :mar, :apr, :may, :jun,
     																:jul, :aug, :sep, :okt, :nov, :dec)
+  end
+
+  def detect_invalid_user
+    unless current_user.admin_role?
+      if current_user.manager_role?
+        denied_action if @consumer.manager_gas_username != current_user.name
+      else
+        denied_action if @consumer.client_username != current_user.name
+      end
+    end
+  end
+
+  def denied_action
+    redirect_to :consumers, alert: "Спроба отримати доступ до споживача, що Вам не належить або не існує"
   end
 end
