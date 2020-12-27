@@ -68,11 +68,11 @@
 		</div>
 		<div class="form-group col-md-4">
 		<%= f.label :manager_en_username, "Менеджер по ел/енергії" %>
-		<%= f.select :manager_en_username, @managers, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+		<%= f.select :manager_en_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
 		</div>
 		<div class="form-group col-md-4">
 		<%= f.label :manager_gas_username, "Менеджер по газу" %>
-		<%= f.select :manager_gas_username, @managers, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+		<%= f.select :manager_gas_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
 		</div>
 	</div>
 	<br />
