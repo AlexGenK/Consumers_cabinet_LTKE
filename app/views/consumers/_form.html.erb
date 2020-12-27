@@ -74,6 +74,10 @@
 		<%= f.label :manager_gas_username, "Менеджер по газу" %>
 		<%= f.select :manager_gas_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
 		</div>
+		<% if !current_user.admin_role? %>
+			<%= f.hidden_field :manager_en_username %>
+			<%= f.hidden_field :manager_gas_username %>
+		<% end %>
 	</div>
 	<br />
 	<div class="form-row">
