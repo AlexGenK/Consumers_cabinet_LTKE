@@ -20,7 +20,7 @@ class Ability
         can :manage, GasBid
         can :manage, EnPayment
         can :manage, GasPayment
-        can [:edit, :update], Message
+        can [:edit, :update, :index], Message
         can [:new, :create, :index], User
     end
 
