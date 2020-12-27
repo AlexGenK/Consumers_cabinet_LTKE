@@ -1,6 +1,7 @@
 class EnPaymentsController < ApplicationController
   before_action :set_consumer
   before_action :set_en_payment, only: [:destroy, :edit, :update]
+  before_action :detect_invalid_user
   load_and_authorize_resource
 
   def index
@@ -49,6 +50,20 @@ class EnPaymentsController < ApplicationController
 
   def en_payment_params
     params.require(:en_payment).permit(:day, :percent)
+  end
+
+  def detect_invalid_user
+    unless current_user.admin_role?
+      if current_user.manager_role?
+        denied_action if @consumer.manager_en_username != current_user.name
+      else
+        denied_action if @consumer.client_username != current_user.name
+      end
+    end
+  end
+
+  def denied_action
+    redirect_to :consumers, alert: "Спроба отримати доступ до споживача, що Вам не належить або не існує"
   end
 	
 end

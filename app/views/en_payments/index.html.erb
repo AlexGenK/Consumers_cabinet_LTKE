@@ -33,7 +33,9 @@
 				<th class="text-center">Планова сума оплати, грн.</th>
 				<th class="text-center">Оплачено, грн.</th>
 				<th class="text-center">Сальдо, грн.</th>
-				<th></th>
+				<% if can? :manage, EnPayment %>
+					<th></th>
+				<% end %>
 			</thead>
 			<tbody>
 				<% @en_payments.each do |payment| %>
@@ -43,25 +45,29 @@
 						<td class='text-right'></td>
 						<td class='text-right'></td>
 						<td class='text-right'></td>
-						<td class='text-right'>
-							<div class="btn-group">
-							<%= link_to edit_consumer_en_payment_path(@consumer, payment), 
-								class: "btn btn-outline-dark btn-sm" do %>
-								<i class="fas fa-edit test-edit-payment"></i>
-							<% end %>
-							<%= link_to [@consumer, payment], method: :delete, 
-								class: "btn btn-outline-danger btn-sm",
-								data: {confirm: "Ви впевнені що хочете видалити плановий платіж?"} do %>
-								<i class="fas fa-times test-delete-payment">&nbsp</i>
-							<% end %>
-							</div>
-						</td>
+						<% if can? :manage, EnPayment %>
+							<td class='text-right'>
+								<div class="btn-group">
+								<%= link_to edit_consumer_en_payment_path(@consumer, payment), 
+									class: "btn btn-outline-dark btn-sm" do %>
+									<i class="fas fa-edit test-edit-payment"></i>
+								<% end %>
+								<%= link_to [@consumer, payment], method: :delete, 
+									class: "btn btn-outline-danger btn-sm",
+									data: {confirm: "Ви впевнені що хочете видалити плановий платіж?"} do %>
+									<i class="fas fa-times test-delete-payment">&nbsp</i>
+								<% end %>
+								</div>
+							</td>
+						<% end %>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
-		<h6>Додати платіж</h6>
-		<%= render 'form' %>
+		<% if can? :manage, EnPayment %>
+			<h6>Додати платіж</h6>
+			<%= render 'form' %>
+		<% end %>
 	</div>
 	<div class='col-sm-3'>
 		<br>
