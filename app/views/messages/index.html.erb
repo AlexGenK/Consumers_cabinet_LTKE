@@ -6,24 +6,26 @@
   <%= render './entab', active: 4 %>
 <% end %>
 <br>
-<%= form_for [@consumer, @message] do |f| %>
-  <div class="form-group row">
-    <div class="col-sm-2">
-      <%= f.label :text, "Введить запит:", class: "col-form-label" %>
+<% if can? :new, Message %>
+  <%= form_for [@consumer, @message] do |f| %>
+    <div class="form-group row">
+      <div class="col-sm-2">
+        <%= f.label :text, "Введить запит:", class: "col-form-label" %>
+      </div>
+      <div class="col-sm-10">
+        <%= f.text_area :text, class: "form-control" %>
+      </div>
     </div>
-    <div class="col-sm-10">
-      <%= f.text_area :text, class: "form-control" %>
+    <div class="form-group row">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-10">
+        <%= f.button type: 'submit', name: 'cab', value: params[:cab], class: "btn btn-outline-dark" do %>
+          <i class="fas fa-share-square"></i> Надіслати
+        <% end %>
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-10">
-      <%= f.button type: 'submit', name: 'cab', value: params[:cab], class: "btn btn-outline-dark" do %>
-        <i class="fas fa-share-square"></i> Надіслати
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 <% end %>
 <h6>Історія запитів</h6>
 <div class="row block-v-scroll">
@@ -56,15 +58,19 @@
             <td><%= truncate(message.comment, length: 25) %></td>
             <td class='text-right'>
               <div class="btn-group">
-              <%= link_to edit_consumer_message_path(@consumer, message, cab: params[:cab]), 
-                class: "btn btn-outline-dark btn-sm" do %>
-                <i class="fas fa-edit test-edit-message"></i>
+              <% if can? :edit, Message %>
+                <%= link_to edit_consumer_message_path(@consumer, message, cab: params[:cab]), 
+                  class: "btn btn-outline-dark btn-sm" do %>
+                  <i class="fas fa-edit test-edit-message"></i>
+                <% end %>
               <% end %>
-              <%= link_to [@consumer, message, cab: params[:cab]], method: :delete, 
-                class: "btn btn-outline-danger btn-sm",
-                data: {confirm: "Ви впевнені що хочете видалити запит?"} do %>
-                <i class="fas fa-times test-delete-message">&nbsp</i>
-              <% end %>
+              <% if can? :delete, Message %>
+                <%= link_to [@consumer, message, cab: params[:cab]], method: :delete, 
+                  class: "btn btn-outline-danger btn-sm",
+                  data: {confirm: "Ви впевнені що хочете видалити запит?"} do %>
+                  <i class="fas fa-times test-delete-message">&nbsp</i>
+                <% end %>
+              <% end %> 
               </div>
             </td>
           </tr>
