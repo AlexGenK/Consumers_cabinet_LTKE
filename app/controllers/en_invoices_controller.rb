@@ -1,6 +1,6 @@
 class EnInvoicesController < Invoice
   before_action :set_consumer
-  load_and_authorize_resource
+  authorize_resource :class => false
   
   def show
     respond_to do |format|
