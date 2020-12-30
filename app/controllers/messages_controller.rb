@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
   def create
     @message = @consumer.messages.new(message_params)
     if @message.save
-      MessageMailer.with(consumer: @consumer, message: @message).new_message_email.deliver_later
+      MessageMailer.with(consumer: @consumer, manager: @manager, message: @message).new_message_email.deliver_later
     else
       flash[:alert] = 'Неможливо створити запит'
     end

@@ -2,7 +2,8 @@ class MessageMailer < ApplicationMailer
 	def new_message_email
 		@consumer = params[:consumer]
 		@message = params[:message]
+		@manager = params[:manager]
 
-		mail(to: ENV['CONSUMERS_CABINET_LTKE_TESTEMAIL'], subject: "Надіслано нове повідомлення")
+		mail(to: @manager.email, subject: "Надіслано нове повідомлення")
 	end
 end
