@@ -42,7 +42,7 @@
         <% @messages.each do |message| %>
           <tr>
             <td class="text-center"><%= message.created_at.strftime('%d.%m.%Y') %></td>
-            <td><%= truncate(message.text, length: 60) %></td>
+            <td><small><%= message.text %></small></td>
             <td class="text-center">
               <% case message.state %>
               <% when 0 %>
@@ -55,7 +55,7 @@
                 <span class="badge badge-danger">Не виконано</span>
               <% end %>              
             </td>
-            <td><%= truncate(message.comment, length: 25) %></td>
+            <td><small><%= message.comment %></small></td>
             <td class='text-right'>
               <div class="btn-group">
               <% if can? :edit, Message %>
