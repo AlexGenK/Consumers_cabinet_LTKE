@@ -17,13 +17,13 @@
   <% @previous_gas_consumptions.each do |consumption| %>
     <tr>
       <td class="text-center"><%= consumption&.date.strftime('%d.%m.%Y') %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.opening_balance, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.opening_balance, precision: 2, delimiter: " ") %></td>
       <td class="text-center"><%= number_with_delimiter(consumption.volume, delimiter: " ") %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.tariff, delimiter: " ") %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.cost, delimiter: " ") %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.cost_val, delimiter: " ") %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.money, delimiter: " ") %></td>
-      <td class="text-center"><%= number_with_delimiter(consumption.closing_balance, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.tariff, precision: 5, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.cost, precision: 2, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.cost_val, precision: 2, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.money, precision: 2, delimiter: " ") %></td>
+      <td class="text-center"><%= number_with_precision(consumption.closing_balance, precision: 2, delimiter: " ") %></td>
     </tr>
   <% end %>
   </tbody>
