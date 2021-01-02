@@ -8,7 +8,7 @@ class EnInvoicesController < Invoice
       format.pdf do
         data = InvData.new(0, 0, 0, 0, 0)
         send_data pdf_form(data, style: 'energy').render,
-                  filename: "Счет для #{@consumer.name} от #{DateTime.now.strftime('%Y_%m')}.pdf",
+                  filename: "Рахунок для #{@consumer.name} від #{DateTime.now.strftime('%Y_%m')}.pdf",
                   type: 'application/pdf',
                   disposition: 'inline'
       end
