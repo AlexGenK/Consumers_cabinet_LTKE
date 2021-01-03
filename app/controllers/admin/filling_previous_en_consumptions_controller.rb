@@ -21,7 +21,7 @@ class Admin::FillingPreviousEnConsumptionsController < ApplicationController
     csv = CSV.parse(csv_file, col_sep: ';')
       csv.each do |record|
         @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
-        unless @consumer == nil
+        if @consumer
           delete_old(to_dog_en_date(record[1]))
           @consumer.previous_en_consumption.new(date:            to_dog_en_date(record[1]),
                                                 opening_balance: record[2].to_f,
