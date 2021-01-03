@@ -1,5 +1,6 @@
 class Admin::FillingConsumersController < ApplicationController
 	require 'csv'
+  include Admin::FillingConsumersHelper
 	skip_before_action :verify_authenticity_token
   authorize_resource :class => false
 
