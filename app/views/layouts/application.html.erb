@@ -45,9 +45,12 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
                   <%= link_to "Імпорт споживачів", admin_filling_consumers_path, class: "dropdown-item" %>
+                  <div class="dropdown-divider"></div>
                   <%= link_to "Імпорт попереднього споживання ел/енергії", admin_filling_previous_en_consumptions_path, class: "dropdown-item" %>
                   <%= link_to "Імпорт поточного споживання ел/енергії", admin_filling_current_en_consumptions_path, class: "dropdown-item" %>
+                  <div class="dropdown-divider"></div>
                   <%= link_to "Імпорт попереднього споживання газу", admin_filling_previous_gas_consumptions_path, class: "dropdown-item" %>
+                  <%= link_to "Імпорт поточного споживання газу", admin_filling_current_gas_consumptions_path, class: "dropdown-item" %>
                   <div class="dropdown-divider"></div>
                   <%= link_to "Платіжні реквізити", edit_admin_receiver_path, class: "dropdown-item" %>
                 </div>

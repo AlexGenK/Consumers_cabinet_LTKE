@@ -15,5 +15,4 @@ class Admin::FillingCurrentEnConsumptionsController < ApplicationController
   def filling_current_en_consumptions_params
     params.require(:filling_current_en_consumptions).permit(:datafile)
   end
-
 end
