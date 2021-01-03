@@ -14,13 +14,13 @@
 		<th class="text-center">Сальдо на кінець періоду, грн. з ПДВ</th>
 	</thead>
 	<tbody>
-		<td class='text-right'><%= @current_en_consumption&.opening_balance %></td>
-		<td class='text-right'><%= @current_en_consumption&.power %></td>
-		<td class='text-right'><%= @current_en_consumption&.tariff %></td>
-		<td class='text-right'><%= @current_en_consumption&.cost %></td>
-		<td class='text-right'><%= @current_en_consumption&.cost_val %></td>
-		<td class='text-right'><%= @current_en_consumption&.money %></td>
-		<td class='text-right'><%= @current_en_consumption&.closing_balance %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.opening_balance, precision: 2, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_delimiter(@current_en_consumption&.power, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.tariff, precision: 5, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.cost, precision: 2, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.cost_val, precision: 2, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.money, precision: 2, delimiter: " ") %></td>
+		<td class='text-center'><%= number_with_precision(@current_en_consumption&.closing_balance, precision: 2, delimiter: " ") %></td>
 	</tbody>
 </table>
 <div class='row'>
