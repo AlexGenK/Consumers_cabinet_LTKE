@@ -49,7 +49,11 @@ class EnPaymentsController < ApplicationController
 
   def calculate_balance(payments, o_balance:, tariff:, power:, money:)
     balance = []
-    cur_balance = 0
+    if money+o_balance > 0
+      cur_balance = 0
+    else
+      cur_balance = -o_balance-money
+    end
     all_cost = tariff * power * 1.2
     total_payment = o_balance + money
     payments.each do |payment|
@@ -64,7 +68,7 @@ class EnPaymentsController < ApplicationController
       end
       cur_balance = cur_balance + (sum - cur_payment)
       total_payment -= sum
-      balance << {sum: sum, cur_payment: cur_payment, cur_balance: cur_balance}
+      balance << {sum: sum, cur_payment: cur_payment, cur_balance: cur_balance, day: payment.day}
     end
     return balance
   end
