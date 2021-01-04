@@ -8,6 +8,13 @@ class EnPaymentsController < ApplicationController
   def index
     @current_en_consumption = @consumer.current_en_consumption
     @en_payments = @consumer.en_payments.all.order(:day)
+    @calculable = @current_en_consumption && @en_payments
+    if @calculable
+      @balance = calculate_balance(@en_payments, o_balance: @current_en_consumption.opening_balance,
+                                                 tariff: @current_en_consumption.tariff,
+                                                 power: @current_en_consumption.power,
+                                                 money: @current_en_consumption.money)
+    end
     @en_payment = @consumer.en_payments.new
   end
 
@@ -39,6 +46,15 @@ class EnPaymentsController < ApplicationController
   end
 
   private
+
+  def calculate_balance(payments, o_balance:, tariff:, power:, money:)
+    balance = []
+    all_cost = tariff * power * 1.2
+    payments.each do |payment|
+      balance << {sum: payment.percent*all_cost/100}
+    end
+    return balance
+  end
 
   def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
