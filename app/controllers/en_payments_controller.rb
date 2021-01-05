@@ -14,6 +14,8 @@ class EnPaymentsController < ApplicationController
                                                  tariff: @current_en_consumption.tariff,
                                                  power: @current_en_consumption.power,
                                                  money: @current_en_consumption.money)
+      @current_balance = get_current_balance(@balance, o_balance: @current_en_consumption.opening_balance,
+                                                       money: @current_en_consumption.money)
     end
     @en_payment = @consumer.en_payments.new
   end
@@ -71,6 +73,24 @@ class EnPaymentsController < ApplicationController
       balance << {sum: sum, cur_payment: cur_payment, cur_balance: cur_balance, day: payment.day}
     end
     return balance
+  end
+
+  def get_current_balance(balance, o_balance:, money:)
+    current_day = Time.now.day
+    if money+o_balance > 0
+      cur_balance = 0
+    else
+      cur_balance = -o_balance-money
+    end
+    balance.each do |item|
+        if item[:day] <= current_day
+          p item[:cur_balance]
+          cur_balance = item[:cur_balance]
+        else
+          break
+        end
+    end
+    return cur_balance
   end
 
   def set_consumer
