@@ -82,7 +82,7 @@
 		<b><%= "#{number_with_precision(@current_balance, precision: 2, delimiter: ' ')} грн." if @calculable %><b>
 		<br>
 		<br>
-		<%= link_to consumer_en_invoice_path(@consumer, :format => :pdf), 
+		<%= link_to consumer_en_invoice_path(@consumer, sum: @current_balance, tariff: @current_en_consumption.tariff, format: :pdf), 
 			class: "btn btn-outline-dark btn-block", target: :_blank do %>
 			<i class="fas fa-file-download"></i> Сформувати рахунок
 		<% end %>
