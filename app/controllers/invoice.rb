@@ -19,7 +19,7 @@ class Invoice < ApplicationController
     	dog_num = @consumer.dog_gas_num
     	dog_date = @consumer.dog_gas_date
     else
-    	units = 'тис.кВт.год'
+    	units = 'кВт.год'
     	product = 'електроенергію'
     	dog_num = @consumer.dog_en_num
     	dog_date = @consumer.dog_en_date
@@ -68,7 +68,7 @@ class Invoice < ApplicationController
             ActiveSupport::NumberHelper.number_to_delimited(data.quantity, delimiter: ' '),
             units, 
             ActiveSupport::NumberHelper.number_to_delimited(data.price, delimiter: ' '), 
-            ActiveSupport::NumberHelper.number_to_delimited(data.sum, delimiter: ' ')]]
+            float_format(data.sum)]]
     pdf.table(table_data, column_widths: [30, 235, 80, 45, 70, 80]) do
       row(0).columns(0..5).align = :center
       row(0).columns(0..5).background_color = "F0F0F0"
@@ -85,7 +85,7 @@ class Invoice < ApplicationController
       pdf.text "Всього:", align: :right, style: :bold
     end
     pdf.bounding_box([460, y], width: 80) do
-      pdf.text ActiveSupport::NumberHelper.number_to_delimited(data.sum, delimiter: ' '), align: :right, style: :bold
+      pdf.text float_format(data.sum), align: :right, style: :bold
     end
     pdf.move_down 2
     y = pdf.cursor
@@ -93,7 +93,7 @@ class Invoice < ApplicationController
       pdf.text "Сума ПДВ:", align: :right, style: :bold
     end
     pdf.bounding_box([460, y], width: 80) do
-      pdf.text ActiveSupport::NumberHelper.number_to_delimited(data.vat, delimiter: ' '), align: :right, style: :bold
+      pdf.text float_format(data.vat), align: :right, style: :bold
     end
     pdf.move_down 2
     y = pdf.cursor
@@ -101,20 +101,25 @@ class Invoice < ApplicationController
       pdf.text "Вього із ПДВ:", align: :right, style: :bold
     end
     pdf.bounding_box([460, y], width: 80) do
-      pdf.text ActiveSupport::NumberHelper.number_to_delimited(data.sum_vat, delimiter: ' '), align: :right, style: :bold
+      pdf.text float_format(data.sum_vat), align: :right, style: :bold
     end
     pdf.move_down 10
-    pdf.text "Всього найменувань 1, на суму #{ActiveSupport::NumberHelper.number_to_delimited(data.sum_vat, delimiter: ' ')} грн.", size: 10
+    pdf.text "Всього найменувань 1, на суму #{float_format(data.sum_vat)} грн.", size: 10
     pdf.move_down 2
-    sum_vat_parts = data.sum_vat.to_s.split('.')
+    # sum_vat_parts = data.sum_vat.to_s.split('.')
+    sum_vat_parts = ActionController::Base.helpers.number_with_precision(data.sum_vat, precision: 2).split(',')
     pdf.text "#{sum_vat_parts[0].to_i.humanize(locale: 'ua').capitalize} грн. #{sum_vat_parts[1]} коп.", style: :bold
     pdf.move_down 2
-    vat_parts = data.vat.to_s.split('.')
+    # vat_parts = data.vat.to_s.split('.')
+    vat_parts = ActionController::Base.helpers.number_with_precision(data.vat, precision: 2).split(',')
     pdf.text "У т.р. ПДВ: #{vat_parts[0].to_i.humanize(locale: 'ua')} грн. #{vat_parts[1]} коп.", style: :bold
 
-    pdf.stroke_axis
     pdf.draw_text now.strftime('Сгенеровано %d.%m.%Y в %T'), size: 10, at: [0, 0]
     return pdf
+  end
+
+  def float_format(float)
+    ActionController::Base.helpers.number_with_precision(float, delimiter: ' ', precision: 2)
   end
 
 end
