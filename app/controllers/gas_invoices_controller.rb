@@ -6,7 +6,7 @@ class GasInvoicesController < Invoice
 		respond_to do |format|
       format.html { render :show }
       format.pdf do
-      	data = InvData.new(0, 0, 0, 0, 0)
+      	data = calculate_invoice
         send_data pdf_form(data, style: 'gas').render,
                   filename: "Рахунок для #{@consumer.name} від #{DateTime.now.strftime('%Y_%m')}.pdf",
                   type: 'application/pdf',

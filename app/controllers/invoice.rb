@@ -106,11 +106,9 @@ class Invoice < ApplicationController
     pdf.move_down 10
     pdf.text "Всього найменувань 1, на суму #{float_format(data.sum_vat)} грн.", size: 10
     pdf.move_down 2
-    # sum_vat_parts = data.sum_vat.to_s.split('.')
     sum_vat_parts = ActionController::Base.helpers.number_with_precision(data.sum_vat, precision: 2).split(',')
     pdf.text "#{sum_vat_parts[0].to_i.humanize(locale: 'ua').capitalize} грн. #{sum_vat_parts[1]} коп.", style: :bold
     pdf.move_down 2
-    # vat_parts = data.vat.to_s.split('.')
     vat_parts = ActionController::Base.helpers.number_with_precision(data.vat, precision: 2).split(',')
     pdf.text "У т.р. ПДВ: #{vat_parts[0].to_i.humanize(locale: 'ua')} грн. #{vat_parts[1]} коп.", style: :bold
 
@@ -120,6 +118,15 @@ class Invoice < ApplicationController
 
   def float_format(float)
     ActionController::Base.helpers.number_with_precision(float, delimiter: ' ', precision: 2)
+  end
+
+  def calculate_invoice
+    sum_vat = params[:sum].to_f.round(2)
+    price = params[:tariff].to_f
+    sum = (sum_vat - (sum_vat / 6)).round(2)
+    vat = (sum_vat - sum).round(2)
+    quantity = (sum/price).round(5)
+    InvData.new(quantity, price, sum, vat, sum_vat)
   end
 
 end

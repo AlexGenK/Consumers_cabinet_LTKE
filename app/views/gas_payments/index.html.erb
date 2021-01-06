@@ -10,7 +10,7 @@
 		<th class="text-center">Планова ціна, грн. без ПДВ</th>
 		<th class="text-center">Вартість, грн. без ПДВ</th>
 		<th class="text-center">Вартість, грн. з ПДВ</th>
-		<th class="text-center">Оплачено, грн.</th>
+		<th class="text-center">&nbsp;&nbsp;&nbsp;Оплачено,&nbsp;&nbsp;&nbsp; грн.</th>
 		<th class="text-center">Сальдо на кінець періоду, грн. з ПДВ</th>
 	</thead>
 	<tbody>
@@ -42,13 +42,14 @@
 				<% end %>
 			</thead>
 			<tbody>
+				<% count = 0 %>
 				<% @gas_payments.each do |payment| %>
 					<tr>
 						<td class="text-center"><%= payment.day %></td>
 						<td class="text-center"><%= payment.percent %></td>
-						<td class='text-right'></td>
-						<td class='text-right'></td>
-						<td class='text-right'></td>
+						<td class='text-center'><%= number_with_precision(@balance[count][:sum], precision: 2, delimiter: ' ') if @calculable %></td>
+						<td class='text-center'><%= number_with_precision(@balance[count][:cur_payment], precision: 2, delimiter: ' ') if @calculable %></td>
+						<td class='text-center'><%= number_with_precision(@balance[count][:cur_balance], precision: 2, delimiter: ' ') if @calculable %></td>
 						<% if can? :manage, GasPayment %>
 							<td class='text-right'>
 								<div class="btn-group">
@@ -65,6 +66,7 @@
 							</td>
 						<% end %>
 					</tr>
+					<% count += 1 %>
 				<% end %>
 			</tbody>
 		</table>
@@ -77,10 +79,17 @@
 		<br>
 		<b>Поточна заборгованість:</b>
 		<br>
+		<b><%= "#{number_with_precision(@current_balance, precision: 2, delimiter: ' ')} грн." if @calculable %><b>
 		<br>
-		<%= link_to consumer_gas_invoice_path(@consumer, :format => :pdf), 
-		class: "btn btn-outline-dark btn-block", target: :_blank do %>
-			<i class="fas fa-file-download"></i> Сформувати рахунок
+		<br>
+		<% if @calculable %>
+			<%= link_to consumer_gas_invoice_path(@consumer, sum: @current_balance, tariff: @current_gas_consumption.tariff, format: :pdf), 
+				class: "btn btn-outline-dark btn-block", target: :_blank do %>
+				<i class="fas fa-file-download"></i> Сформувати рахунок
+			<% end %>
+		<% else %>
+			<button type="button" class="btn btn-outline-dark btn-block" disabled><i class="fas fa-file-download">
+				</i> Сформувати рахунок</button>
 		<% end %>
 	</div>
 </div>
