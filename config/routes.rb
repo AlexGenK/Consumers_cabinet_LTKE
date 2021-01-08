@@ -34,6 +34,10 @@ Rails.application.routes.draw do
 
     get 'filling_previous_gas_consumptions',  to: 'filling_previous_gas_consumptions#set_params'
     post 'filling_previous_gas_consumptions', to: 'filling_previous_gas_consumptions#start'
+
+    get 'filling_en_certificates',  to: 'filling_en_certificates#start'
+
+    get 'filling_gas_certificates', to: 'filling_gas_certificates#start'
   end
 
   root to: 'consumers#index'
