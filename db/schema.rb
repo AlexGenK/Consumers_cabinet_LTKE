@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_101423) do
+ActiveRecord::Schema.define(version: 2021_01_08_140727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,14 @@ ActiveRecord::Schema.define(version: 2021_01_08_101423) do
     t.index ["consumer_id"], name: "index_en_bids_on_consumer_id"
   end
 
+  create_table "en_certificates", force: :cascade do |t|
+    t.bigint "consumer_id"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_en_certificates_on_consumer_id"
+  end
+
   create_table "en_payments", force: :cascade do |t|
     t.integer "day"
     t.integer "percent"
@@ -168,6 +176,14 @@ ActiveRecord::Schema.define(version: 2021_01_08_101423) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["consumer_id"], name: "index_gas_bids_on_consumer_id"
+  end
+
+  create_table "gas_certificates", force: :cascade do |t|
+    t.bigint "consumer_id"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_gas_certificates_on_consumer_id"
   end
 
   create_table "gas_payments", force: :cascade do |t|
