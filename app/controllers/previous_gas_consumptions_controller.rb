@@ -6,6 +6,7 @@ class PreviousGasConsumptionsController < ApplicationController
 
 	def index
 		@previous_gas_consumptions = @consumer.previous_gas_consumption.all.order(date: :desc)
+    @certificate = @consumer.gas_certificate
 	end
 
 	private
