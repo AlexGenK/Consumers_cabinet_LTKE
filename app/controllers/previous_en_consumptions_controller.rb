@@ -6,6 +6,7 @@ class PreviousEnConsumptionsController < ApplicationController
 
 	def index
 		@previous_en_consumptions = @consumer.previous_en_consumption.all.order(date: :desc)
+    @certificate = @consumer.en_certificate
 	end
 
 	private

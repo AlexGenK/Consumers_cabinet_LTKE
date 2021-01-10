@@ -3,13 +3,13 @@ class Consumer < ApplicationRecord
 	has_one  :en_bid, dependent: :destroy
 	has_many :previous_en_consumption, dependent: :destroy
 	has_one  :current_en_consumption, dependent: :destroy
-	has_one  :en_certificates, dependent: :destroy
+	has_one  :en_certificate, dependent: :destroy
 
 	has_many :gas_payments, dependent: :destroy
 	has_one  :gas_bid, dependent: :destroy
 	has_many :previous_gas_consumption, dependent: :destroy
 	has_one  :current_gas_consumption, dependent: :destroy
-	has_one  :gas_certificates, dependent: :destroy
+	has_one  :gas_certificate, dependent: :destroy
 
 	has_many :messages, dependent: :destroy
 

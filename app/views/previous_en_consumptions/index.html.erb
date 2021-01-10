@@ -30,4 +30,10 @@
   <% end %>
   </tbody>
 </table>
-<a href="#" class="btn btn-outline-dark"><i class="fas fa-file-download"></i> Отримати акт за <%= UA_MONTHS_SINGLE[1.months.ago.month] %> <%= 1.months.ago.year %> р.</a>
+<% if @certificate %>
+  <%= link_to rails_blob_path(@certificate.print_form, disposition: "attachment"), class: "btn btn-outline-dark" do %>
+    <i class="fas fa-file-download"></i> Отримати акт за <%= UA_MONTHS_SINGLE[1.months.ago.month] %> <%= 1.months.ago.year %> р.
+  <% end %>
+<% else %>
+  <button type="button" class="btn btn-outline-dark" disabled><i class="fas fa-file-download"></i> <%= "Акт за #{UA_MONTHS_SINGLE[1.months.ago.month]} відсутній" %></button>
+<% end %>
