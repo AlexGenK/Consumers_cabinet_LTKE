@@ -16,7 +16,7 @@ class Admin::FillingEnCertificatesController < ApplicationController
         Net::FTP.open(ENV['CONSUMERS_CABINET_LTKE_FTP_HOST'], 
                   ENV['CONSUMERS_CABINET_LTKE_FTP_USERNAME'],
                   ENV['CONSUMERS_CABINET_LTKE_FTP_PASSWORD'],) do |ftp| 
-        	ftp.chdir('energy/')
+        	ftp.chdir('energy/certificates')
          	ftp.getbinaryfile(value[:filename], 'public/akt.xlsx')
         end
         @cert.print_form.attach(io: File.open('public/akt.xlsx'), filename: 'akt.xlsx', content_type: 'application/vnd.ms-excel')
@@ -32,7 +32,7 @@ class Admin::FillingEnCertificatesController < ApplicationController
     Net::FTP.open(ENV['CONSUMERS_CABINET_LTKE_FTP_HOST'], 
                   ENV['CONSUMERS_CABINET_LTKE_FTP_USERNAME'],
                   ENV['CONSUMERS_CABINET_LTKE_FTP_PASSWORD'],) do |ftp|
-      ftp.chdir('energy/') 
+      ftp.chdir('energy/certificates') 
       ftp.nlst.each do |filename|
         if !files[parse_id(filename)] || files[parse_id(filename)][:date] < parse_date(filename)
           files[parse_id(filename)] = {date: parse_date(filename), filename: filename}
