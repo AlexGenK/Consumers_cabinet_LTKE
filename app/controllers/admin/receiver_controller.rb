@@ -3,6 +3,7 @@ class Admin::ReceiverController < ApplicationController
   load_and_authorize_resource
 
   def edit
+    @receiver ||= Receiver.build(name: 'Big company')
   end
 
   def update
