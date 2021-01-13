@@ -3,7 +3,6 @@ class Admin::ReceiverController < ApplicationController
   load_and_authorize_resource
 
   def edit
-    @receiver ||= Receiver.build(name: 'Big company')
   end
 
   def update
@@ -19,6 +18,7 @@ class Admin::ReceiverController < ApplicationController
 
   def set_receiver
     @receiver = Receiver.first
+    @receiver ||= Receiver.create(name: 'Big company')
   end
 
   def receiver_params
