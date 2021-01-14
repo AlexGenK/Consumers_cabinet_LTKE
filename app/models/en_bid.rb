@@ -13,4 +13,15 @@ class EnBid < ApplicationRecord
             :nov_a_1, :nov_b_1, :nov_a_2, :nov_b_2,
             :dec_a_1, :dec_b_1, :dec_a_2, :dec_b_2,
             numericality: { less_than: 2147483647, greater_than_or_equal_to: 0 }
+
+  MNT = ['','jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
+
+  def month_sum(month)
+    if month>0 && month<13
+      return self.send("#{MNT[month]}_a_1")+self.send("#{MNT[month]}_b_1")+self.send("#{MNT[month]}_a_2")+self.send("#{MNT[month]}_b_2")
+    else
+      return nil
+    end
+  end
+
 end
