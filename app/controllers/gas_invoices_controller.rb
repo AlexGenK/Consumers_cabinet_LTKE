@@ -1,6 +1,5 @@
 class GasInvoicesController < Invoice
 	before_action :set_consumer
-  # authorize_resource :class => false
 	
 	def show
     authorize! :show, :invoice
