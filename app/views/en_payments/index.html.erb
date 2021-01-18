@@ -77,9 +77,9 @@
 	</div>
 	<div class='col-sm-3'>
 		<br>
-		<b>Поточна заборгованість:</b>
+		<b class=<%= "text-danger" if @current_balance && (@current_balance > 0)%>>Поточна заборгованість:</b>
 		<br>
-		<b><%= "#{number_with_precision(@current_balance, precision: 2, delimiter: ' ')} грн." if @calculable %><b>
+		<b class=<%= "text-danger" if @current_balance && (@current_balance > 0)%>><%= "#{number_with_precision(@current_balance, precision: 2, delimiter: ' ')} грн." if @calculable %><b>
 		<br>
 		<br>
 		<% if @calculable %>
