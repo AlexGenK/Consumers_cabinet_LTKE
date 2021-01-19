@@ -11,17 +11,9 @@
 		</div>
 	</div>
 	<div class="form-row">
-		<div class="form-group col-md-4">
+		<div class="form-group col-md-12">
 		<%= f.label :address,"Адрес" %>
 		<%= f.text_field :address, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :director_name,"Директор" %>
-		<%= f.text_field :director_name, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :engineer_name,"Головний енергетик" %>
-		<%= f.text_field :engineer_name, class: "form-control" %>
 		</div>
 	</div>
 	<div class="form-row">
@@ -41,6 +33,48 @@
 		<div class="form-group col-md-3">
 		<%= f.label :gas_consumer, "Споживач газу" %>
 		<%= f.check_box :gas_consumer, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :director_name,"Директор" %>
+		<%= f.text_field :director_name, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :director_phone,"Телефон" %>
+		<%= f.text_field :director_phone, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :director_mail,"E-mail" %>
+		<%= f.text_field :director_mail, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :accountant_name,"Головний бухгалтер" %>
+		<%= f.text_field :accountant_name, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :accountant_phone,"Телефон" %>
+		<%= f.text_field :accountant_phone, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :accountant_mail,"E-mail" %>
+		<%= f.text_field :accountant_mail, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+		<%= f.label :engineer_name,"Головний енергетик" %>
+		<%= f.text_field :engineer_name, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :engineer_phone,"Телефон" %>
+		<%= f.text_field :engineer_phone, class: "form-control" %>
+		</div>
+		<div class="form-group col-md-4">
+		<%= f.label :engineer_mail,"E-mail" %>
+		<%= f.text_field :engineer_mail, class: "form-control" %>
 		</div>
 	</div>
 	<div class="form-row">

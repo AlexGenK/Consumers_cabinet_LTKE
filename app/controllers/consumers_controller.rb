@@ -5,8 +5,8 @@ class ConsumersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :denied_action
   load_and_authorize_resource
 
-	def index
-		if current_user.admin_role?
+  def index
+    if current_user.admin_role?
       @consumers=Consumer.order(:name)
     elsif current_user.manager_role?
       @consumers=Consumer.where('manager_en_username = ?', current_user.name).
@@ -15,13 +15,13 @@ class ConsumersController < ApplicationController
     elsif current_user.client_role?
       @consumers=Consumer.where('client_username = ?', current_user.name).order(:name)
     end
-	end
+  end
 
-	def new
+  def new
     @consumer = Consumer.new
     @consumer.manager_en_username = current_user.name
     @consumer.manager_gas_username = current_user.name
-	end
+  end
 
   def create
     @consumer = Consumer.new(consumer_params)
@@ -50,16 +50,18 @@ class ConsumersController < ApplicationController
     redirect_to consumers_path
   end
 
-	private
+  private
 
-	def consumer_params
+  def consumer_params
     params.require(:consumer).permit(:name, :full_name, :edrpou, :onec_id,
-                                      :director_name, :engineer_name,
-                                      :dog_en_num, :dog_en_date,
-                                      :dog_gas_num, :dog_gas_date,
-                                      :energy_consumer, :gas_consumer,
-                                      :manager_en_username, :manager_gas_username,
-                                      :client_username, :address)
+                                     :director_name, :director_phone, :director_mail,
+                                     :engineer_name, :engineer_phone, :engineer_mail,
+                                     :accountant_name, :accountant_phone, :accountant_mail,
+                                     :dog_en_num, :dog_en_date,
+                                     :dog_gas_num, :dog_gas_date,
+                                     :energy_consumer, :gas_consumer,
+                                     :manager_en_username, :manager_gas_username,
+                                     :client_username, :address)
   end
 
   def set_consumer
