@@ -51,7 +51,7 @@
 			<div class="tab-pane container fade" id="cont">
 				<div class="row">
 					<div class="col-md-12">
-						<table class="table table-borderless table-sm">
+						<table class="table table-borderless table-sm table-striped">
 						  <thead>
 						    <tr>
 						      <th scope="col"></th>
@@ -65,25 +65,25 @@
 						      <th scope="row">Директор</th>
 						      <td><i><%= consumer.director_name %></i></td>
 						      <td><i><%= consumer.director_phone %></i></td>
-						      <td><i><%= consumer.director_mail %></i></td>
+						      <td><i><%= mail_to consumer.director_mail %></i></td>
 						    </tr>
 						    <tr>
 						      <th scope="row">Бухгалтер</th>
 						      <td><i><%= consumer.accountant_name %></i></td>
 						      <td><i><%= consumer.accountant_phone %></i></td>
-						      <td><i><%= consumer.accountant_mail %></i></td>
+						      <td><i><%= mail_to consumer.accountant_mail %></i></td>
 						    </tr>
 						    <tr>
 						      <th scope="row">Енергетик</th>
 						      <td><i><%= consumer.engineer_name %></i></td>
 						      <td><i><%= consumer.engineer_phone %></i></td>
-						      <td><i><%= consumer.engineer_mail %></i></td>
+						      <td><i><%= mail_to consumer.engineer_mail %></i></td>
 						    </tr>
 						    <tr>
 						      <th scope="row">Кліент</th>
 						      <td><i><%= client&.name %></i></td>
 						      <td><i><%= client&.phone %></i></td>
-						      <td><i><%= client&.email %></i></td>
+						      <td><i><%= mail_to client&.email %></i></td>
 						    </tr>
 						    <tr>
 					    	<% if style == 'gas' %>
@@ -93,7 +93,7 @@
 					    	<% end %>
 					    	  <td><i><%= manager&.name %></i></td>
 					    	  <td><i><%= manager&.phone %></i></td>
-						      <td><i><%= manager&.email %></i></td>
+						      <td><i><%= mail_to manager&.email %></i></td>
 						    </tr>
 						  </tbody>
 						</table>
