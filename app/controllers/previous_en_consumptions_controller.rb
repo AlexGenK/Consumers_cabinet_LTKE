@@ -14,6 +14,7 @@ class PreviousEnConsumptionsController < ApplicationController
 	def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
     @manager = User.find_by(name: @consumer.manager_en_username)
+    @client = User.find_by(name: @consumer.client_username)
   end
 
   def detect_invalid_user
