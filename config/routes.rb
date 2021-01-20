@@ -8,11 +8,13 @@ Rails.application.routes.draw do
 
     resources :en_payments
     resources :previous_en_consumptions
+    resources :en_adjustments
     resource  :en_bid
     resource  :en_invoice, only: [:show]
 
     resources :gas_payments
     resources :previous_gas_consumptions
+    resources :gas_adjustments
     resource  :gas_bid
     resource  :gas_invoice, only: [:show]
   end
