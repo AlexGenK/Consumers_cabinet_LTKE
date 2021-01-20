@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_205805) do
+ActiveRecord::Schema.define(version: 2021_01_20_193937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(version: 2021_01_18_205805) do
     t.index ["consumer_id"], name: "index_current_gas_consumptions_on_consumer_id"
   end
 
+  create_table "en_adjustments", force: :cascade do |t|
+    t.integer "month"
+    t.bigint "sum"
+    t.text "comment"
+    t.integer "state", default: 0
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_en_adjustments_on_consumer_id"
+  end
+
   create_table "en_bids", force: :cascade do |t|
     t.integer "jan_a_1", default: 0
     t.integer "jan_a_2", default: 0
@@ -164,6 +175,17 @@ ActiveRecord::Schema.define(version: 2021_01_18_205805) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["consumer_id"], name: "index_en_payments_on_consumer_id"
+  end
+
+  create_table "gas_adjustments", force: :cascade do |t|
+    t.integer "month"
+    t.bigint "sum"
+    t.text "comment"
+    t.integer "state", default: 0
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_gas_adjustments_on_consumer_id"
   end
 
   create_table "gas_bids", force: :cascade do |t|
@@ -276,8 +298,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_205805) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "current_en_consumptions", "consumers"
   add_foreign_key "current_gas_consumptions", "consumers"
+  add_foreign_key "en_adjustments", "consumers"
   add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
+  add_foreign_key "gas_adjustments", "consumers"
   add_foreign_key "gas_bids", "consumers"
   add_foreign_key "gas_payments", "consumers"
   add_foreign_key "messages", "consumers"
