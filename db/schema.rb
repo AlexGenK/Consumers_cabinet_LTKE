@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_193937) do
 
   create_table "en_adjustments", force: :cascade do |t|
     t.integer "month"
-    t.bigint "sum"
+    t.bigint "value"
     t.text "comment"
     t.integer "state", default: 0
     t.bigint "consumer_id", null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_193937) do
 
   create_table "gas_adjustments", force: :cascade do |t|
     t.integer "month"
-    t.bigint "sum"
+    t.bigint "value"
     t.text "comment"
     t.integer "state", default: 0
     t.bigint "consumer_id", null: false
