@@ -20,6 +20,18 @@ class EnAdjustmentsController < ApplicationController
     redirect_to consumer_en_adjustments_path(@consumer)
   end
 
+  def edit
+  end
+
+  def update
+    if @en_adjustment.update(en_adjustment_params)
+      redirect_to consumer_en_adjustments_path(@consumer)
+    else
+      flash[:alert] = 'Неможливо відредагувати коригування'
+      render :edit
+    end
+  end
+
   private
 
   def set_consumer
@@ -29,7 +41,7 @@ class EnAdjustmentsController < ApplicationController
   end
 
   def set_en_adjustment
-    @message = EnAdjustment.find(params[:id])
+    @en_adjustment = EnAdjustment.find(params[:id])
   end
 
   def en_adjustment_params
