@@ -20,4 +20,12 @@ class Consumer < ApplicationRecord
 	def has_new_message?
 		self.messages.where("state = 0").count > 0
 	end
+
+	def has_new_en_adjustment?
+		self.en_adjustments.where("state = 0").count > 0
+	end
+
+	def has_new_gas_adjustment?
+		self.gas_adjustments.where("state = 0").count > 0
+	end
 end

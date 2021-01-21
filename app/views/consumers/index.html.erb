@@ -15,10 +15,11 @@
 			<th class="text-center">&nbsp;&nbsp;&nbsp;Газ&nbsp;&nbsp;&nbsp;</th>
 			<% if can? :manage, Consumer %>
 				<th class="text-center">Надійшов запит</th>
+				<th class="text-center">Надійшло кориг.</th>
 			<% end %>
 			<th class="text-right">ЕДРПОУ</th>
 			<% if can? :manage, Consumer %>
-				<th class="text-right">Код 1С</th>
+				<th class="text-right">Код&nbsp;1С</th>
 				<th class="text-right"></th>
 			<% end %>
 		</tr>
@@ -47,6 +48,15 @@
 				<td class="text-center">
 					<% if consumer.has_new_message? %>
 						<i class="fas fa-check"></i>
+					<% end %>
+				</td>
+				<td class="text-center">
+					<% if consumer.has_new_en_adjustment? && consumer.has_new_gas_adjustment? %>
+						<span class="fas fa-plug"></span> / <span class="fas fa-burn"></span>
+					<% elsif consumer.has_new_en_adjustment? %>
+						<span class="fas fa-plug"></span>
+					<% elsif consumer.has_new_gas_adjustment? %>
+						<span class="fas fa-burn"></span>
 					<% end %>
 				</td>
 			<% end %>
