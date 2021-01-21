@@ -6,7 +6,37 @@ class GasAdjustmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @adjustments = @consumer.gas_adjustments.all.order(created_at: :desc).first(100)
+    @adjustment = @consumer.gas_adjustments.new(month: Time.now.month)
   end
+
+  def create
+    @adjustment = @consumer.gas_adjustments.new(gas_adjustment_params)
+    if @adjustment.save
+      # EnAdjustmentMailer.with(consumer: @consumer, manager: @manager, message: "").new_message_email.deliver_later
+    else
+      flash[:alert] = 'Неможливо створити коригування'
+    end
+    redirect_to consumer_gas_adjustments_path(@consumer)
+  end
+
+  def edit
+  end
+
+  def update
+    if @gas_adjustment.update(gas_adjustment_params)
+      redirect_to consumer_gas_adjustments_path(@consumer)
+    else
+      flash[:alert] = 'Неможливо відредагувати коригування'
+      render :edit
+    end
+  end
+
+  def destroy
+    flash[:alert] = 'Неможливо видалити коригування' unless @gas_adjustment.destroy
+    redirect_to consumer_gas_adjustments_path(@consumer)
+  end
+
 
   private
 
@@ -17,7 +47,7 @@ class GasAdjustmentsController < ApplicationController
   end
 
   def set_gas_adjustment
-    @message = EnAdjustment.find(params[:id])
+    @message = GasAdjustment.find(params[:id])
   end
 
   def gas_adjustment_params
