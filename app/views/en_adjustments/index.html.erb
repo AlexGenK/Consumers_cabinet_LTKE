@@ -15,3 +15,58 @@
 	</div>
 	<% end %>
 <% end %>
+<br />
+<h6>Історія наданих коригувань</h6>
+<div class="row block-v-scroll">
+  <div class="col-md">
+    <table class="table table-striped table-sm">
+      <thead>
+        <th class="text-center">Дата надання</th>
+        <th class="text-center">Місяць</th>
+        <th class="text-center">Значення</th>
+        <th class="text-center">Статус</th>
+        <th class="text-center">Коментар</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @adjustments.each do |adjustment| %>
+          <tr>
+            <td class="text-center"><%= adjustment.created_at.strftime('%d.%m.%Y') %></td>
+            <td class="text-center"><%= UA_MONTHS_SINGLE[adjustment.month] %></td>
+            <td class="text-center"><%= number_with_delimiter(adjustment.value, delimiter: " ") %></td>
+            <td class="text-center">
+              <% case adjustment.state %>
+              <% when 0 %>
+                <span class="badge badge-light">Відправлено</span>
+              <% when 1 %>
+                <span class="badge badge-primary">Прийнято</span>
+              <% when 2 %>
+                <span class="badge badge-success">Виконано</span>
+              <% when 3 %>
+                <span class="badge badge-danger">Не виконано</span>
+              <% end %>              
+            </td>
+            <td><small><%= adjustment.comment %></small></td>
+            <td class='text-right'>
+              <div class="btn-group">
+              <% if can? :edit, EnAdjustment %>
+                <%= link_to edit_consumer_message_path(@consumer, adjustment), 
+                  class: "btn btn-outline-dark btn-sm" do %>
+                  <i class="fas fa-edit test-edit-message"></i>
+                <% end %>
+              <% end %>
+              <% if can? :delete, EnAdjustment %>
+                <%= link_to [@consumer, adjustment], method: :delete, 
+                  class: "btn btn-outline-danger btn-sm",
+                  data: {confirm: "Ви впевнені що хочете видалити коригування?"} do %>
+                  <i class="fas fa-times test-delete-message">&nbsp</i>
+                <% end %>
+              <% end %> 
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
