@@ -3,6 +3,7 @@ class EnAdjustmentsController < ApplicationController
   before_action :set_en_adjustment, only: [:destroy, :edit, :update]
   before_action :detect_invalid_user
   rescue_from ActiveRecord::RecordNotFound, with: :denied_action
+  load_and_authorize_resource
 
   def index
   end

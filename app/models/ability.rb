@@ -22,6 +22,8 @@ class Ability
         can :manage, GasPayment
         can :show, :invoice
         can [:edit, :update, :index], Message
+        can [:edit, :update, :index], EnAdjustment
+        can [:edit, :update, :index], GasAdjustment
         can [:new, :create, :index], User
     end
 
@@ -37,6 +39,8 @@ class Ability
         can :read, GasPayment
         can :show, :invoice
         can [:new, :create, :index], Message
+        can [:new, :create, :index], EnAdjustment
+        can [:new, :create, :index], GasAdjustment
     end
   end
 end
