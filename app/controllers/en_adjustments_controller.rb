@@ -32,6 +32,11 @@ class EnAdjustmentsController < ApplicationController
     end
   end
 
+  def destroy
+    flash[:alert] = 'Неможливо видалити коригування' unless @en_adjustment.destroy
+    redirect_to consumer_en_adjustments_path(@consumer)
+  end
+
   private
 
   def set_consumer
