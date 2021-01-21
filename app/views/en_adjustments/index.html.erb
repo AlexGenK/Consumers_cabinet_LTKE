@@ -1,3 +1,17 @@
 <%= render './consumers/card', consumer: @consumer, manager: @manager, client: @client, style: 'energy'%>
 <br>
 <%= render './entab', active: 5 %>
+<br />
+<% if can? :new, EnAdjustment %>
+	<%= form_for [@consumer, @adjustment], html: {class: 'form-inline'} do |f| %>
+	<div class="form-group mb-2">
+		<%= f.label :month, "Місяць:" %>
+		<%= f.select :month, UA_MONTHS_SINGLE.invert, {}, { class: "form-control mx-sm-3" } %>
+		<%= f.label :value, "Значення:" %>
+		<%= f.number_field :value, class: "form-control mx-sm-3" %>
+		<%= f.button type: 'submit', name: 'cab', class: "btn btn-outline-dark" do %>
+			<i class="fas fa-share-square"></i> Надіслати
+		<% end %>
+	</div>
+	<% end %>
+<% end %>

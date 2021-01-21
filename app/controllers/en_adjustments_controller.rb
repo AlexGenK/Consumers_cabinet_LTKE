@@ -6,6 +6,18 @@ class EnAdjustmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @adjustments = @consumer.en_adjustments.all.order(created_at: :desc).first(100)
+    @adjustment = @consumer.en_adjustments.new(month: Time.now.month)
+  end
+
+  def create
+    @adjustment = @consumer.en_adjustments.new(en_adjustment_params)
+    if @adjustment.save
+      # EnAdjustmentMailer.with(consumer: @consumer, manager: @manager, message: "").new_message_email.deliver_later
+    else
+      flash[:alert] = 'Неможливо створити коригування'
+    end
+    redirect_to consumer_en_adjustments_path(@consumer)
   end
 
   private
