@@ -1,0 +1,2 @@
+class GasAdjustmentMailer < ApplicationMailer
+end
