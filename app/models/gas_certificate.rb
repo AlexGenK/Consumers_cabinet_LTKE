@@ -1,3 +1,3 @@
 class GasCertificate < ApplicationRecord
-	has_one_attached :print_form
+	has_one_attached :print_form, dependent: :destroy
 end
