@@ -13,7 +13,7 @@ class GasAdjustmentsController < ApplicationController
   def create
     @adjustment = @consumer.gas_adjustments.new(gas_adjustment_params)
     if @adjustment.save
-      # EnAdjustmentMailer.with(consumer: @consumer, manager: @manager, message: "").new_message_email.deliver_later
+      GasAdjustmentMailer.with(consumer: @consumer, manager: @manager, gas_adjustment: @adjustment).new_gas_adjustment_email.deliver_later
     else
       flash[:alert] = 'Неможливо створити коригування'
     end
