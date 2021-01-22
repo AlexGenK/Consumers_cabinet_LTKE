@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:text, :comment, :state)
+    params.require(:message).permit(:text, :comment, :state, :attach)
   end
 
   def detect_invalid_user
