@@ -1,12 +1,21 @@
 <h6><%= "Редагування запиту від #{@message.created_at.strftime('%d.%m.%Y')}" %></h6>
 <%= form_for [@consumer, @message] do |f| %>
-	<fieldset disabled>
-		<div class="form-row">
-				<div class="form-group col-md-12">
-					<%= f.text_area :text, class: "form-control" %>
-				</div>			
-		</div>
-	</fieldset>
+	<div class="form-row">
+		<% if @message.attach.attached? %>
+			<div class="form-group col-md-11">
+				<fieldset disabled><%= f.text_area :text, class: "form-control" %></fieldset>
+			</div>
+			<div class="form-group col-md-1">
+				<%= link_to rails_blob_path(@message.attach, disposition: 'preview'), class: "btn btn-outline-primary btn-block" do %>
+                  <i class="fas fa-file-alt"></i>
+                <% end %>
+        	</div>
+		<% else %>			
+			<div class="form-group col-md-12">
+				<fieldset disabled><%= f.text_area :text, class: "form-control" %></fieldset>
+			</div>
+		<% end %>			
+	</div>
 	<div class="form-row">
 		<div class="form-group col-md-2">
 			<%= f.label :state, "Статус" %><br>
