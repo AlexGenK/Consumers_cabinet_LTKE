@@ -1,6 +1,6 @@
 class AddDefaultValuesToEnBid < ActiveRecord::Migration[6.0]
   def change
-  		change_column :en_bids, :jan_a_1, :integer, default: 0
+  	change_column :en_bids, :jan_a_1, :integer, default: 0
       change_column :en_bids, :jan_a_2, :integer, default: 0
       change_column :en_bids, :jan_b_1, :integer, default: 0
       change_column :en_bids, :jan_b_2, :integer, default: 0

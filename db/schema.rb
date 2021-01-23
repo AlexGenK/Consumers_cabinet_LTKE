@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_193937) do
+ActiveRecord::Schema.define(version: 2021_01_23_085058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_193937) do
     t.bigint "consumer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "month", default: 0
     t.index ["consumer_id"], name: "index_en_payments_on_consumer_id"
   end
 
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_193937) do
     t.bigint "consumer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "month", default: 0
     t.index ["consumer_id"], name: "index_gas_payments_on_consumer_id"
   end
 
