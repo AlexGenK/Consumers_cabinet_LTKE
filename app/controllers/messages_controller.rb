@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     if @message.save
       MessageMailer.with(consumer: @consumer, manager: @manager, message: @message).new_message_email.deliver_later
     else
-      flash[:alert] = 'Неможливо створити запит'
+      flash[:alert] = "Неможливо створити запит. #{@message.errors.first[1]}"
     end
     redirect_to consumer_messages_path(@consumer, cab: params[:cab])
   end
