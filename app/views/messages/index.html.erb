@@ -23,7 +23,7 @@
       <div class="col-sm-10">
         <div class='custom-file'>
           <%= f.file_field :attach, class: 'custom-file-input' %>
-          <%= f.label :attach, 'Виберіть файл для імпорту', class: 'custom-file-label' %>
+          <%= f.label :attach, 'Виберіть файл', class: 'custom-file-label' %>
         </div>
       </div>
     </div>
@@ -57,7 +57,9 @@
             <td><small><%= message.text %></small></td>
             <td class="text-center">
               <% if message.attach.attached? %>
-                <i class="fas fa-file-alt"></i>
+                <%= link_to rails_blob_path(message.attach, disposition: 'preview') do %>
+                  <i class="fas fa-file-alt"></i>
+                <% end %>
               <% end %>
             </td>
             <td class="text-center">
