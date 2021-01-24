@@ -10,9 +10,18 @@ class GasPaymentsController < ApplicationController
     @gas_payments = @consumer.gas_payments.all.order(:day)
     @calculable = @current_gas_consumption && @gas_payments
     if @calculable
+      # начальные и конечные даты предыдущего месяца
+      start_prev = (Time.now.beginning_of_month - 1).beginning_of_month
+      end_prev = Time.now.beginning_of_month - 1
+      # выбираем стоимость потребление предыдущего месяца
+      prev_cons = @consumer.previous_gas_consumption.where(date: start_prev..end_prev).first
+      # находим стоимость потребленя следующего месяца
+      next_cost = @consumer.gas_bid.month_sum((Time.now.end_of_month + 1.day).month) * @current_gas_consumption.tariff * 1.2
+      # рассчитываем баланс
       @balance = calculate_balance(@gas_payments, o_balance: @current_gas_consumption.opening_balance,
-                                                  tariff: @current_gas_consumption.tariff,
-                                                  power: @current_gas_consumption.volume,
+                                                  prev_cost: prev_cons&.cost_val,
+                                                  cur_cost: @current_gas_consumption.cost_val,
+                                                  next_cost: next_cost&.round(2),
                                                   money: @current_gas_consumption.money)
       @current_balance = get_current_balance(@balance, o_balance: @current_gas_consumption.opening_balance,
                                                        money: @current_gas_consumption.money)
@@ -49,17 +58,47 @@ class GasPaymentsController < ApplicationController
 
   private
 
-  def calculate_balance(payments, o_balance:, tariff:, power:, money:)
+  def calculate_balance(payments, o_balance:, prev_cost: , cur_cost:, next_cost: , money:)
+    prev_cost ||= 0
+    next_cost ||= 0
     balance = []
-    if money+o_balance > 0
-      cur_balance = 0
-    else
-      cur_balance = -o_balance-money
-    end
-    all_cost = tariff * power * 1.2
+    cur_balance = 0
+
+    #расчет оплаты на начало месяца
+    #расчет процентов долгов и предоплат на начало месяца
+    debt_perc = 0
+    prep_perc = 0
+
+    payments.each { |payment| debt_perc += payment.percent if payment.month == 1 }
+    payments.each { |payment| prep_perc += payment.percent if payment.month == -1 }
+
+    #расчет общей суммы на начало месяца
+    begin_sum = ((cur_cost * prep_perc)/100 - (prev_cost * debt_perc)/100).round(2)
     total_payment = o_balance + money
+    case total_payment
+    when -Float::INFINITY..0
+      cur_payment = 0
+    when 0..begin_sum
+      cur_payment = total_payment
+    when begin_sum..Float::INFINITY
+      cur_payment = begin_sum  
+    end
+
+    cur_balance = cur_balance + (begin_sum - cur_payment)
+    total_payment -= begin_sum
+
+    balance << {sum: begin_sum, cur_payment: cur_payment, cur_balance: cur_balance, day: 0}
+
     payments.each do |payment|
-      sum = payment.percent*all_cost/100
+      case payment.month
+      when 1
+        sum = payment.percent*prev_cost/100
+      when -1
+        sum = payment.percent*next_cost/100
+      else
+        sum = payment.percent*cur_cost/100
+      end
+
       case total_payment
       when -Float::INFINITY..0
         cur_payment = 0
@@ -68,23 +107,19 @@ class GasPaymentsController < ApplicationController
       when sum..Float::INFINITY
         cur_payment = sum  
       end
+
       cur_balance = cur_balance + (sum - cur_payment)
       total_payment -= sum
       balance << {sum: sum, cur_payment: cur_payment, cur_balance: cur_balance, day: payment.day}
     end
     return balance
   end
-
+  
   def get_current_balance(balance, o_balance:, money:)
     current_day = Time.now.day
-    if money+o_balance > 0
-      cur_balance = 0
-    else
-      cur_balance = -o_balance-money
-    end
+    cur_balance = 0
     balance.each do |item|
         if item[:day] <= current_day
-          p item[:cur_balance]
           cur_balance = item[:cur_balance]
         else
           break
