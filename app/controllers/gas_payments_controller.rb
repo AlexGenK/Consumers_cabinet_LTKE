@@ -104,7 +104,7 @@ class GasPaymentsController < ApplicationController
   end
 
   def gas_payment_params
-    params.require(:gas_payment).permit(:day, :percent)
+    params.require(:gas_payment).permit(:day, :percent, :month)
   end
 
   def detect_invalid_user

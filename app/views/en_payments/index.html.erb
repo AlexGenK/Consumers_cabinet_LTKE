@@ -32,8 +32,9 @@
 		<h6>Графік оплати</h6>
 		<table class="table table-striped table-sm">
 			<thead>
-				<th class="text-center">Дата місяця</th>
+				<th class="text-center">Дата</th>
 				<th class="text-center">% оплати</th>
+				<th class="text-center">Місяць</th>
 				<th class="text-center">Планова сума оплати, грн.</th>
 				<th class="text-center">Оплачено, грн.</th>
 				<th class="text-center">Сальдо, грн.</th>
@@ -47,6 +48,7 @@
 					<tr>
 						<td class="text-center"><%= payment.day %></td>
 						<td class="text-center"><%= payment.percent %></td>
+						<td class="text-center"><%= UA_PERIOD_BY_CUR[payment.month] %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:sum], precision: 2, delimiter: ' ') if @calculable %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:cur_payment], precision: 2, delimiter: ' ') if @calculable %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:cur_balance], precision: 2, delimiter: ' ') if @calculable %></td>
@@ -71,7 +73,7 @@
 			</tbody>
 		</table>
 		<% if can? :manage, EnPayment %>
-			<h6>Додати платіж</h6>
+			<h6>Додати платіж графіка оплати поточного місяця:</h6>
 			<%= render 'form' %>
 		<% end %>
 	</div>

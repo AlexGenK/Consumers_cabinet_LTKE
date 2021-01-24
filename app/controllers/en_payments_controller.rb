@@ -104,7 +104,7 @@ class EnPaymentsController < ApplicationController
   end
 
   def en_payment_params
-    params.require(:en_payment).permit(:day, :percent)
+    params.require(:en_payment).permit(:day, :percent, :month)
   end
 
   def detect_invalid_user
