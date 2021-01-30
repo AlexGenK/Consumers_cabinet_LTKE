@@ -22,15 +22,15 @@ class Admin::FillingPreviousEnConsumptionsController < ApplicationController
       csv.each do |record|
         @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
         if @consumer
-          delete_old(to_dog_en_date(record[1]))
-          @consumer.previous_en_consumption.new(date:            to_dog_en_date(record[1]),
-                                                opening_balance: record[2].to_f,
-                                                power:           record[3].to_i,
-                                                tariff:          record[4].to_f,
-                                                cost:            record[5].to_f,
-                                                cost_val:        record[6].to_f,
-                                                money:           record[7].to_f,
-                                                closing_balance: record[8].to_f).save
+          delete_old(record[2].to_date)
+          @consumer.previous_en_consumption.new(date:            record[2].to_date,
+                                                opening_balance: -1*to_money(record[3]),
+                                                power:           to_kvt(record[4]),
+                                                tariff:          to_tariff(record[5]),
+                                                cost:            to_money(record[6]),
+                                                cost_val:        to_money(record[7]),
+                                                money:           to_money(record[8]),
+                                                closing_balance: -1*to_money(record[9])).save
           @imported += 1
         end
       end

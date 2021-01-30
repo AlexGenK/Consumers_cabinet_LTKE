@@ -15,4 +15,20 @@ module Admin::CsvHelper
 	def to_dog_en_date(item)
 	  item == nil ? nil : Date.strptime(item, '%Y.%m.%d')
 	end
+
+	def to_money(item)
+		(item == nil) || (item == '') ? 0 : to_number_string(item).to_f.round(2)
+	end
+
+	def to_tariff(item)
+		(item == nil) || (item == '') ? 0 : ((to_number_string(item).to_f)/1000).round(8)
+	end
+
+	def to_kvt(item)
+		(item == nil) || (item == '') ? 0 : (to_number_string(item).to_f*1000).to_i
+	end
+
+  def to_number_string(item)
+  	(item == nil) || (item == '')  ? '0' : item.gsub(/,/, '.').gsub(/[^0-9.-]/, '')
+  end
 end
