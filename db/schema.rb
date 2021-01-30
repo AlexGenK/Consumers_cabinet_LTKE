@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_085058) do
+ActiveRecord::Schema.define(version: 2021_01_30_073412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -242,7 +242,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_085058) do
     t.date "date"
     t.decimal "opening_balance", precision: 13, scale: 2
     t.integer "power"
-    t.decimal "tariff", precision: 10, scale: 5
+    t.decimal "tariff", precision: 13, scale: 8
     t.decimal "cost", precision: 13, scale: 2
     t.decimal "cost_val", precision: 13, scale: 2
     t.decimal "money", precision: 13, scale: 2
