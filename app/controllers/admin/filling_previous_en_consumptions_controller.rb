@@ -16,6 +16,12 @@ class Admin::FillingPreviousEnConsumptionsController < ApplicationController
     end
   end
 
+  def destroy
+    PreviousEnConsumption.all.destroy_all
+    flash[:notice] = 'Всі записи щодо попереднього споживання електроенергії видалені'
+    redirect_to admin_filling_previous_en_consumptions_path
+  end
+
   def filling_from_file(csv_file)
     @imported = 0
     csv = CSV.parse(csv_file, col_sep: ';')

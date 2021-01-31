@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
     get 'filling_previous_en_consumptions',  to: 'filling_previous_en_consumptions#set_params'
     post 'filling_previous_en_consumptions', to: 'filling_previous_en_consumptions#start'
+    delete 'filling_previous_en_consumptions', to: 'filling_previous_en_consumptions#destroy'
 
     get 'filling_previous_gas_consumptions',  to: 'filling_previous_gas_consumptions#set_params'
     post 'filling_previous_gas_consumptions', to: 'filling_previous_gas_consumptions#start'
