@@ -33,4 +33,8 @@ module Admin::CsvHelper
   def to_kvt(item)
     (item == nil) || (item == '') ? 0 : (to_number_string(item).to_f*1000).to_i
   end
+
+  def to_m3(item)
+    (item == nil) || (item == '') ? 0 : to_number_string(item).to_f*1000
+  end
 end

@@ -31,13 +31,13 @@ class Admin::FillingPreviousGasConsumptionsController < ApplicationController
         if @consumer
           delete_old(record[2].to_date)
           @consumer.previous_gas_consumption.new(date:            record[2].to_date,
-                                                 opening_balance: -1*record[4].to_f,
-                                                 volume:          record[5].to_i,
-                                                 tariff:          record[6].to_f,
-                                                 cost:            record[7].to_f,
-                                                 cost_val:        record[8].to_f,
-                                                 money:           record[9].to_f,
-                                                 closing_balance: -1*record[10].to_f).save
+                                                 opening_balance: -1*to_money(record[4]),
+                                                 volume:          to_m3(record[5]),
+                                                 tariff:          to_tariff(record[6]),
+                                                 cost:            to_money(record[7]),
+                                                 cost_val:        to_money(record[8]),
+                                                 money:           to_money(record[9]),
+                                                 closing_balance: -1*to_money(record[10])).save
           @imported += 1
         end
       end
