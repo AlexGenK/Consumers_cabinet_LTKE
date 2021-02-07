@@ -29,8 +29,8 @@ class Admin::FillingPreviousGasConsumptionsController < ApplicationController
       csv.each do |record|
         @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
         if @consumer
-          delete_old(to_dog_gas_date(record[2]))
-          @consumer.previous_gas_consumption.new(date:            to_consumption_date(record[2]),
+          delete_old(record[2].to_date)
+          @consumer.previous_gas_consumption.new(date:            record[2].to_date,
                                                  opening_balance: -1*record[4].to_f,
                                                  volume:          record[5].to_i,
                                                  tariff:          record[6].to_f,

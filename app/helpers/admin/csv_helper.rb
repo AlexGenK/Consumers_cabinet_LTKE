@@ -33,8 +33,4 @@ module Admin::CsvHelper
   def to_kvt(item)
     (item == nil) || (item == '') ? 0 : (to_number_string(item).to_f*1000).to_i
   end
-
-  def to_consumption_date(item)
-    item == nil ? nil : Date.strptime(item, '%d.%m.%Y')
-  end
 end

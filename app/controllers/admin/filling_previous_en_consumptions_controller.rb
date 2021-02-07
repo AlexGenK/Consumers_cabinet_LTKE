@@ -29,7 +29,7 @@ class Admin::FillingPreviousEnConsumptionsController < ApplicationController
         @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
         if @consumer
           delete_old(record[2].to_date)
-          @consumer.previous_en_consumption.new(date:            to_consumption_date(record[2]),
+          @consumer.previous_en_consumption.new(date:            (record[2].to_date),
                                                 opening_balance: -1*to_money(record[4]),
                                                 power:           to_kvt(record[5]),
                                                 tariff:          to_tariff(record[6]),
