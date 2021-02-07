@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_073412) do
+ActiveRecord::Schema.define(version: 2021_02_07_112838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_073412) do
   create_table "previous_gas_consumptions", force: :cascade do |t|
     t.date "date"
     t.decimal "opening_balance", precision: 13, scale: 2
-    t.integer "volume"
+    t.decimal "volume", precision: 13, scale: 3
     t.decimal "tariff", precision: 10, scale: 5
     t.decimal "cost", precision: 13, scale: 2
     t.decimal "cost_val", precision: 13, scale: 2
