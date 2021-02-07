@@ -1,2 +1,7 @@
 <h5>Імпорт даних про фактичне споживання газу за попередні періоди з 1С</h5>
 <%= render 'admin/select_file', operation: 'filling_previous_gas_consumptions' %>
+<br />
+<%= link_to admin_filling_previous_gas_consumptions_path, method: :delete, class: "btn btn-outline-danger",
+data: {confirm: "Ви впевнені, що хочете видалити всі записи щодо попереднього споживання газу?"} do %>
+	<i class="fas fa-trash-alt"></i> Видалити все
+<% end %>

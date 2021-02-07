@@ -16,6 +16,13 @@ class Admin::FillingPreviousGasConsumptionsController < ApplicationController
     end
   end
 
+  def destroy
+    PreviousGasConsumption.all.destroy_all
+    flash[:notice] = 'Всі записи щодо попереднього споживання газу видалені'
+    redirect_to admin_filling_previous_gas_consumptions_path
+  end
+
+
   def filling_from_file(csv_file)
     @imported = 0
     csv = CSV.parse(csv_file, col_sep: ';')
