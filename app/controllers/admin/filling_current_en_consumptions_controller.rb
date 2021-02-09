@@ -23,13 +23,22 @@ class Admin::FillingCurrentEnConsumptionsController < ApplicationController
         @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
         if @consumer
           delete_old
-          @consumer.create_current_en_consumption(opening_balance: record[1].to_f,
-                                               		power:           record[2].to_i,
-                                               		tariff:          record[3].to_f,
-                                               		cost:            record[4].to_f,
-                                               		cost_val:        record[5].to_f,
-                                               		money:           record[6].to_f,
-                                               		closing_balance: record[7].to_f).save
+
+          opening_balance = -1*to_money(record[4])
+          power = (@consumer.en_bid ? @consumer.en_bid.month_sum(Time.now.month) : 0)
+          tariff = to_tariff(record[5])
+          cost = (power * tariff).round(2)
+          cost_val = (cost * 1.2).round(2)
+          money = to_money(record[6])
+          closing_balance = opening_balance - cost_val + money
+
+          @consumer.create_current_en_consumption(opening_balance: opening_balance,
+                                               		power:           power,
+                                               		tariff:          tariff,
+                                               		cost:            cost,
+                                               		cost_val:        cost_val,
+                                               		money:           money,
+                                               		closing_balance: closing_balance).save
           @imported << "#{@consumer.onec_id} - #{@consumer.name}"
         end
       end
