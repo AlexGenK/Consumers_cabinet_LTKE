@@ -16,7 +16,11 @@ class EnPaymentsController < ApplicationController
       # выбираем стоимость потребление предыдущего месяца
       prev_cons = @consumer.previous_en_consumption.where(date: start_prev..end_prev).first
       # находим стоимость потребленя следующего месяца
-      next_cost = @consumer.en_bid.month_sum((Time.now.end_of_month + 1.day).month) * @current_en_consumption.tariff * 1.2
+      if @consumer.en_bid
+        next_cost = @consumer.en_bid.month_sum((Time.now.end_of_month + 1.day).month) * @current_en_consumption.tariff * 1.2
+      else
+        next_cost = 0
+      end
       # рассчитываем баланс
       @balance = calculate_balance(@en_payments, o_balance: @current_en_consumption.opening_balance,
                                                  prev_cost: prev_cons&.cost_val,
