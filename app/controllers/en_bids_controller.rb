@@ -14,6 +14,7 @@ class EnBidsController < ApplicationController
   def update
     if @en_bid.update(en_bid_params)
       flash[:alert] = nil
+      recalc_cur_cons
       redirect_to consumer_en_bid_path(@consumer)
     else
       flash[:alert] = 'Неможливо відредагувати заявку'
@@ -47,6 +48,23 @@ class EnBidsController < ApplicationController
                                    :okt_a_1, :okt_b_1, :okt_a_2, :okt_b_2,
                                    :nov_a_1, :nov_b_1, :nov_a_2, :nov_b_2,
                                    :dec_a_1, :dec_b_1, :dec_a_2, :dec_b_2)
+  end
+
+  def recalc_cur_cons
+    cur_cons = @consumer.current_en_consumption
+    if cur_cons
+      power = @consumer.en_bid.month_sum(Time.now.month)
+      cost = (power * cur_cons.tariff).round(2)
+      cost_val = (cost * 1.2).round(2)
+      closing_balance = cur_cons.opening_balance - cost_val + cur_cons.money
+
+      cur_cons.power = power
+      cur_cons.cost = cost
+      cur_cons.cost_val = cost_val
+      cur_cons.closing_balance = closing_balance
+
+      cur_cons.save 
+    end
   end
 
   def detect_invalid_user

@@ -14,6 +14,7 @@ class GasBidsController < ApplicationController
   def update
     if @gas_bid.update(gas_bid_params)
       flash[:alert] = nil
+      recalc_cur_cons
       redirect_to consumer_gas_bid_path(@consumer)
     else
       flash[:alert] = 'Неможливо відредагувати заявку'
@@ -37,6 +38,23 @@ class GasBidsController < ApplicationController
   def gas_bid_params
     params.require(:gas_bid).permit(:jan, :feb, :mar, :apr, :may, :jun,
     																:jul, :aug, :sep, :okt, :nov, :dec)
+  end
+
+  def recalc_cur_cons
+    cur_cons = @consumer.current_gas_consumption
+    if cur_cons
+      volume = @consumer.gas_bid.month_sum(Time.now.month)
+      cost = (volume * cur_cons.tariff).round(2)
+      cost_val = (cost * 1.2).round(2)
+      closing_balance = cur_cons.opening_balance - cost_val + cur_cons.money
+
+      cur_cons.volume = volume
+      cur_cons.cost = cost
+      cur_cons.cost_val = cost_val
+      cur_cons.closing_balance = closing_balance
+
+      cur_cons.save 
+    end
   end
 
   def detect_invalid_user
