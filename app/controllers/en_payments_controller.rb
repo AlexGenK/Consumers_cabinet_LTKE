@@ -76,9 +76,21 @@ class EnPaymentsController < ApplicationController
     payments.each { |payment| debt_perc += payment.percent if payment.month == 1 }
     payments.each { |payment| prep_perc += payment.percent if payment.month == -1 }
 
-    #расчет общей суммы на начало месяца
+    #расчет общей суммы, которую надо заплатить, на начало месяца с учетом возможных долгов и предоплат
     begin_sum = ((cur_cost * prep_perc)/100 - (prev_cost * debt_perc)/100).round(2)
-    total_payment = o_balance + money
+    
+    #сколько есть оплат на начало месяца и начинаем майстрячить костыли
+    if o_balance > 0
+      total_payment = o_balance + money
+    else
+      total_payment = money
+      begin_sum += -o_balance
+      if begin_sum < 0
+        begin_sum = 0
+      end
+    end
+
+    #рассчитываем, сколько уже оплачено из суммы, которую надо оплатить
     case total_payment
     when -Float::INFINITY..0
       cur_payment = 0
