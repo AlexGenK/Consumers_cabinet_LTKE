@@ -27,17 +27,17 @@ class Admin::FillingPreviousGasConsumptionsController < ApplicationController
     @imported = 0
     csv = CSV.parse(csv_file, col_sep: ';')
       csv.each do |record|
-        @consumer = Consumer.find_by(onec_id: to_1cid(record[0]))
+        @consumer = Consumer.find_by(onec_id: to_1cid(record[0]), dog_num: record[13])
         if @consumer
           delete_old(record[2].to_date)
           @consumer.previous_gas_consumption.new(date:            record[2].to_date,
-                                                 opening_balance: -1*to_money(record[4]),
-                                                 volume:          to_m3(record[5]),
-                                                 tariff:          to_tariff(record[6]),
-                                                 cost:            to_money(record[7]),
-                                                 cost_val:        to_money(record[8]),
-                                                 money:           to_money(record[9]),
-                                                 closing_balance: -1*to_money(record[10])).save
+                                                 opening_balance: -1*to_money(record[5]),
+                                                 volume:          to_m3(record[6]),
+                                                 tariff:          to_tariff(record[7]),
+                                                 cost:            to_money(record[8]),
+                                                 cost_val:        to_money(record[9]),
+                                                 money:           to_money(record[10]),
+                                                 closing_balance: -1*to_money(record[11])).save
           @imported += 1
         end
       end
