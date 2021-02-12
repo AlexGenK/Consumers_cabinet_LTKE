@@ -11,15 +11,15 @@ module Admin::CsvHelper
   end
 
   def to_edrpou(item)
-    item.rjust(8, '0') 
+    (item == nil) || (item == '') ? 0 : item.rjust(8, '0') 
   end
 
   def to_dog_en_num(item)
     item =~ /Договір №(.*) від/ ? Regexp.last_match[1].strip : nil
   end
 
-  def to_dog_en_date(item)
-    item == nil ? nil : Date.strptime(item, '%Y.%m.%d')
+  def to_dog_date(item)
+    item == nil ? nil : Date.strptime(item, '%d.%m.%Y')
   end
 
   def to_money(item)

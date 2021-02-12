@@ -14,20 +14,21 @@ class Admin::FillingConsumersController < ApplicationController
       csv_text = params[:datafile].read.encode('UTF-8', 'UTF-8', invalid: :replace, indef: :replace).gsub(/"/,'\'')
       csv = CSV.parse(csv_text, col_sep: ';')
       csv.each do |record|
-        if Consumer.exists?(onec_id: to_1cid(record[0]))
-          @not_imported << "#{to_1cid(record[0])} - #{record[2]}"
+        if Consumer.exists?(onec_id: to_1cid(record[0]), dog_num: record[7])
+          @not_imported << "#{to_1cid(record[0])} - #{record[2]} - Дог. №#{record[7]}"
         else
           Consumer.new(name: record[2],
                       full_name: record[3],
                       edrpou: to_edrpou(record[1]),
                       onec_id: to_1cid(record[0]),
-                      director_name: "#{record[4]} #{record[5]} #{record[6]}",
-                      dog_en_num: to_dog_en_num(record[7]),
-                      dog_en_date: to_dog_en_date(record[8]),
+                      director_name: record[4],
+                      dog_num: record[7],
+                      dog_date: to_dog_date(record[6]),
                       address: record[9],
-                      energy_consumer: true
+                      energy_consumer: record[8]=='Електроенергія',
+                      gas_consumer: record[8]=='ГАЗ'
                       ).save
-          @imported << "#{to_1cid(record[0])} - #{record[2]}"
+          @imported << "#{to_1cid(record[0])} - #{record[2]} - Дог. №#{record[7]}"
         end
       end
     rescue
