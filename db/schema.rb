@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_112838) do
+ActiveRecord::Schema.define(version: 2021_02_12_193241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2021_02_07_112838) do
     t.integer "onec_id"
     t.string "director_name"
     t.string "engineer_name"
-    t.string "dog_en_num"
-    t.date "dog_en_date"
+    t.string "dog_num"
+    t.date "dog_date"
     t.string "dog_gas_num"
     t.date "dog_gas_date"
     t.boolean "energy_consumer"

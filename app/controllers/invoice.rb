@@ -16,13 +16,13 @@ class Invoice < ApplicationController
     if args[:style] == 'gas'
     	units = 'тис. м3'
     	product = 'газ'
-    	dog_num = @consumer.dog_gas_num
-    	dog_date = @consumer.dog_gas_date
+    	dog_num = @consumer.dog_num
+    	dog_date = @consumer.dog_date
     else
     	units = 'кВт.год'
     	product = 'електроенергію'
-    	dog_num = @consumer.dog_en_num
-    	dog_date = @consumer.dog_en_date
+    	dog_num = @consumer.dog_num
+    	dog_date = @consumer.dog_date
     end
 
     # document header

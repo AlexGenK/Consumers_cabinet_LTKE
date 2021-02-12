@@ -57,7 +57,7 @@ class ConsumersController < ApplicationController
                                      :director_name, :director_phone, :director_mail,
                                      :engineer_name, :engineer_phone, :engineer_mail,
                                      :accountant_name, :accountant_phone, :accountant_mail,
-                                     :dog_en_num, :dog_en_date,
+                                     :dog_num, :dog_date,
                                      :dog_gas_num, :dog_gas_date,
                                      :energy_consumer, :gas_consumer,
                                      :manager_en_username, :manager_gas_username,
