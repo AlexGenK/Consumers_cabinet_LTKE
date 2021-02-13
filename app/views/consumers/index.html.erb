@@ -12,7 +12,7 @@
 			<th>#</th>
 			<th>Найменування</th>
 			<th class="text-center">Е/енергія</th>
-			<th class="text-center">&nbsp;&nbsp;&nbsp;Газ&nbsp;&nbsp;&nbsp;</th>
+			<th class="text-center">&nbsp;&nbsp;&nbsp;&nbsp;Газ&nbsp;&nbsp;&nbsp;&nbsp;</th>
 			<% if can? :manage, Consumer %>
 				<th class="text-center">Надійшов запит</th>
 				<th class="text-center">Надійшло кориг.</th>
@@ -29,17 +29,19 @@
 		<% @consumers.each do |consumer| %>
 		<tr>
 			<td><%= n += 1 %></td>
-			<td><%= truncate(consumer.name, length: 50) %></td>
+			<td><%= truncate(consumer.name, length: 50) %><br/>
+				<small><%= "Дог. №#{consumer.dog_num} від #{consumer.dog_date.strftime('%d.%m.%Y')}"%></small>
+			</td>
 			<td class="text-center">
 				<% if consumer.energy_consumer %>
-					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
+					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary" do %>
 						&nbsp;&nbsp;<span class="fas fa-plug"></span>&nbsp;&nbsp;
 					<% end %>
 				<% end %>
 			</td>
 			<td class="text-center">
 				<% if consumer.gas_consumer %>
-					<%= link_to consumer_gas_payments_path(consumer), class: "btn btn-outline-primary btn-sm" do %>
+					<%= link_to consumer_gas_payments_path(consumer), class: "btn btn-outline-primary" do %>
 						&nbsp;&nbsp;<span class="fas fa-burn"></span>&nbsp;&nbsp;
 					<% end %>
 				<% end %>
