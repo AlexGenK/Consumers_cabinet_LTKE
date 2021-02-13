@@ -8,6 +8,7 @@ class EnPaymentsController < ApplicationController
   def index
     @current_en_consumption = @consumer.current_en_consumption
     @en_payments = @consumer.en_payments.all.order(:day)
+    @sum_percent = @en_payments.sum(:percent)
     @calculable = @current_en_consumption && @en_payments
     if @calculable
       # начальные и конечные даты предыдущего месяца

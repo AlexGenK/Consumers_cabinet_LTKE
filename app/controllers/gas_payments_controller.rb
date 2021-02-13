@@ -9,6 +9,7 @@ class GasPaymentsController < ApplicationController
     @current_gas_consumption = @consumer.current_gas_consumption
     @gas_payments = @consumer.gas_payments.all.order(:day)
     @calculable = @current_gas_consumption && @gas_payments
+    @sum_percent = @gas_payments.sum(:percent)
     if @calculable
       # начальные и конечные даты предыдущего месяца
       start_prev = (Time.now.beginning_of_month - 1).beginning_of_month

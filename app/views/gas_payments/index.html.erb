@@ -29,7 +29,16 @@
 </table>
 <div class='row'>
 	<div class='col-sm-9'>
-		<h6>Графік оплати</h6>
+		<h6>Графік оплати 
+			<% case @sum_percent %>
+			<% when 0 %>
+				<span class="badge badge-danger">Відсутній</span>
+			<% when 100 %>
+				<span class="badge badge-success">Повний</span>
+			<% else %>
+				<span class="badge badge-warning">Не повний</span>
+			<% end %>
+		</h6>
 		<table class="table table-striped table-sm">
 			<thead>
 				<th class="text-center">Дата</th>
