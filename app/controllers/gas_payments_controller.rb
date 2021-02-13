@@ -82,6 +82,9 @@ class GasPaymentsController < ApplicationController
     #сколько есть оплат на начало месяца и начинаем майстрячить костыли
     if o_balance > 0
       total_payment = o_balance + money
+    elsif (begin_sum < 0) and (o_balance > begin_sum)
+      total_payment = o_balance - begin_sum + money
+      begin_sum = 0
     else
       total_payment = money
       begin_sum += -o_balance
