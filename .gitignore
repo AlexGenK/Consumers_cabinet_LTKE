@@ -38,3 +38,4 @@ yarn-debug.log*
 debug.log
 public/akt.xls
 public/akt.xlsx
+public/local.csv

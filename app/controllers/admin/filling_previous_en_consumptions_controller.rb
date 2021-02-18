@@ -1,5 +1,6 @@
 class Admin::FillingPreviousEnConsumptionsController < ApplicationController
   require 'csv'
+  require 'net/ftp'
   include Admin::FillingPreviousEnConsumptionsHelper
   skip_before_action :verify_authenticity_token
   authorize_resource :class => false
@@ -8,8 +9,20 @@ class Admin::FillingPreviousEnConsumptionsController < ApplicationController
   end
 
   def start
+    if params[:datafile]
+      file = params[:datafile]
+    else
+      Net::FTP.open(ENV['CONSUMERS_CABINET_LTKE_FTP_HOST'], 
+                    port: ENV['CONSUMERS_CABINET_LTKE_FTP_PORT'],
+                    username: ENV['CONSUMERS_CABINET_LTKE_FTP_USERNAME'],
+                    password: ENV['CONSUMERS_CABINET_LTKE_FTP_PASSWORD'],) do |ftp|
+        ftp.getbinaryfile('Electro.csv', 'public/local.csv')
+        file = File.open('public/local.csv')
+      end
+    end
+
     begin
-      csv_file = params[:datafile].read.encode('UTF-8', 'UTF-8', invalid: :replace, indef: :replace).gsub(/"/,'\'')
+      csv_file = file.read.encode('UTF-8', 'UTF-8', invalid: :replace, indef: :replace).gsub(/"/,'\'')
       filling_from_file(csv_file)
     rescue
       flash[:alert] = 'Помилка при імпорті записів з файлу!'
