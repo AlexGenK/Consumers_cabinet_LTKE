@@ -64,6 +64,8 @@ def filling_en_from_file(csv_file)
     end
 end
 
+# заполнение ежедневных данных по потреблению электроэнергии и газа
+
 s.cron('20 1 * * *')  do
 	Net::FTP.open(ENV['CONSUMERS_CABINET_LTKE_FTP_HOST'], 
                     port: ENV['CONSUMERS_CABINET_LTKE_FTP_PORT'],
@@ -79,4 +81,14 @@ s.cron('20 1 * * *')  do
   filling_gas_from_file(csv_file)
   csv_file = @file_en.read.encode('UTF-8', 'UTF-8', invalid: :replace, indef: :replace).gsub(/"/,'\'')
   filling_en_from_file(csv_file)
+end
+
+# ежемесячное удаление актов потребления электроэнергии и газа
+
+s.cron('0 1 1 * *')  do
+	@consumers = Consumer.all
+	@consumers.each do |consumer|
+		consumer.en_certificate&.destroy
+		consumer.gas_certificate&.destroy
+	end
 end
