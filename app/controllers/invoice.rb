@@ -125,7 +125,11 @@ class Invoice < ApplicationController
     price = params[:tariff].to_f
     sum = (sum_vat - (sum_vat / 6)).round(2)
     vat = (sum_vat - sum).round(2)
-    quantity = (sum/price).round(5)
+    if (sum == 0) || (price == 0)
+      quantity = 0
+    else
+      quantity = (sum/price).round(5)
+    end
     InvData.new(quantity, price, sum, vat, sum_vat)
   end
 
