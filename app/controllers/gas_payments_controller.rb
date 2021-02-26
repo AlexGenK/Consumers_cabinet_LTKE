@@ -8,8 +8,8 @@ class GasPaymentsController < ApplicationController
   def index
     @current_gas_consumption = @consumer.current_gas_consumption
     @gas_payments = @consumer.gas_payments.all.order(:day)
-    @calculable = @current_gas_consumption && @gas_payments
     @sum_percent = @gas_payments.sum(:percent)
+    @calculable = @current_gas_consumption && @gas_payments
     if @calculable
       # начальные и конечные даты предыдущего месяца
       start_prev = (Time.now.beginning_of_month - 1).beginning_of_month
@@ -30,6 +30,14 @@ class GasPaymentsController < ApplicationController
                                                   money: @current_gas_consumption.money)
       @current_balance = get_current_balance(@balance, o_balance: @current_gas_consumption.opening_balance,
                                                        money: @current_gas_consumption.money)
+      # выбираем цену для счета
+      if @current_gas_consumption.tariff > 0
+        # или тариф текщего месяца
+        @current_tariff = @current_gas_consumption.tariff
+      else
+        # или тариф ближайшего предыдущего месяца
+        @current_tariff = @consumer.previous_gas_consumption.order(:date).last&.tariff
+      end
     end
     @gas_payment = @consumer.gas_payments.new
   end

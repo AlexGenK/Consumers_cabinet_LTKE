@@ -30,6 +30,14 @@ class EnPaymentsController < ApplicationController
                                                  money: @current_en_consumption.money)
       @current_balance = get_current_balance(@balance, o_balance: @current_en_consumption.opening_balance,
                                                        money: @current_en_consumption.money)
+      # выбираем цену для счета
+      if @current_en_consumption.tariff > 0
+        # или тариф текщего месяца
+        @current_tariff = @current_en_consumption.tariff
+      else
+        # или тариф ближайшего предыдущего месяца
+        @current_tariff = @consumer.previous_en_consumption.order(:date).last&.tariff
+      end
     end
     @en_payment = @consumer.en_payments.new
   end

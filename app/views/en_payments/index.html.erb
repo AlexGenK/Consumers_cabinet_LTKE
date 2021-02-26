@@ -101,7 +101,7 @@
 		<br>
 		<br>
 		<% if @calculable %>
-			<%= link_to consumer_en_invoice_path(@consumer, sum: @current_balance, tariff: @current_en_consumption.tariff, format: :pdf), 
+			<%= link_to consumer_en_invoice_path(@consumer, sum: @current_balance, tariff: @current_tariff, format: :pdf), 
 				class: "btn btn-outline-dark btn-block", target: :_blank do %>
 				<i class="fas fa-file-download"></i> Сформувати рахунок
 			<% end %>
