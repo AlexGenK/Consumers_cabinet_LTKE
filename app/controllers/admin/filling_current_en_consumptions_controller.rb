@@ -16,8 +16,8 @@ class Admin::FillingCurrentEnConsumptionsController < ApplicationController
                     port: ENV['CONSUMERS_CABINET_LTKE_FTP_PORT'],
                     username: ENV['CONSUMERS_CABINET_LTKE_FTP_USERNAME'],
                     password: ENV['CONSUMERS_CABINET_LTKE_FTP_PASSWORD'],) do |ftp|
-        ftp.getbinaryfile('ElectroDay.csv', 'local.csv')
-        file = File.open('local.csv')
+        ftp.getbinaryfile('ElectroDay.csv', 'public/local.csv')
+        file = File.open('public/local.csv')
       end
     end
 
