@@ -37,6 +37,8 @@
 					<%= link_to consumer_en_payments_path(consumer), class: "btn btn-outline-primary" do %>
 						&nbsp;&nbsp;<span class="fas fa-plug"></span>&nbsp;&nbsp;
 					<% end %>
+				<% else %>
+					<button type="button" class="btn btn-outline-secondary" disabled>&nbsp;&nbsp;<span class="fas fa-plug"></span>&nbsp;&nbsp;</button>
 				<% end %>
 			</td>
 			<td class="text-center">
@@ -44,6 +46,8 @@
 					<%= link_to consumer_gas_payments_path(consumer), class: "btn btn-outline-primary" do %>
 						&nbsp;&nbsp;<span class="fas fa-burn"></span>&nbsp;&nbsp;
 					<% end %>
+				<% else %>
+					<button type="button" class="btn btn-outline-secondary" disabled>&nbsp;&nbsp;<span class="fas fa-burn"></span>&nbsp;&nbsp;</button>
 				<% end %>
 			</td>
 			<% if can? :manage, Consumer %>
