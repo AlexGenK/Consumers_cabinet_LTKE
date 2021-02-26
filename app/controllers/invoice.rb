@@ -64,7 +64,7 @@ class Invoice < ApplicationController
     pdf.move_down 10
     # table
     table_data = [['№', 'Товари (роботи, послуги)', 'Кіл-сть', 'Од.', 'Ціна без ПДВ', 'Сума без ПДВ'],
-            ['1', "Доплата за #{product} у #{UA_MONTHS_MIS[Time.current.month]} #{Time.current.year} р.", 
+            ['1', "Оплата за #{product}", 
             ActiveSupport::NumberHelper.number_to_delimited(data.quantity, delimiter: ' '),
             units, 
             ActiveSupport::NumberHelper.number_to_delimited(data.price, delimiter: ' '), 
