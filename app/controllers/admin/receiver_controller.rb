@@ -7,7 +7,7 @@ class Admin::ReceiverController < ApplicationController
 
   def update
     if @receiver.update(receiver_params)
-      flash[:notice] = "Платіжні реквізити відредаговані" 
+      flash[:notice] = "Реквізити відредаговані" 
       redirect_to consumers_path
     else
       render :edit
