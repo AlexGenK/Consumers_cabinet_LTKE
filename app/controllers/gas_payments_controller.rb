@@ -18,7 +18,14 @@ class GasPaymentsController < ApplicationController
       prev_cons = @consumer.previous_gas_consumption.where(date: start_prev..end_prev).first
       # находим стоимость потребленя следующего месяца
       if @consumer.gas_bid
-        next_cost = @consumer.gas_bid.month_sum((Time.now.end_of_month + 1.day).month) * @current_gas_consumption.tariff * 1.2
+        # выбор тарифа для расчета стоимости следующего месяца
+        if (@current_gas_consumption.next_tariff != nil) && (@current_gas_consumption.next_tariff > 0)
+          next_tariff = @current_gas_consumption.next_tariff
+        else
+          next_tariff = @current_gas_consumption.tariff 
+        end
+
+        next_cost = @consumer.gas_bid.month_sum((Time.now.end_of_month + 1.day).month) * next_tariff * 1.2
       else
         next_cost = 0
       end
