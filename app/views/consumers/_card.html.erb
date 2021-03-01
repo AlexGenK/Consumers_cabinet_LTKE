@@ -1,3 +1,4 @@
+<% @receiver = Receiver.first %>
 <div class="card">
 	<% if style == 'gas' %>
 		<div class="card-header text-white bg-primary">
@@ -106,7 +107,44 @@
 			<div class="tab-pane container fade" id="cont_rec">
 				<div class="row">
 					<div class="col-md-12">
-						<br>
+						<table class="table table-borderless table-sm table-striped">
+						  <thead>
+						    <tr>
+						      <th scope="col">Підрозділ</th>
+						      <th scope="col">Контактна особа</th>
+						      <th scope="col">Телефон</th>
+						      <th scope="col">E-mail</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <td><b>Бухгалтерія</b><br><small>(рахунки, акти, розрахунки)</small></td>
+						      <td><i><%= @receiver.buh_name %></i></td>
+						      <td><i><%= @receiver.buh_phone %></i></td>
+						      <td><i><%= mail_to @receiver.buh_mail %></i></td>
+						    </tr>
+							<tr>
+						      <td><b>Договірний відділ</b><br><small>(договірні документи, питання щодо умов постачання)</small></td>
+						      <td><i><%= @receiver.dog_name %></i></td>
+						      <td><i><%= @receiver.dog_phone %></i></td>
+						      <td><i><%= mail_to @receiver.dog_mail %></i></td>
+						    </tr>
+						    <tr>
+						      <td><b>Технічний відділ</b><br><small>(ліміти, коригування, вичитка даних)</small></td>
+						      <td><i><%= @receiver.teh_name %></i></td>
+						      <td><i><%= @receiver.teh_phone %></i></td>
+						      <td><i><%= mail_to @receiver.teh_mail %></i></td>
+						    </tr>
+						    <tr>
+						      <td><b>Комерційний відділ</b><br><small>(гострі питання постачання)</small></td>
+						      <td><i><%= @receiver.com_name %></i></td>
+						      <td><i><%= @receiver.com_phone %></i></td>
+						      <td><i><%= mail_to @receiver.com_mail %></i></td>
+						    </tr>
+						  </tbody>
+						</table>
+
+						
 					</div>
 				</div>
 			</div>
