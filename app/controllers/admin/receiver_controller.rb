@@ -22,7 +22,8 @@ class Admin::ReceiverController < ApplicationController
   end
 
   def receiver_params
-    params.require(:receiver).permit(:name, :edrpou, :account, :bank, :ipn, :address,
+    params.require(:receiver).permit(:name, :edrpou, :account, :bank, 
+                                     :account_gas, :bank_gas, :ipn, :address,
                                      :buh_name, :buh_phone, :buh_mail,
                                      :dog_name, :dog_phone, :dog_mail,
                                      :teh_name, :teh_phone, :teh_mail,
