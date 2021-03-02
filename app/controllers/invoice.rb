@@ -18,11 +18,15 @@ class Invoice < ApplicationController
     	product = 'газ'
     	dog_num = @consumer.dog_num
     	dog_date = @consumer.dog_date
+      account = receiver.account_gas
+      bank = receiver.bank_gas
     else
     	units = 'кВт.год'
     	product = 'електроенергію'
     	dog_num = @consumer.dog_num
     	dog_date = @consumer.dog_date
+      account = receiver.account
+      bank = receiver.bank
     end
 
     # document header
@@ -37,7 +41,7 @@ class Invoice < ApplicationController
       pdf.text receiver.name, style: :bold
     end
     pdf.bounding_box([105, pdf.cursor], width: 435) do
-      pdf.text "п/р #{receiver.account} у банку #{receiver.bank},"
+      pdf.text "п/р #{account} у банку #{bank},"
     end
     pdf.bounding_box([105, pdf.cursor], width: 435) do
       pdf.text "#{receiver.address},"
