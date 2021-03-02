@@ -33,16 +33,17 @@ class Admin::FillingCurrentGasConsumptionsController < ApplicationController
     @imported = []
     csv = CSV.parse(csv_file, col_sep: ';')
       csv.each do |record|
-        @consumer = Consumer.find_by(onec_id: to_1cid(record[0]), dog_num: record[10])
+        @consumer = Consumer.find_by(onec_id: to_1cid(record[0]), dog_num: record[11])
         if @consumer
           delete_old
 
           opening_balance = -1*to_money(record[5])
           volume = (@consumer.gas_bid ? @consumer.gas_bid.month_sum(Time.now.month) : 0)
           tariff = to_tariff(record[6])
+          next_tariff = to_tariff(record[7])
           cost = (volume * tariff).round(2)
           cost_val = (cost * 1.2).round(2)
-          money = to_money(record[7])
+          money = to_money(record[8])
           closing_balance = opening_balance - cost_val + money
 
           @consumer.create_current_gas_consumption(opening_balance: opening_balance,
