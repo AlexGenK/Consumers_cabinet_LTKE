@@ -20,8 +20,8 @@ class Admin::FillingGasCertificatesController < ApplicationController
           @consumer.gas_certificate&.destroy
           @cert = @consumer.build_gas_certificate
           @cert.save!
-          ftp.getbinaryfile(filename, 'public/akt.xlsx')
-          @cert.print_form.attach(io: File.open('public/akt.xlsx'), filename: 'akt.xlsx', content_type: 'application/vnd.ms-excel')
+          ftp.getbinaryfile(filename, 'public/akt.pdf')
+          @cert.print_form.attach(io: File.open('public/akt.pdf'), filename: 'akt.pdf', content_type: 'application/pdf')
           @add_certs << "Споживач #{@consumer.name} (#{@consumer.edrpou}) - договір №#{@consumer.dog_num}"
         end
       end
@@ -36,7 +36,7 @@ class Admin::FillingGasCertificatesController < ApplicationController
   end
 
   def parse_id(filename)
-    filename =~ /(.+)_.+/
+    filename =~ /._(.+)_.+/
     to_1cid($1)
   end
 end
