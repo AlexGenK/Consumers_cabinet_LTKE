@@ -49,6 +49,7 @@ class Admin::FillingCurrentGasConsumptionsController < ApplicationController
           @consumer.create_current_gas_consumption(opening_balance: opening_balance,
                                                    volume:          volume,
                                                    tariff:          tariff,
+                                                   next_tariff:     next_tariff,
                                                    cost:            cost,
                                                    cost_val:        cost_val,
                                                    money:           money,

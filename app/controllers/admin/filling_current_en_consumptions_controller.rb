@@ -49,6 +49,7 @@ class Admin::FillingCurrentEnConsumptionsController < ApplicationController
           @consumer.create_current_en_consumption(opening_balance: opening_balance,
                                                		power:           power,
                                                		tariff:          tariff,
+                                                  next_tariff:     next_tariff,
                                                		cost:            cost,
                                                		cost_val:        cost_val,
                                                		money:           money,
