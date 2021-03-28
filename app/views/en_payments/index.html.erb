@@ -63,7 +63,7 @@
 				<% @en_payments.each do |payment| %>
 					<tr>
 						<td class="text-center"><%= payment.day %></td>
-						<td class="text-center"><%= payment.percent %></td>
+						<td class="text-center"><%= "#{payment.percent}%" %></td>
 						<td class="text-center"><%= UA_PERIOD_BY_CUR[payment.month] %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:sum], precision: 2, delimiter: ' ') if @calculable %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:cur_payment], precision: 2, delimiter: ' ') if @calculable %></td>
