@@ -47,9 +47,7 @@
 				<th class="text-center">Планова сума оплати, грн.</th>
 				<th class="text-center">Оплачено, грн.</th>
 				<th class="text-center">Сальдо, грн.</th>
-				<% if can? :manage, GasPayment %>
-					<th></th>
-				<% end %>
+				<th></th>
 			</thead>
 			<tbody>
 				<tr>
@@ -68,21 +66,24 @@
 						<td class='text-center'><%= number_with_precision(@balance[count][:sum], precision: 2, delimiter: ' ') if @calculable %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:cur_payment], precision: 2, delimiter: ' ') if @calculable %></td>
 						<td class='text-center'><%= number_with_precision(@balance[count][:cur_balance], precision: 2, delimiter: ' ') if @calculable %></td>
-						<% if can? :manage, GasPayment %>
-							<td class='text-right'>
-								<div class="btn-group">
-								<%= link_to edit_consumer_gas_payment_path(@consumer, payment), 
-									class: "btn btn-outline-dark btn-sm" do %>
-									<i class="fas fa-edit test-edit-payment"></i>
+						<td class='text-right'>
+							<div class="btn-group">
+								<% if can? :manage, GasPayment %>
+									<%= link_to edit_consumer_gas_payment_path(@consumer, payment), 
+										class: "btn btn-outline-dark btn-sm" do %>
+										<i class="fas fa-edit test-edit-payment"></i>
+									<% end %>
+									<%= link_to [@consumer, payment], method: :delete, 
+										class: "btn btn-outline-danger btn-sm",
+										data: {confirm: "Ви впевнені що хочете видалити плановий платіж?"} do %>
+										<i class="fas fa-times test-delete-payment">&nbsp</i>
+									<% end %>
 								<% end %>
-								<%= link_to [@consumer, payment], method: :delete, 
-									class: "btn btn-outline-danger btn-sm",
-									data: {confirm: "Ви впевнені що хочете видалити плановий платіж?"} do %>
-									<i class="fas fa-times test-delete-payment">&nbsp</i>
+								<%= link_to consumer_gas_invoice_path(@consumer, sum: @balance[count][:cur_balance].round(2), tariff: @current_tariff, format: :pdf), class: "btn btn-outline-dark btn-sm", target: :_blank do %>
+										<i class="fas fa-file-download"></i>
 								<% end %>
-								</div>
-							</td>
-						<% end %>
+							</div>
+						</td>
 					</tr>
 					<% count += 1 %>
 				<% end %>
