@@ -1,7 +1,7 @@
 class Invoice < ApplicationController
 	require 'humanize'
 
-	InvData = Struct.new(:quantity, :price, :sum, :vat, :sum_vat)
+	InvData = Struct.new(:quantity, :price, :sum, :vat, :sum_vat, :percent, :day, :month)
 
   def pdf_form(data, **args)
     # document preparation
@@ -28,6 +28,8 @@ class Invoice < ApplicationController
       account = receiver.account
       bank = receiver.bank
     end
+
+    p args[:percent]
 
     # document header
     pdf.text "Рахунок на оплату б/н від #{l(now, format: '%-d %B %Y')} р.", size: 14, style: :bold
@@ -67,8 +69,9 @@ class Invoice < ApplicationController
     end
     pdf.move_down 10
     # table
+    formulation = get_formulation(data, product)
     table_data = [['№', 'Товари (роботи, послуги)', 'Кіл-сть', 'Од.', 'Ціна без ПДВ', 'Сума без ПДВ'],
-            ['1', "Оплата за #{product}", 
+            ['1', formulation, 
             ActiveSupport::NumberHelper.number_to_delimited(data.quantity, delimiter: ' '),
             units, 
             ActiveSupport::NumberHelper.number_to_delimited(data.price, delimiter: ' '), 
@@ -134,7 +137,28 @@ class Invoice < ApplicationController
     else
       quantity = (sum/price).round(5)
     end
-    InvData.new(quantity, price, sum, vat, sum_vat)
+    InvData.new(quantity, price, sum, vat, sum_vat, params[:percent], params[:day], params[:month])
+  end
+
+  protected
+
+  def get_formulation(data, product)
+    if data.percent && data.day && data.month
+      case data.month
+      when '1'
+        t = Time.now.beginning_of_month - 1.day
+        period = "#{UA_MONTHS_MIS[t.month]} #{t.year}"
+      when '-1'
+        t = Time.now.end_of_month + 1.day
+        period = "#{UA_MONTHS_MIS[t.month]} #{t.year}"
+      else
+        period = "#{UA_MONTHS_MIS[Time.now.month]} #{Time.now.year}"
+      end
+      formulation = "Платіж #{data.percent}% до #{data.day}.#{Time.now.strftime('%m.%Y')} за #{product} у #{period}"
+    else
+      formulation = "Оплата за #{product}"
+    end
+    return formulation
   end
 
 end

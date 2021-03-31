@@ -79,7 +79,14 @@
 										<i class="fas fa-times test-delete-payment">&nbsp</i>
 									<% end %>
 								<% end %>
-								<%= link_to consumer_en_invoice_path(@consumer, sum: @balance[count][:cur_balance].round(2), tariff: @current_tariff, format: :pdf), class: "btn btn-outline-dark btn-sm", target: :_blank do %>
+								<%= link_to consumer_en_invoice_path(@consumer, 
+																	sum: @balance[count][:cur_balance].round(2), 
+																	tariff: @current_tariff, 
+																	percent: payment.percent,
+																	day: payment.day,
+																	month: payment.month,
+																	format: :pdf), 
+									class: "btn btn-outline-dark btn-sm", target: :_blank do %>
 									<i class="fas fa-file-download"></i>
 								<% end %>
 							</div>
