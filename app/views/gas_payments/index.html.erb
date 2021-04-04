@@ -15,14 +15,22 @@
 	</thead>
 	<tbody>
 		<% if @current_gas_consumption %>
-			<td class="text-center<%= ' text-danger' if @current_gas_consumption.opening_balance < 0 %>">
+			<td class="text-center<%= if @current_gas_consumption.opening_balance < 0 
+										' text-danger'
+									  elsif @current_gas_consumption.opening_balance > 0
+									  	' text-success'
+									  end %>">
 				<%= number_with_precision(@current_gas_consumption.opening_balance, precision: 2, delimiter: " ") %></td>
 			<td class='text-center'><%= number_with_delimiter(@current_gas_consumption.volume, delimiter: " ") %></td>
 			<td class='text-center'><%= number_with_precision(@current_gas_consumption.tariff, precision: 5, delimiter: " ") %></td>
 			<td class='text-center'><%= number_with_precision(@current_gas_consumption.cost, precision: 2, delimiter: " ") %></td>
 			<td class='text-center'><%= number_with_precision(@current_gas_consumption.cost_val, precision: 2, delimiter: " ") %></td>
 			<td class='text-center'><%= number_with_precision(@current_gas_consumption.money, precision: 2, delimiter: " ") %></td>
-			<td class="text-center<%= ' text-danger' if @current_gas_consumption.closing_balance < 0 %>">
+			<td class="text-center<%= if @current_gas_consumption.closing_balance < 0 
+										' text-danger'
+									  elsif @current_gas_consumption.closing_balance > 0
+									  	' text-success'
+									  end %>">
 				<%= number_with_precision(@current_gas_consumption.closing_balance, precision: 2, delimiter: " ") %></td>
 		<% end %>
 	</tbody>
