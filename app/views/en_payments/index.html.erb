@@ -63,7 +63,18 @@
 					<td class="text-center"><%= number_with_precision(@balance[0][:sum], precision: 2, delimiter: ' ') if @calculable %></td>
 					<td class="text-center"><%= number_with_precision(@balance[0][:cur_payment], precision: 2, delimiter: ' ') if @calculable %></td>
 					<td class="text-center"><%= number_with_precision(@balance[0][:cur_balance], precision: 2, delimiter: ' ') if @calculable %></td>
-					<td class='text-right'></td>
+					<td class='text-right'>
+						<div class="btn-group">
+							<%= link_to consumer_en_invoice_path(@consumer, 
+																sum: @balance[0][:cur_balance].round(2), 
+																tariff: @consumer.en_prev_tariff,
+																period: 'prev', 
+																format: :pdf), 
+							class: "btn btn-outline-dark btn-sm", target: :_blank do %>
+								<i class="fas fa-file-download"></i>
+							<% end %>
+						</div>
+					</td>
 				</tr>
 				<% count = 1 %>
 				<% @en_payments.each do |payment| %>

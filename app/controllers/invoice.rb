@@ -143,6 +143,10 @@ class Invoice < ApplicationController
   protected
 
   def get_formulation(data, product)
+    if params[:period] == 'prev'
+      t = Time.now.beginning_of_month - 1.day
+      return "Доплата за #{product} #{l(t, format: '%B %Y')}"
+    end
     if data.percent && data.day && data.month
       case data.month
       when '1'

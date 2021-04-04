@@ -28,4 +28,26 @@ class Consumer < ApplicationRecord
 	def has_new_gas_adjustment?
 		self.gas_adjustments.where("state = 0").count > 0
 	end
+
+	def en_prev_tariff
+		t = self.previous_en_consumption.order(:date).last&.tariff
+		if (t == nil) or (t == 0)
+			t = self&.current_en_consumption.tariff
+			if (t == nil) or (t == 0)
+				t = 1
+			end
+		end
+		return t
+	end
+
+	def gas_prev_tariff
+		t = self.previous_gas_consumption.order(:date).last&.tariff
+		if (t == nil) or (t == 0)
+			t = self&.current_gas_consumption.tariff
+			if (t == nil) or (t == 0)
+				t = 1
+			end
+		end
+		return t
+	end
 end
