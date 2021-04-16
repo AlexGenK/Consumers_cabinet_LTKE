@@ -1,110 +1,118 @@
 <%= form_for consumer do |f| %>
-	<div class="form-row">
-		<div class="form-group col-md-4">
-		<%= f.label :name,"Найменування" %>
-		<%= f.text_field :name, class: "form-control" %>
-		<div class="invalid-feedback">вже існує</div>
+	<% if can? :manage, Consumer %>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+			<%= f.label :name,"Найменування" %>
+			<%= f.text_field :name, class: "form-control" %>
+			<div class="invalid-feedback">вже існує</div>
+			</div>
+			<div class="form-group col-md-8">
+			<%= f.label :full_name,"Повне найменування" %>
+			<%= f.text_field :full_name, class: "form-control" %>
+			</div>
 		</div>
-		<div class="form-group col-md-8">
-		<%= f.label :full_name,"Повне найменування" %>
-		<%= f.text_field :full_name, class: "form-control" %>
+		<div class="form-row">
+			<div class="form-group col-md-12">
+			<%= f.label :address,"Адрес" %>
+			<%= f.text_field :address, class: "form-control" %>
+			</div>
 		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-12">
-		<%= f.label :address,"Адрес" %>
-		<%= f.text_field :address, class: "form-control" %>
+		<div class="form-row">
+			<div class="form-group col-md-3">
+			<%= f.label :edrpou,"Код ЕДРПОУ" %>
+			<%= f.text_field :edrpou, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-3">
+			<%= f.label :onec_id, "Номер 1С" %>
+			<%= f.number_field :onec_id, class: "form-control" %>
+			<div class="invalid-feedback">вже існує</div>
+			</div>
+			<div class="form-group col-md-3">
+			<%= f.label :energy_consumer, "Споживач ел/ен." %>
+			<%= f.check_box :energy_consumer, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-3">
+			<%= f.label :gas_consumer, "Споживач газу" %>
+			<%= f.check_box :gas_consumer, class: "form-control" %>
+			</div>
 		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-3">
-		<%= f.label :edrpou,"Код ЕДРПОУ" %>
-		<%= f.text_field :edrpou, class: "form-control" %>
+	<% end %>
+
+	<% if can? :edit, Consumer %>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+			<%= f.label :director_name,"Директор" %>
+			<%= f.text_field :director_name, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :director_phone,"Телефон" %>
+			<%= f.text_field :director_phone, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :director_mail,"E-mail" %>
+			<%= f.text_field :director_mail, class: "form-control" %>
+			</div>
 		</div>
-		<div class="form-group col-md-3">
-		<%= f.label :onec_id, "Номер 1С" %>
-		<%= f.number_field :onec_id, class: "form-control" %>
-		<div class="invalid-feedback">вже існує</div>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+			<%= f.label :accountant_name,"Головний бухгалтер" %>
+			<%= f.text_field :accountant_name, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :accountant_phone,"Телефон" %>
+			<%= f.text_field :accountant_phone, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :accountant_mail,"E-mail" %>
+			<%= f.text_field :accountant_mail, class: "form-control" %>
+			</div>
 		</div>
-		<div class="form-group col-md-3">
-		<%= f.label :energy_consumer, "Споживач ел/ен." %>
-		<%= f.check_box :energy_consumer, class: "form-control" %>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+			<%= f.label :engineer_name,"Головний енергетик" %>
+			<%= f.text_field :engineer_name, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :engineer_phone,"Телефон" %>
+			<%= f.text_field :engineer_phone, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :engineer_mail,"E-mail" %>
+			<%= f.text_field :engineer_mail, class: "form-control" %>
+			</div>
 		</div>
-		<div class="form-group col-md-3">
-		<%= f.label :gas_consumer, "Споживач газу" %>
-		<%= f.check_box :gas_consumer, class: "form-control" %>
+	<% end %>
+
+	<% if can? :manage, Consumer %>
+		<div class="form-row">
+			<div class="form-group col-md-3">
+			<%= f.label :dog_num, "Договір" %>
+			<%= f.text_field :dog_num, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-3">
+			<%= f.label :dog_date, "від" %>
+			<%= f.date_field :dog_date, class: "form-control" %>
+			</div>
 		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-4">
-		<%= f.label :director_name,"Директор" %>
-		<%= f.text_field :director_name, class: "form-control" %>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+			<%= f.label :client_username, "Клієнт" %>
+			<%= f.select :client_username, @clients, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :manager_en_username, "Менеджер по ел/енергії" %>
+			<%= f.select :manager_en_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+			</div>
+			<div class="form-group col-md-4">
+			<%= f.label :manager_gas_username, "Менеджер по газу" %>
+			<%= f.select :manager_gas_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
+			</div>
+			<% if !current_user.admin_role? %>
+				<%= f.hidden_field :manager_en_username %>
+				<%= f.hidden_field :manager_gas_username %>
+			<% end %>
 		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :director_phone,"Телефон" %>
-		<%= f.text_field :director_phone, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :director_mail,"E-mail" %>
-		<%= f.text_field :director_mail, class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-4">
-		<%= f.label :accountant_name,"Головний бухгалтер" %>
-		<%= f.text_field :accountant_name, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :accountant_phone,"Телефон" %>
-		<%= f.text_field :accountant_phone, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :accountant_mail,"E-mail" %>
-		<%= f.text_field :accountant_mail, class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-4">
-		<%= f.label :engineer_name,"Головний енергетик" %>
-		<%= f.text_field :engineer_name, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :engineer_phone,"Телефон" %>
-		<%= f.text_field :engineer_phone, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :engineer_mail,"E-mail" %>
-		<%= f.text_field :engineer_mail, class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-3">
-		<%= f.label :dog_num, "Договір" %>
-		<%= f.text_field :dog_num, class: "form-control" %>
-		</div>
-		<div class="form-group col-md-3">
-		<%= f.label :dog_date, "від" %>
-		<%= f.date_field :dog_date, class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="form-group col-md-4">
-		<%= f.label :client_username, "Клієнт" %>
-		<%= f.select :client_username, @clients, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :manager_en_username, "Менеджер по ел/енергії" %>
-		<%= f.select :manager_en_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
-		</div>
-		<div class="form-group col-md-4">
-		<%= f.label :manager_gas_username, "Менеджер по газу" %>
-		<%= f.select :manager_gas_username, @managers, {include_blank: true}, disabled: !current_user.admin_role?, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
-		</div>
-		<% if !current_user.admin_role? %>
-			<%= f.hidden_field :manager_en_username %>
-			<%= f.hidden_field :manager_gas_username %>
-		<% end %>
-	</div>
+	<% end %>
 	<br />
 	<div class="form-row">
 		<div class="col-md-3">

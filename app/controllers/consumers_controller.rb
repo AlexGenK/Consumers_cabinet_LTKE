@@ -53,15 +53,21 @@ class ConsumersController < ApplicationController
   private
 
   def consumer_params
-    params.require(:consumer).permit(:name, :full_name, :edrpou, :onec_id,
-                                     :director_name, :director_phone, :director_mail,
-                                     :engineer_name, :engineer_phone, :engineer_mail,
-                                     :accountant_name, :accountant_phone, :accountant_mail,
-                                     :dog_num, :dog_date,
-                                     :dog_gas_num, :dog_gas_date,
-                                     :energy_consumer, :gas_consumer,
-                                     :manager_en_username, :manager_gas_username,
-                                     :client_username, :address)
+    if current_user.admin_role? || current_user.manager_role?
+      params.require(:consumer).permit(:name, :full_name, :edrpou, :onec_id,
+                                       :director_name, :director_phone, :director_mail,
+                                       :engineer_name, :engineer_phone, :engineer_mail,
+                                       :accountant_name, :accountant_phone, :accountant_mail,
+                                       :dog_num, :dog_date,
+                                       :dog_gas_num, :dog_gas_date,
+                                       :energy_consumer, :gas_consumer,
+                                       :manager_en_username, :manager_gas_username,
+                                       :client_username, :address)
+    else
+      params.require(:consumer).permit(:director_name, :director_phone, :director_mail,
+                                       :engineer_name, :engineer_phone, :engineer_mail,
+                                       :accountant_name, :accountant_phone, :accountant_mail)
+    end
   end
 
   def set_consumer
