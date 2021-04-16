@@ -15,7 +15,6 @@ class Admin::FillingEnCertificatesController < ApplicationController
       ftp.nlst.each do |filename|
         consumer_id = parse_id(filename)
         consumer_dog = parse_dog(filename)
-        p "#{consumer_id} - #{consumer_dog}"
         @consumer = Consumer.find_by(onec_id: consumer_id, dog_num: consumer_dog, energy_consumer: true)
         if @consumer
           @consumer.en_certificate&.destroy
