@@ -58,9 +58,11 @@
                 </div>
               </li>
             <% end %>
-            <li class="nav-item">
-              <%= link_to "Інструкція", root_path << 'readme.pdf', target: :_blank, class: "nav-link" %>
-            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Інструкція", root_path << 'readme.pdf', target: :_blank, class: "nav-link" %>
+              </li>
+            <% end %>
           </ul>
 
           <ul class="navbar-nav ml-auto">
