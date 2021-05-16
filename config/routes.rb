@@ -42,6 +42,8 @@ Rails.application.routes.draw do
     get 'filling_en_certificates',  to: 'filling_en_certificates#start'
 
     get 'filling_gas_certificates', to: 'filling_gas_certificates#start'
+
+    get 'report_clients', to: 'report_clients#show'
   end
 
   root to: 'consumers#index'
