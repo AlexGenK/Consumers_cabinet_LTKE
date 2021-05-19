@@ -13,7 +13,8 @@ class ConsumersController < ApplicationController
                 or(Consumer.where('manager_gas_username = ?', current_user.name)).
                 order(:name)
     elsif current_user.client_role?
-      @consumers=Consumer.where('client_username = ?', current_user.name).order(:name)
+      @consumers = Consumer.where('client_username = ?', current_user.name) + current_user.consumers
+      @consumers = @consumers.sort_by(&:name)
     end
   end
 
