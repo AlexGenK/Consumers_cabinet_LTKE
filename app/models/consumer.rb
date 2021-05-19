@@ -15,6 +15,8 @@ class Consumer < ApplicationRecord
 
 	has_many :messages, dependent: :destroy
 
+	has_and_belongs_to_many :users
+
 	validates :name, :onec_id, presence: true
 
 	def has_new_message?
