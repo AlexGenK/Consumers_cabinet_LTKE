@@ -96,7 +96,7 @@
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-4">
-			<%= f.label :client_username, "Клієнт" %>
+			<%= f.label :client_username, "Основний клієнт" %>
 			<%= f.select :client_username, @clients, {include_blank: true}, class: 'selectpicker form-control', data: { 'live-search' => 'true' } %>
 			</div>
 			<div class="form-group col-md-4">
@@ -111,6 +111,12 @@
 				<%= f.hidden_field :manager_en_username %>
 				<%= f.hidden_field :manager_gas_username %>
 			<% end %>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-12">
+				<%= label_tag :add_clients_username, "Додаткові клієнти" %>
+				<%= select_tag :add_clients_username, options_for_select(@clients, @add_clients), {class: "selectpicker form-control", multiple: true, data: { 'live-search' => 'true' }} %>
+			</div>
 		</div>
 	<% end %>
 	<br />

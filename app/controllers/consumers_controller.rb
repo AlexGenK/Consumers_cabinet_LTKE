@@ -38,7 +38,13 @@ class ConsumersController < ApplicationController
 
   def update
     if @consumer.update(consumer_params)
+
       @consumer.users.clear
+      params[:add_clients_username]&.each do |username|
+        @consumer.users << User.find_by(name: username)
+      end  
+      p @consumer.users
+
       redirect_to consumers_path, notice: "Споживач #{@consumer.name} успішно відредагований"
     else
       flash[:alert] = 'Неможливо відредагувати споживача'
@@ -63,7 +69,7 @@ class ConsumersController < ApplicationController
                                        :dog_gas_num, :dog_gas_date,
                                        :energy_consumer, :gas_consumer,
                                        :manager_en_username, :manager_gas_username,
-                                       :client_username, :address)
+                                       :client_username, :address, :add_clients_username)
     else
       params.require(:consumer).permit(:director_name, :director_phone, :director_mail,
                                        :engineer_name, :engineer_phone, :engineer_mail,
@@ -78,6 +84,8 @@ class ConsumersController < ApplicationController
   def set_users_list
     @managers = User.where("manager_role").order(:name).collect(&:name)
     @clients = User.where("client_role").order(:name).collect(&:name)
+    @add_clients = []
+    @consumer.users.each {|user| @add_clients << user.name }
   end
 
   def detect_invalid_user
