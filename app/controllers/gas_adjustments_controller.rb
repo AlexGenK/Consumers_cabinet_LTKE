@@ -59,7 +59,9 @@ class GasAdjustmentsController < ApplicationController
       if current_user.manager_role?
         denied_action if @consumer.manager_gas_username != current_user.name
       elsif current_user.client_role?
-        denied_action if @consumer.client_username != current_user.name
+        consumers = @consumer.users.map{|n| n.name}
+        consumers << @consumer.client_username
+        denied_action unless consumers.include?(current_user.name)
       end
     end
   end

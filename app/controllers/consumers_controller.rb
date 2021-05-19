@@ -43,7 +43,6 @@ class ConsumersController < ApplicationController
       params[:add_clients_username]&.each do |username|
         @consumer.users << User.find_by(name: username)
       end  
-      p @consumer.users
 
       redirect_to consumers_path, notice: "Споживач #{@consumer.name} успішно відредагований"
     else
@@ -94,7 +93,9 @@ class ConsumersController < ApplicationController
         denied_action if (@consumer.manager_en_username != current_user.name) &&
                          (@consumer.manager_gas_username != current_user.name)
       elsif current_user.client_role?
-        denied_action if @consumer.client_username != current_user.name
+        consumers = @consumer.users.map{|n| n.name}
+        consumers << @consumer.client_username
+        denied_action unless consumers.include?(current_user.name)
       end
     end
   end
