@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
   end
 
   create_table "consumers_users", id: false, force: :cascade do |t|
-    t.bigint "consuner_id"
+    t.bigint "consumer_id"
     t.bigint "user_id"
-    t.index ["consuner_id"], name: "index_consumers_users_on_consuner_id"
+    t.index ["consumer_id"], name: "index_consumers_users_on_consumer_id"
     t.index ["user_id"], name: "index_consumers_users_on_user_id"
   end
 
