@@ -13,7 +13,8 @@ class ConsumersController < ApplicationController
                 or(Consumer.where('manager_gas_username = ?', current_user.name)).
                 order(:name)
     elsif current_user.client_role?
-      @consumers=Consumer.where('client_username = ?', current_user.name).order(:name)
+      @consumers = Consumer.where('client_username = ?', current_user.name) + current_user.consumers
+      @consumers = @consumers.sort_by(&:name)
     end
   end
 
@@ -38,7 +39,12 @@ class ConsumersController < ApplicationController
 
   def update
     if @consumer.update(consumer_params)
+
       @consumer.users.clear
+      params[:add_clients_username]&.each do |username|
+        @consumer.users << User.find_by(name: username)
+      end  
+
       redirect_to consumers_path, notice: "Споживач #{@consumer.name} успішно відредагований"
     else
       flash[:alert] = 'Неможливо відредагувати споживача'
@@ -63,7 +69,7 @@ class ConsumersController < ApplicationController
                                        :dog_gas_num, :dog_gas_date,
                                        :energy_consumer, :gas_consumer,
                                        :manager_en_username, :manager_gas_username,
-                                       :client_username, :address)
+                                       :client_username, :address, :add_clients_username)
     else
       params.require(:consumer).permit(:director_name, :director_phone, :director_mail,
                                        :engineer_name, :engineer_phone, :engineer_mail,
@@ -78,6 +84,8 @@ class ConsumersController < ApplicationController
   def set_users_list
     @managers = User.where("manager_role").order(:name).collect(&:name)
     @clients = User.where("client_role").order(:name).collect(&:name)
+    @add_clients = []
+    @consumer.users.each {|user| @add_clients << user.name }
   end
 
   def detect_invalid_user
@@ -86,7 +94,9 @@ class ConsumersController < ApplicationController
         denied_action if (@consumer.manager_en_username != current_user.name) &&
                          (@consumer.manager_gas_username != current_user.name)
       elsif current_user.client_role?
-        denied_action if @consumer.client_username != current_user.name
+        consumers = @consumer.users.map{|n| n.name}
+        consumers << @consumer.client_username
+        denied_action unless consumers.include?(current_user.name)
       end
     end
   end
