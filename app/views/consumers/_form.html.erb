@@ -27,13 +27,17 @@
 			<%= f.number_field :onec_id, class: "form-control" %>
 			<div class="invalid-feedback">вже існує</div>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 			<%= f.label :energy_consumer, "Споживач ел/ен." %>
 			<%= f.check_box :energy_consumer, class: "form-control" %>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-2">
 			<%= f.label :gas_consumer, "Споживач газу" %>
 			<%= f.check_box :gas_consumer, class: "form-control" %>
+			</div>
+			<div class="form-group col-md-2">
+			<%= f.label :has_hourly, "Отримує погодинку" %>
+			<%= f.check_box :has_hourly, class: "form-control" %>
 			</div>
 		</div>
 	<% end %>

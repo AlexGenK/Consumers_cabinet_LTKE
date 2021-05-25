@@ -67,7 +67,7 @@ class ConsumersController < ApplicationController
                                        :accountant_name, :accountant_phone, :accountant_mail,
                                        :dog_num, :dog_date,
                                        :dog_gas_num, :dog_gas_date,
-                                       :energy_consumer, :gas_consumer,
+                                       :energy_consumer, :gas_consumer, :has_hourly,
                                        :manager_en_username, :manager_gas_username,
                                        :client_username, :address, :add_clients_username)
     else
