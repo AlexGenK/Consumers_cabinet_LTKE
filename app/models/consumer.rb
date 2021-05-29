@@ -5,6 +5,7 @@ class Consumer < ApplicationRecord
 	has_one  :current_en_consumption, dependent: :destroy
 	has_one  :en_certificate, dependent: :destroy
 	has_many :en_adjustments, dependent: :destroy
+	has_many :monthlies, dependent: :destroy
 
 	has_many :gas_payments, dependent: :destroy
 	has_one  :gas_bid, dependent: :destroy
