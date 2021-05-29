@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_063513) do
+ActiveRecord::Schema.define(version: 2021_05_29_064656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,15 @@ ActiveRecord::Schema.define(version: 2021_05_29_063513) do
     t.index ["consumer_id"], name: "index_gas_payments_on_consumer_id"
   end
 
+  create_table "hourlies", force: :cascade do |t|
+    t.integer "hour_cons"
+    t.decimal "w", precision: 8, scale: 2
+    t.bigint "daily_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["daily_id"], name: "index_hourlies_on_daily_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "text"
     t.text "comment"
@@ -347,6 +356,7 @@ ActiveRecord::Schema.define(version: 2021_05_29_063513) do
   add_foreign_key "gas_adjustments", "consumers"
   add_foreign_key "gas_bids", "consumers"
   add_foreign_key "gas_payments", "consumers"
+  add_foreign_key "hourlies", "dailies"
   add_foreign_key "messages", "consumers"
   add_foreign_key "monthlies", "consumers"
   add_foreign_key "previous_en_consumptions", "consumers"
