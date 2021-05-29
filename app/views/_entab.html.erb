@@ -10,7 +10,7 @@
   </li>
   <% if @consumer.has_hourly %>
     <li class="nav-item">
-      <a class="nav-link <%= 'active' if active == 6 %> " href="#">Погодинне споживання</a>
+      <a class="nav-link <%= 'active' if active == 6 %> " href="<%= consumer_monthlies_path(@consumer) %>">Погодинне споживання</a>
     </li>
   <% end %>
   <li class="nav-item">
