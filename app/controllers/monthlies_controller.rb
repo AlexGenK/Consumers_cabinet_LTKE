@@ -6,6 +6,10 @@ class MonthliesController < ApplicationController
     def index
     end
 
+    def create
+        redirect_to consumer_monthlies_path(@consumer), notice: "Погодинне споживання для #{@consumer.name} імпортовано успішно"
+    end
+
     private
 
     def set_consumer
