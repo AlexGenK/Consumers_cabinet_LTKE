@@ -2,11 +2,23 @@
 <br>
 <%= render './entab', active: 6 %>
 <br>
+
 <div class='row'>
-    <div class='col'>
-        <p class="font-italic text-danger text-center">Відомості про погодинне споживання відсутні</p>
+    <div class='col-md-3'>
+        <%= form_tag selector_consumer_monthlies_path(@consumer) do %>
+            <div class="form-row align-items-end">
+                <div class="col-auto">
+                    <%= select_tag 'monthly_id', options_from_collection_for_select(@monthlies, :id, :text_period, @monthly.id), class: 'form-control' %>
+                </div>
+                <div class='col-auto'>
+                    <%= button_tag 'Показати', class: 'btn btn-outline-primary' %>
+                </div>
+            </div>
+        <% end %>
     </div>
 </div>
+<br>
+<br>
 <div class='row'>
     <div class='col'>
         <div class="card">
