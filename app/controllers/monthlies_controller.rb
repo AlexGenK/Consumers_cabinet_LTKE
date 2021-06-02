@@ -8,6 +8,7 @@ class MonthliesController < ApplicationController
 
     def create
         @monthly = ParseMonthlyService.call(params[:datafile].read)
+        CreateMDHConsumptionQuery.call(params[:date].to_date.change(day: 1), @monthly, @consumer)
         redirect_to consumer_monthlies_path(@consumer), notice: "Погодинне споживання для #{@consumer.name} імпортовано успішно"
     end
 
