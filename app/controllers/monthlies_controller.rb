@@ -12,6 +12,7 @@ class MonthliesController < ApplicationController
   def show
     @monthlies = @consumer.monthlies.all.order(date_cons: :desc)
     @monthly = Monthly.find(params[:id])
+    @dailies = @monthly.dailies.all.order(:day_cons)
   end
 
   def create
