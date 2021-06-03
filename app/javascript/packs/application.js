@@ -19,6 +19,7 @@ require("channels")
 import '../stylesheets/application'
 import './bootstrap_custom.js'
 import 'bootstrap-select/dist/js/bootstrap-select.min'
+import 'chartkick/chart.js'
 
 $(document).on('turbolinks:load', function() {
   $('*:not(.bootstrap-select) > .selectpicker').selectpicker('refresh');
