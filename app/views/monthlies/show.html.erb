@@ -50,7 +50,14 @@
     </div>
 </div>
 <br>
-
+<div class='row'>
+    <div class='col'>
+        <%= link_to consumer_monthly_path(@consumer, @monthly, format: 'xlsx'), class: "btn btn-outline-dark" do %>
+            <i class="fas fa-file-download"></i> Завантажити
+        <% end %>
+    </div>
+</div>
+<br>
 <div class='row'>
     <div class='col'>
         <div class="card">

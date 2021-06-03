@@ -13,6 +13,16 @@ class MonthliesController < ApplicationController
     @monthlies = @consumer.monthlies.all.order(date_cons: :desc)
     @monthly = Monthly.find(params[:id])
     @dailies = @monthly.dailies.all.order(:day_cons)
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        workbook = CreateMonthlyXlsxService.call(@consumer, @monthly, @dailies)
+        send_data workbook.stream.string,
+                  filename: "#{@consumer.edrpou}-#{@monthly.date_cons.month}-#{@monthly.date_cons.year}.xlsx",
+                  type: 'application/xlsx',
+                  disposition: 'inline'
+      end
+    end
   end
 
   def create
