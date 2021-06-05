@@ -51,9 +51,17 @@
 </div>
 <br>
 <div class='row'>
-    <div class='col'>
+    <div class='col-md-3'>
         <%= link_to consumer_monthly_path(@consumer, @monthly, format: 'xlsx'), class: "btn btn-outline-dark" do %>
             <i class="fas fa-file-download"></i> Завантажити
+        <% end %>
+    </div>
+
+    <div class='col-md-9'>
+        <%= form_tag consumer_monthly_dailies_path(@consumer, @monthly), method: 'get' do %>
+            <%= button_tag type: :submit, class: "btn btn-outline-dark" do %>
+                <i class="fas fa-chart-area"></i> Побудувати графік
+            <% end %>
         <% end %>
     </div>
 </div>
