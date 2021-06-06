@@ -1,0 +1,91 @@
+<%= render './consumers/card', consumer: @consumer, manager: @manager, client: @client, style: 'energy' %>
+<br>
+<%= render './entab', active: 6 %>
+<br>
+
+<div class='row'>
+    <div class='col-md-12'>
+        <%= form_tag selector_consumer_monthlies_path(@consumer) do %>
+            <div class="form-row">
+                <div class="col-auto">
+                    <%= select_tag 'monthly_id', options_from_collection_for_select(@monthlies, :id, :text_period, @monthly.id), class: 'form-control' %>
+                </div>
+                <div class='col-auto'>
+                    <%= button_tag class: 'btn btn-outline-dark' do %>
+                        <span><i class="far fa-eye"></i> Показати </span>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
+<br>
+<div class='row'>
+    <div class='col-md-12'>
+        <div class="table-responsive table-vertical">
+            <table class="table table-sm table-bordered table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <% (1..24).each do |i| %>
+                            <th class='text-center'><%= i %></th>
+                        <% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @dailies.each do |daily| %>
+                        <tr>
+                            <th class='text-center'><%= daily.day_cons %></th>
+                            <td class='text-right'><%= daily.hourlies.sum(:w) %></td>
+                            <% @hourlies = daily.hourlies.all.order(:hour_cons) %>
+                            <% @hourlies.each do |hourly| %>
+                                <td class='text-right'><%= hourly.w %></td>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class='row'>
+    <div class='col-md-3'>
+        <%= link_to consumer_monthly_path(@consumer, @monthly, format: 'xlsx'), class: "btn btn-outline-dark" do %>
+            <i class="fas fa-file-download"></i> Завантажити XLSX
+        <% end %>
+    </div>
+
+    <div class='col-md-9'>
+        <%= form_tag consumer_monthly_dailies_path(@consumer, @monthly), method: 'get', class: "form-inline" do %>
+            <%= button_tag type: :submit, class: "btn btn-outline-dark" do %>
+                <i class="fas fa-chart-area"></i> Побудувати графік
+            <% end %>
+            <div class="form-group">
+                <label for="day_begin" class='mx-sm-3'= >з </label>
+                <%= select_tag 'day_begin', options_for_select((1..31)), class: 'form-control' %>
+            </div>
+            <div class="form-group">
+                <label for="day_end" class='mx-sm-3'= >по </label>
+                <%= select_tag 'day_end', options_for_select((1..31)), class: 'form-control' %>
+            </div>
+        <% end %>
+    </div>
+</div>
+<br>
+
+<% if can? :manage, Monthly %>
+    <div class='row'>
+        <div class='col'>
+            <div class="card">
+                <div class="card-header">
+                    Імпортувати погодинне споживання до кабінету:
+                </div>
+                <div class="card-body">
+                    <%= render 'admin/select_file', operation: consumer_monthlies_path(@consumer), style: 'with_date' %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

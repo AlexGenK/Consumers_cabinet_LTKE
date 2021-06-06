@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_172154) do
+ActiveRecord::Schema.define(version: 2021_05_29_064656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
     t.string "accountant_name"
     t.string "accountant_phone"
     t.string "accountant_mail"
+    t.boolean "has_hourly", default: false
   end
 
   create_table "consumers_users", id: false, force: :cascade do |t|
@@ -101,6 +102,14 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "next_tariff", precision: 10, scale: 5
     t.index ["consumer_id"], name: "index_current_gas_consumptions_on_consumer_id"
+  end
+
+  create_table "dailies", force: :cascade do |t|
+    t.integer "day_cons"
+    t.bigint "monthly_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["monthly_id"], name: "index_dailies_on_monthly_id"
   end
 
   create_table "en_adjustments", force: :cascade do |t|
@@ -235,6 +244,15 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
     t.index ["consumer_id"], name: "index_gas_payments_on_consumer_id"
   end
 
+  create_table "hourlies", force: :cascade do |t|
+    t.integer "hour_cons"
+    t.decimal "w", precision: 8, scale: 2
+    t.bigint "daily_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["daily_id"], name: "index_hourlies_on_daily_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "text"
     t.text "comment"
@@ -245,6 +263,14 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["consumer_id"], name: "index_messages_on_consumer_id"
+  end
+
+  create_table "monthlies", force: :cascade do |t|
+    t.date "date_cons"
+    t.bigint "consumer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_monthlies_on_consumer_id"
   end
 
   create_table "previous_en_consumptions", force: :cascade do |t|
@@ -323,13 +349,16 @@ ActiveRecord::Schema.define(version: 2021_05_19_172154) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "current_en_consumptions", "consumers"
   add_foreign_key "current_gas_consumptions", "consumers"
+  add_foreign_key "dailies", "monthlies"
   add_foreign_key "en_adjustments", "consumers"
   add_foreign_key "en_bids", "consumers"
   add_foreign_key "en_payments", "consumers"
   add_foreign_key "gas_adjustments", "consumers"
   add_foreign_key "gas_bids", "consumers"
   add_foreign_key "gas_payments", "consumers"
+  add_foreign_key "hourlies", "dailies"
   add_foreign_key "messages", "consumers"
+  add_foreign_key "monthlies", "consumers"
   add_foreign_key "previous_en_consumptions", "consumers"
   add_foreign_key "previous_gas_consumptions", "consumers"
 end

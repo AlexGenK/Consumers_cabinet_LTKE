@@ -8,6 +8,11 @@
   <li class="nav-item">
     <a class="nav-link <%= 'active' if active == 3 %> " href="<%= consumer_en_bid_path(@consumer) %>">Заявка</a>
   </li>
+  <% if @consumer.has_hourly %>
+    <li class="nav-item">
+      <a class="nav-link <%= 'active' if active == 6 %> " href="<%= consumer_monthlies_path(@consumer) %>">Погодинне споживання</a>
+    </li>
+  <% end %>
   <li class="nav-item">
     <a class="nav-link <%= 'active' if active == 4 %>" href="<%= consumer_messages_path(@consumer, cab: 'energy') %>">Запити</a>
   </li>

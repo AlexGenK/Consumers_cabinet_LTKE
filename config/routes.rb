@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :en_payments
     resources :previous_en_consumptions
     resources :en_adjustments
+    resources :monthlies do
+      resources  :dailies, only: [:index] 
+      post 'selector', on: :collection
+    end
     resource  :en_bid
     resource  :en_invoice, only: [:show]
 

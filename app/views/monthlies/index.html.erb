@@ -1,0 +1,21 @@
+<%= render './consumers/card', consumer: @consumer, manager: @manager, client: @client, style: 'energy' %>
+<br>
+<%= render './entab', active: 6 %>
+<br>
+<div class='row'>
+    <div class='col'>
+        <p class="font-italic text-danger text-center">Відомості про погодинне споживання відсутні</p>
+    </div>
+</div>
+<div class='row'>
+    <div class='col'>
+        <div class="card">
+            <div class="card-header">
+                Імпортувати погодинне споживання до кабінету:
+            </div>
+            <div class="card-body">
+                <%= render 'admin/select_file', operation: consumer_monthlies_path(@consumer), style: 'with_date' %>
+            </div>
+        </div>
+    </div>
+</div>
