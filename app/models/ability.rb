@@ -40,9 +40,9 @@ class Ability
         can :read, GasBid
         can :read, EnPayment
         can :read, GasPayment
-        can :read, Monthly
-        can :read, Daily
-        can :read, Hourly
+        can [:read, :selector], Monthly
+        can [:read, :selector], Daily
+        can [:read, :selector], Hourly
         can :show, :invoice
         can [:new, :create, :index], Message
         can [:new, :create, :index], EnAdjustment
