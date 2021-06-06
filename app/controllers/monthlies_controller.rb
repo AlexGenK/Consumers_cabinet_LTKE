@@ -44,7 +44,7 @@ class MonthliesController < ApplicationController
     @client = User.find_by(name: @consumer.client_username)
   end
   
-  def message_params
+  def monthlies_params
       params.require(:monthlies).permit(:date, :file)
   end
   
