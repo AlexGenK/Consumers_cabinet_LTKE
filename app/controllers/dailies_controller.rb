@@ -4,6 +4,11 @@ class DailiesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @day_begin = params[:day_begin].to_i
+    @day_end = params[:day_end].to_i
+    @day_begin, @day_end = @day_end, @day_begin if @day_begin > @day_end
+    scope = @monthly.dailies.all
+    @dailies_graph = GetDailiesConsumptionsQuery.call(scope, @day_begin, @day_end)
   end
 
   private

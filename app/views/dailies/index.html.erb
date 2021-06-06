@@ -4,8 +4,18 @@
 	</div>
 	<div class="card-body">
 		<div class='row'>
+			<div class='col text-center'>
+				<h5>Графік погодинного споживання з <%= @day_begin %> по <%= @day_end %> <%= I18n.t('date.month_names')[@monthly.date_cons.month]%></h5>
+			</div>
+		</div>
+		<div class='row'>
+				<div class='col'>
+					<%= line_chart @dailies_graph, ytitle: 'кВт*год', xtitle: 'години', height: "500px", discrete: true %>
+				</div>
+			</div>
+		<div class='row'>
 			<div class='col'>
-				<%= link_to consumer_monthlies_path(@consumer), class: "btn btn-outline-dark" do %>
+				<%= link_to consumer_monthly_path(@consumer, @monthly), class: "btn btn-outline-dark" do %>
             		<i class="fas fa-undo-alt"></i> Повернутись
         		<% end %>
 			</div>
