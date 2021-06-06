@@ -66,15 +66,18 @@
     </div>
 </div>
 <br>
-<div class='row'>
-    <div class='col'>
-        <div class="card">
-            <div class="card-header">
-                Імпортувати погодинне споживання до кабінету:
-            </div>
-            <div class="card-body">
-                <%= render 'admin/select_file', operation: consumer_monthlies_path(@consumer), style: 'with_date' %>
+
+<% if can? :manage, Monthly %>
+    <div class='row'>
+        <div class='col'>
+            <div class="card">
+                <div class="card-header">
+                    Імпортувати погодинне споживання до кабінету:
+                </div>
+                <div class="card-body">
+                    <%= render 'admin/select_file', operation: consumer_monthlies_path(@consumer), style: 'with_date' %>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<% end %>

@@ -29,6 +29,6 @@ class DailiesController < ApplicationController
   end
 
   def denied_action
-      redirect_to :consumers, alert: "Спроба отримати доступ до спиживання споживача, що Вам не належить або не існує"
+      redirect_to :consumers, alert: "Спроба отримати доступ до споживання споживача, що Вам не належить або не існує"
   end
 end

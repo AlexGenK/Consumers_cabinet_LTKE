@@ -20,6 +20,9 @@ class Ability
         can :manage, GasBid
         can :manage, EnPayment
         can :manage, GasPayment
+        can :manage, Monthly
+        can :manage, Daily
+        can :manage, Hourly
         can :show, :invoice
         can [:edit, :update, :index], Message
         can [:edit, :update, :index], EnAdjustment
@@ -37,6 +40,9 @@ class Ability
         can :read, GasBid
         can :read, EnPayment
         can :read, GasPayment
+        can :read, Monthly
+        can :read, Daily
+        can :read, Hourly
         can :show, :invoice
         can [:new, :create, :index], Message
         can [:new, :create, :index], EnAdjustment
