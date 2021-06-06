@@ -7,6 +7,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("chart.js")
+require("chartkick")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -19,7 +21,7 @@ require("channels")
 import '../stylesheets/application'
 import './bootstrap_custom.js'
 import 'bootstrap-select/dist/js/bootstrap-select.min'
-import 'chartkick/chart.js'
+import 'chart.js/dist/chart.min.js'
 
 $(document).on('turbolinks:load', function() {
   $('*:not(.bootstrap-select) > .selectpicker').selectpicker('refresh');
