@@ -27,6 +27,9 @@ class ConsumersController < ApplicationController
   def create
     @consumer = Consumer.new(consumer_params)
     if @consumer.save
+      params[:add_clients_username]&.each do |username|
+        @consumer.users << User.find_by(name: username)
+      end
       redirect_to consumers_path, notice: "Споживач #{@consumer.name} успішно створений"
     else
       flash[:alert] = 'Неможливо створити споживача'
@@ -85,7 +88,7 @@ class ConsumersController < ApplicationController
     @managers = User.where("manager_role").order(:name).collect(&:name)
     @clients = User.where("client_role").order(:name).collect(&:name)
     @add_clients = []
-    @consumer.users.each {|user| @add_clients << user.name }
+    @consumer.users.each {|user| @add_clients << user.name } if @consumer != nil
   end
 
   def detect_invalid_user
