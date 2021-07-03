@@ -27,7 +27,19 @@
 			<tr>
 				<td><%= n += 1 %></td>
 				<td><%= company.name %></td>
-				<td></td>
+				<td class="text-right">
+					<div class="btn-group">
+					<%= link_to edit_d_company_path(company), 
+						class: "btn btn-outline-dark btn-sm" do %>
+						<i class="fas fa-edit"></i>
+					<% end %>
+					<%= link_to company, method: :delete, 
+						class: "btn btn-outline-danger btn-sm",
+						data: {confirm: "Ви впевнені що хочете видалити компанію #{company.name}?"} do %>
+						<i class="fas fa-times">&nbsp;</i>
+					<% end %>
+					</div>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
