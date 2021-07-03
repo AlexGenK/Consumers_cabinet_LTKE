@@ -1,1 +1,34 @@
-<h5>Енергорозподільчі компанії</h5>
+<h3>Енергорозподільчі компанії</h3>
+
+<%= form_for [@d_company] do |f| %>
+	<div class="form-row align-items-end">
+			<div class="col-auto">
+				<%= f.button type: 'submit', class: "btn btn-outline-dark" do %>
+					<i class="fas fa-plus"></i> Нова компанія
+				<% end %>
+			</div>
+			<div class="col">
+				<%= f.text_field :name, class: "form-control", placeholder: 'введіть назву компанії' %>
+			</div>
+	</div>
+<% end %>
+<br>
+<table class="table table-striped table-sm">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Найменування</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% n = 0 %>
+		<% @d_companies.each do |company| %>
+			<tr>
+				<td><%= n += 1 %></td>
+				<td><%= company.name %></td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
