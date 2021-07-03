@@ -1,0 +1,2 @@
+module DTariffsHelper
+end
