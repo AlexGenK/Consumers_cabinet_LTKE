@@ -18,6 +18,18 @@ class DCompaniesController < ApplicationController
     redirect_to d_companies_path
   end
 
+  def edit
+  end
+
+  def update
+    if @d_company.update(d_company_params)
+      redirect_to d_companies_path, notice: "Компанія #{@d_company.name} успішно відредагована"
+    else
+      flash[:alert] = 'Неможливо відредагувати компанію'
+      render :edit
+    end
+  end
+
   private
 
   def set_d_company
