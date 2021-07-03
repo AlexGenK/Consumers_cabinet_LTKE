@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_03_070032) do
+ActiveRecord::Schema.define(version: 2021_07_03_070818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,18 @@ ActiveRecord::Schema.define(version: 2021_07_03_070032) do
     t.boolean "operational"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "d_tariffs", force: :cascade do |t|
+    t.decimal "class_one"
+    t.decimal "class_two"
+    t.date "start_date"
+    t.string "decree"
+    t.date "decree_date"
+    t.bigint "d_company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["d_company_id"], name: "index_d_tariffs_on_d_company_id"
   end
 
   create_table "dailies", force: :cascade do |t|
@@ -356,6 +368,7 @@ ActiveRecord::Schema.define(version: 2021_07_03_070032) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "current_en_consumptions", "consumers"
   add_foreign_key "current_gas_consumptions", "consumers"
+  add_foreign_key "d_tariffs", "d_companies"
   add_foreign_key "dailies", "monthlies"
   add_foreign_key "en_adjustments", "consumers"
   add_foreign_key "en_bids", "consumers"
