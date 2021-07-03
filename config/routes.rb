@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resource  :gas_invoice, only: [:show]
   end
 
+  resources :d_companies
+  
   namespace :admin do
     resource :receiver, controller: 'receiver', only: [:edit, :update]
 
