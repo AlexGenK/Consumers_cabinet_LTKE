@@ -30,6 +30,12 @@ class DCompaniesController < ApplicationController
     end
   end
 
+  def report
+    @consumer = Consumer.find(params[:consumer_id])
+    @manager = User.find_by(name: @consumer.manager_en_username)
+    @client = User.find_by(name: @consumer.client_username)
+  end
+
   private
 
   def set_d_company
