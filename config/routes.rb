@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :d_companies do 
     resources :d_tariffs
     get 'report', on: :collection
+    post 'selector', on: :collection
   end
   
   namespace :admin do

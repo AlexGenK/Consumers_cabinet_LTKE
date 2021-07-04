@@ -34,8 +34,12 @@ class DCompaniesController < ApplicationController
     @consumer = Consumer.find(params[:consumer_id])
     @manager = User.find_by(name: @consumer.manager_en_username)
     @client = User.find_by(name: @consumer.client_username)
-    @current_d_tariffs = GetCurrentDTariffsQuery.call(DCompany.order(:name).where(operational: true), Date.today)
-    p @current_d_tariffs
+    @report_date = params[:report_date] || Date.today
+    @current_d_tariffs = GetCurrentDTariffsQuery.call(DCompany.order(:name).where(operational: true), @report_date)
+  end
+
+  def selector
+    redirect_to report_d_companies_path(consumer_id: params[:consumer_id], report_date: params[:report_date])
   end
 
   private

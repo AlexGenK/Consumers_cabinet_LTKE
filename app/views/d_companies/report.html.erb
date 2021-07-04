@@ -2,7 +2,17 @@
 <br>
 <%= render './entab', active: 7 %>
 <br />
-
+<%= form_tag selector_d_companies_path, class: 'form-inline' do %>
+	<div class="form-group mx-sm-3">
+    	<%= label_tag 'report_date', 'Тарифи на послуги з розподілу електричної енергії, що діють на:', class: "mx-sm-3" %>
+   		<%= date_field_tag 'report_date', @report_date, class: 'form-control' %>
+   		<%= hidden_field_tag 'consumer_id', @consumer.id %>
+   	</div>
+    <%= button_tag class: 'btn btn-outline-dark' do %>
+        <span><i class="far fa-eye"></i> Показати </span>
+   	<% end %>
+<% end %>
+<br />
 <table class="table table-bordered table-striped table-sm">
 	<thead>
 		<tr>
