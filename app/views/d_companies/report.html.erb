@@ -2,3 +2,35 @@
 <br>
 <%= render './entab', active: 7 %>
 <br />
+
+<table class="table table-bordered table-striped table-sm">
+	<thead>
+		<tr>
+			<th rowspan="2", class="text-center">N</th>
+			<th rowspan="2", class="text-center">Енергорозподільчі компанії</th>
+			<th colspan="2", class="text-center">Тарифи на послуги з розподілу електричної енергії</th>
+			<th colspan="3", class="text-center">Регламентуючий документ: постанова НКРЕКП</th>
+		</tr>
+			<th class="text-center">1 клас, грн/МВт*год <br /> (без ПДВ)</th>
+			<th class="text-center">2 клас, грн/МВт*год <br /> (без ПДВ)</th>
+			<th class="text-center">N</th>
+			<th class="text-center">дата</th>
+			<th class="text-center">діє з</th>
+		<tr>
+		</tr>
+	</thead>
+	<tbody>
+		<% n = 0 %>
+		<% @current_d_tariffs.each do |tariff| %>
+			<tr>
+				<td><%= n += 1 %></td>
+				<td><%= tariff.d_company.name %></td>
+				<td class="text-center"><%= tariff.class_one %></td>
+				<td class="text-center"><%= tariff.class_two %></td>
+				<td class="text-center"><%= tariff.decree %></td>
+				<td class="text-center"><%= tariff.decree_date %></td>
+				<td class="text-center"><%= tariff.start_date %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
