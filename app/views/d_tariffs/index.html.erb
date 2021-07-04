@@ -31,6 +31,19 @@
 				<td class="text-center"><%= tariff.decree %></td>
 				<td class="text-center"><%= tariff.decree_date %></td>
 				<td class="text-center"><%= tariff.start_date %></td>
+				<td class="text-right">
+					<div class="btn-group">
+					<%= link_to edit_d_company_d_tariff_path(@d_company, tariff),
+						class: "btn btn-outline-dark btn-sm" do %>
+						<i class="fas fa-edit"></i>
+					<% end %>
+					<%= link_to [@d_company, tariff], method: :delete, 
+						class: "btn btn-outline-danger btn-sm",
+						data: {confirm: "Ви впевнені що хочете видалити тарифи?"} do %>
+						<i class="fas fa-times">&nbsp;</i>
+					<% end %>
+					</div>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

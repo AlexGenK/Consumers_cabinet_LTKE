@@ -20,6 +20,12 @@ class DTariffsController < ApplicationController
     end
   end
 
+  def destroy
+    @d_tariff = @d_company.d_tariffs.find(params[:id])
+    @d_tariff.destroy
+    redirect_to d_company_d_tariffs_path(@d_company)
+  end
+
   private
 
   def set_d_company
