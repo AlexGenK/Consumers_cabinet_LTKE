@@ -1,2 +1,41 @@
 <h3><%= @d_company.name %></h3>
 <h4>Тарифи на послуги з розподілу електричної енергії</h4>
+<%= link_to new_d_company_d_tariff_path(@d_company), class: "btn btn-outline-dark" do %>
+	<i class="fas fa-plus"></i> Додати нові тарифи
+<% end %>
+<br>
+<br>
+<table class="table table-bordered table-striped table-sm">
+	<thead>
+		<tr>
+			<th rowspan="2">N</th>
+			<th colspan="2", class="text-center">Тарифи на послуги з розподілу електричної енергії</th>
+			<th colspan="3", class="text-center">Регламентуючий документ: постанова НКРЕКП</th>
+			<th rowspan="2", class="text-center"></th>
+		</tr>
+			<th class="text-center">1 клас, грн/МВт*год (без ПДВ)</th>
+			<th class="text-center">2 клас, грн/МВт*год (без ПДВ)</th>
+			<th class="text-center">N</th>
+			<th class="text-center">дата</th>
+			<th class="text-center">діє з</th>
+		<tr>
+		</tr>
+	</thead>
+	<tbody>
+		<% n = 0 %>
+		<% @d_tariffs.each do |tariff| %>
+			<tr>
+				<td><%= n += 1 %></td>
+				<td class="text-center"><%= tariff.class_one %></td>
+				<td class="text-center"><%= tariff.class_two %></td>
+				<td class="text-center"><%= tariff.decree %></td>
+				<td class="text-center"><%= tariff.decree_date %></td>
+				<td class="text-center"><%= tariff.start_date %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to d_companies_path, class: "btn btn-outline-secondary" do %>
+	<i class="fas fa-undo-alt"></i> Повернутись
+<% end %>

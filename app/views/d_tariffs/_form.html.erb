@@ -1,0 +1,54 @@
+<%= form_for [company, tariff] do |f| %>
+	<div class="card">
+		<div class="card-header">
+			Тарифи:
+		</div>
+		<div class="card-body">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<%= f.label :class_one, "1 клас, грн/МВт*год (без ПДВ)" %>
+					<%= f.number_field :class_one, step: 0.01, class: "form-control" %>
+				</div>
+				<div class="form-group col-md-4">
+					<%= f.label :class_two, "2 клас, грн/МВт*год (без ПДВ)" %>
+					<%= f.number_field :class_two, step: 0.01, class: "form-control" %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="card">
+		<div class="card-header">
+			Постанова НКРЕ:
+		</div>
+		<div class="card-body">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<%= f.label :decree, "номер:" %>
+					<%= f.text_field :decree, class: "form-control" %>
+				</div>
+				<div class="form-group col-md-4">
+					<%= f.label :decree_date, "дата:" %>
+					<%= f.date_field :decree_date, class: "form-control" %>
+				</div>
+				<div class="form-group col-md-4">
+					<%= f.label :start_date, "діє з:" %>
+					<%= f.date_field :start_date, class: "form-control" %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="form-row">
+		<div class="col-md-3">
+			<%= f.button type: 'submit', class: "btn btn-outline-dark btn-block" do %>
+				<i class="fas fa-save"></i> Зберегти
+			<% end %>
+		</div>
+		<div class="col-md-3">
+			<%= link_to :back, class: "btn btn-outline-secondary btn-block" do %>
+				<i class="fas fa-undo-alt"></i> Повернутись
+			<% end %>
+		</div>
+	</div>
+<% end %>

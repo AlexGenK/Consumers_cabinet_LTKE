@@ -3,6 +3,21 @@ class DTariffsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @d_tariffs = @d_company.d_tariffs.all.order(:start_date)
+  end
+
+  def new
+    @d_tariff = @d_company.d_tariffs.new
+  end
+
+  def create
+    @d_tariff = @d_company.d_tariffs.new(d_tariff_params)
+    if @d_tariff.save
+      redirect_to d_company_d_tariffs_path(@d_company)
+    else
+      flash[:alert] = 'Неможливо додати нові тарифи'
+      render :edit
+    end
   end
 
   private
