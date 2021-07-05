@@ -28,6 +28,7 @@ class Ability
         can [:edit, :update, :index], EnAdjustment
         can [:edit, :update, :index], GasAdjustment
         can [:new, :create, :index], User
+        can [:report, :selector], DCompany
     end
 
     if user.client_role?
@@ -47,6 +48,7 @@ class Ability
         can [:new, :create, :index], Message
         can [:new, :create, :index], EnAdjustment
         can [:new, :create, :index], GasAdjustment
+        can [:report, :selector], DCompany
     end
   end
 end
