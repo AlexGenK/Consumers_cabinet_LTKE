@@ -26,11 +26,11 @@
 		<% @d_tariffs.each do |tariff| %>
 			<tr>
 				<td><%= n += 1 %></td>
-				<td class="text-center"><%= tariff.class_one %></td>
-				<td class="text-center"><%= tariff.class_two %></td>
+				<td class="text-right"><%= number_with_precision(tariff.class_one, precision: 2, delimiter: " ") %></td>
+				<td class="text-right"><%= number_with_precision(tariff.class_two, precision: 2, delimiter: " ") %></td>
 				<td class="text-center"><%= tariff.decree %></td>
-				<td class="text-center"><%= tariff.decree_date %></td>
-				<td class="text-center"><%= tariff.start_date %></td>
+				<td class="text-center"><%= tariff.decree_date&.strftime('%d.%m.%Y') %></td>
+				<td class="text-center"><%= tariff.start_date&.strftime('%d.%m.%Y') %></td>
 				<td class="text-right">
 					<div class="btn-group">
 					<%= link_to edit_d_company_d_tariff_path(@d_company, tariff),
