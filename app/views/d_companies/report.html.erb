@@ -31,7 +31,7 @@
 	</thead>
 	<tbody>
 		<% n = 0 %>
-		<% @current_d_tariffs.each do |tariff| %>
+		<% @current_d_tariffs&.each do |tariff| %>
 			<tr>
 				<td><%= n += 1 %></td>
 				<td><%= tariff.d_company.name %></td>

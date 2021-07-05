@@ -23,7 +23,7 @@
 	</thead>
 	<tbody>
 		<% n = 0 %>
-		<% @d_companies.each do |company| %>
+		<% @d_companies&.each do |company| %>
 			<tr>
 				<td><%= n += 1 %></td>
 				<td><%= link_to company.name, d_company_d_tariffs_path(company) %></td>
