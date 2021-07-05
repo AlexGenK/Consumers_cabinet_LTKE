@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_03_070818) do
+ActiveRecord::Schema.define(version: 2021_07_05_180529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 2021_07_03_070818) do
   end
 
   create_table "d_tariffs", force: :cascade do |t|
-    t.decimal "class_one"
-    t.decimal "class_two"
+    t.decimal "class_one", precision: 8, scale: 2
+    t.decimal "class_two", precision: 8, scale: 2
     t.date "start_date"
     t.string "decree"
     t.date "decree_date"
