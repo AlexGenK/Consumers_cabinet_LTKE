@@ -1,25 +1,28 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 1 %>" href="<%= consumer_en_payments_path(@consumer) %>">Поточний місяць</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 1 %>" href="<%= consumer_en_payments_path(@consumer) %>">Поточний місяць</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 2 %>" href="<%= consumer_previous_en_consumptions_path(@consumer) %>">Попередні періоди</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 2 %>" href="<%= consumer_previous_en_consumptions_path(@consumer) %>">Попередні періоди</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 3 %> " href="<%= consumer_en_bid_path(@consumer) %>">Заявка</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 8 %>" href="">Обмін документами</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link nav-condenced <%= 'active' if active == 3 %> " href="<%= consumer_en_bid_path(@consumer) %>">Заявка</a>
   </li>
   <% if @consumer.has_hourly %>
     <li class="nav-item">
-      <a class="nav-link <%= 'active' if active == 6 %> " href="<%= consumer_monthlies_path(@consumer) %>">Погодинне споживання</a>
+      <a class="nav-link nav-condenced <%= 'active' if active == 6 %> " href="<%= consumer_monthlies_path(@consumer) %>">Погодинне споживання</a>
     </li>
   <% end %>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 7 %> " href="<%= report_d_companies_path(consumer_id: @consumer.id) %>">Тарифи на розподіл</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 7 %> " href="<%= report_d_companies_path(consumer_id: @consumer.id) %>">Тарифи на розподіл</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 4 %>" href="<%= consumer_messages_path(@consumer, cab: 'energy') %>">Запити</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 4 %>" href="<%= consumer_messages_path(@consumer, cab: 'energy') %>">Запити</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if active == 5 %> " href="<%= consumer_en_adjustments_path(@consumer) %>">Коригування</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 5 %> " href="<%= consumer_en_adjustments_path(@consumer) %>">Коригування</a>
   </li>
 </ul>
