@@ -27,6 +27,7 @@ class Admin::ReceiverController < ApplicationController
                                      :buh_name, :buh_phone, :buh_mail,
                                      :dog_name, :dog_phone, :dog_mail,
                                      :teh_name, :teh_phone, :teh_mail,
-                                     :com_name, :com_phone, :com_mail)
+                                     :com_name, :com_phone, :com_mail,
+                                     :adjustment_email, :message_email)
   end
 end
