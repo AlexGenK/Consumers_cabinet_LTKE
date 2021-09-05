@@ -5,11 +5,9 @@
   <li class="nav-item">
     <a class="nav-link nav-condenced <%= 'active' if active == 2 %>" href="<%= consumer_previous_en_consumptions_path(@consumer) %>">Попередні періоди</a>
   </li>
-<!--
   <li class="nav-item">
-    <a class="nav-link nav-condenced <%= 'active' if active == 8 %>" href="">Обмін документами</a>
+    <a class="nav-link nav-condenced <%= 'active' if active == 8 %>" href="<%= consumer_acts_path(@consumer) %>">Обмін документами</a>
   </li>
--->
   <li class="nav-item">
     <a class="nav-link nav-condenced <%= 'active' if active == 3 %> " href="<%= consumer_en_bid_path(@consumer) %>">Заявка</a>
   </li>

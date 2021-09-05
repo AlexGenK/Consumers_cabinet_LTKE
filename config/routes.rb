@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :consumers do
   	resources :messages
+    resources :acts
 
     resources :en_payments
     resources :previous_en_consumptions
