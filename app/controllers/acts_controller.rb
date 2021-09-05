@@ -3,7 +3,7 @@ class ActsController < ApplicationController
   before_action :detect_invalid_user
 
   def index
-    @out_documents = @vchasno_client.out_docs(@consumer.edrpou)
+    @out_documents = @vchasno_client.out_docs(@consumer.edrpou)['documents']
   end
 
   private
