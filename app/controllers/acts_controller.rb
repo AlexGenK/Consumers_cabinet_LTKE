@@ -6,6 +6,16 @@ class ActsController < ApplicationController
     @out_documents = @vchasno_client.out_docs(@consumer.edrpou)['documents']
   end
 
+  def show
+    @doc_id = params[:id]
+    @sesion_type = helpers.detect_doc_operation(@doc_id)
+    if current_user.manager_role? || current_user.admin_role?
+      @session_url = @vchasno_client.sign_doc(@doc_id, Receiver.first.edrpou.to_s, Receiver.first.dog_mail, @sesion_type)
+    else
+      @session_url = @vchasno_client.sign_doc(@doc_id, @consumer.edrpou, current_user.email, @sesion_type)
+    end
+  end
+
   private
 
   def set_consumer
@@ -18,7 +28,7 @@ class ActsController < ApplicationController
   def detect_invalid_user
     unless current_user.admin_role?
       if current_user.manager_role?
-        denied_action if @consumer.manager_gas_username != current_user.name
+        denied_action if @consumer.manager_en_username != current_user.name
       elsif current_user.client_role?
         consumers = @consumer.users.map{|n| n.name}
         consumers << @consumer.client_username

@@ -23,11 +23,15 @@ module Vchasno
                 request(htt_method: :get, endpoint: 'documents', params: params_h)
             end
 
-            def sign_doc(id, code, mail)
+            def doc(id)
+               request(htt_method: :get, endpoint: 'documents', params: {ids: id})['documents'][0] 
+            end
+
+            def sign_doc(id, code, mail, session)
                 body_h = { document_id: id,
                           email: mail,
                           edrpou: code,
-                          type: "sign_session",
+                          type: session,
                           on_cancel_url: "https://landing.vchasno.com.ua/on_cancel_url",
                           on_finish_url: "https://landing.vchasno.com.ua/on_finish_url" }.to_json
                 request(htt_method: :post, endpoint: 'sign-sessions', params: body_h)
