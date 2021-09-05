@@ -3,12 +3,14 @@ class ActsController < ApplicationController
   before_action :detect_invalid_user
 
   def index
+    @out_documents = @vchasno_client.out_docs(@consumer.edrpou)
   end
 
   private
 
   def set_consumer
     @consumer = Consumer.find(params[:consumer_id])
+    @vchasno_client = Vchasno::V2::Client.new(ENV['CONSUMERS_CABINET_LTKE_API_TOKEN'])
     @manager = User.find_by(name: @consumer.manager_en_username)
     @client = User.find_by(name: @consumer.client_username)
   end
