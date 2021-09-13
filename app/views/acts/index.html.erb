@@ -20,7 +20,7 @@
 			<% @out_documents.first(100).each do |document| %>
 				<tr>
 					<td class='text-center'><%= link_to document['date_created'].to_date, consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
-					<td class='text-left'><%= link_to document['title']||='', consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
+					<td class='text-left'><%= link_to document['title'][0..70]||='', consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
 					<td class='text-center'><%= link_to document['number']||='', consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
 					<td class='text-center'><%= Vchasno::V2::Client::DOCUMENT_STATUS[document['status']] %></td>
 				</tr>
