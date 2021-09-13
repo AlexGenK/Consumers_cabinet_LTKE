@@ -28,7 +28,8 @@ class ActsController < ApplicationController
   def detect_invalid_user
     unless current_user.admin_role?
       if current_user.manager_role?
-        denied_action if @consumer.manager_en_username != current_user.name
+        denied_action if (@consumer.manager_en_username != current_user.name) &&
+                         (@consumer.manager_gas_username != current_user.name)
       elsif current_user.client_role?
         consumers = @consumer.users.map{|n| n.name}
         consumers << @consumer.client_username

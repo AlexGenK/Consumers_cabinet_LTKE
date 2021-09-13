@@ -1,8 +1,12 @@
-<%= render './consumers/card', consumer: @consumer, manager: @manager, client: @client, style: 'energy' %>
+<%= render './consumers/card', consumer: @consumer, manager: @manager, client: @client, style: params[:cab]%>
 <br>
-<%= render './entab', active: 8 %>
+<% if params[:cab] == 'gas' %>
+  <%= render './gastab', active: 8 %>
+<% else %>
+  <%= render './entab', active: 8 %>
+<% end %>
 <br>
-<% if @out_documents.size == 0 %>
+<% if (@out_documents == nil) || (@out_documents.size == 0) %>
 	<h6 class='text-center'>Документів не знайдено</h6>
 <% else %>
 	<table class="table table-striped table-sm">
@@ -15,9 +19,9 @@
 		<tbody>
 			<% @out_documents.first(100).each do |document| %>
 				<tr>
-					<td class='text-center'><%= link_to document['date_created'].to_date, consumer_act_path(@consumer, {id: document['id']}) %></td>
-					<td class='text-left'><%= link_to document['title']||='', consumer_act_path(@consumer, {id: document['id']}) %></td>
-					<td class='text-center'><%= link_to document['number']||='', consumer_act_path(@consumer, {id: document['id']}) %></td>
+					<td class='text-center'><%= link_to document['date_created'].to_date, consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
+					<td class='text-left'><%= link_to document['title']||='', consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
+					<td class='text-center'><%= link_to document['number']||='', consumer_act_path(@consumer, id: document['id'], cab: params[:cab]) %></td>
 					<td class='text-center'><%= Vchasno::V2::Client::DOCUMENT_STATUS[document['status']] %></td>
 				</tr>
 			<% end %>
