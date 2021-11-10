@@ -13,8 +13,8 @@ class Admin::FillingEnCertificatesController < ApplicationController
                   password: ENV['CONSUMERS_CABINET_LTKE_FTP_PASSWORD'],) do |ftp|
       ftp.chdir('certificates/en') 
       ftp.nlst.each do |filename|
-        consumer_id = parse_id(filename)
-        consumer_dog = parse_dog(filename)
+        consumer_id = parse_id(filename.encode("UTF-8", "Windows-1251"))
+        consumer_dog = parse_dog(filename.encode("UTF-8", "Windows-1251"))
         @consumer = Consumer.find_by(onec_id: consumer_id, dog_num: consumer_dog, energy_consumer: true)
         if @consumer
           @consumer.en_certificate&.destroy
