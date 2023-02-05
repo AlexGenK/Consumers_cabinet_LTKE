@@ -12,7 +12,7 @@
 	<div class="card-body">
 		<ul class="nav nav-tabs">
 		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#rekv">Реквізити</a>
+		    <a class="nav-link active" data-toggle="tab" href="#rekv">Профіль</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" data-toggle="tab" href="#cont_con">Контакти споживача</a>
@@ -37,7 +37,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<b>ЕДРПОУ:</b><i> <%= consumer.edrpou %>&nbsp; &nbsp;</i>
-						<b>Код 1С:</b><i> <%= consumer.onec_id %>&nbsp; &nbsp;</i>
 					</div>
 				</div>
 				<div class="row">
@@ -86,7 +85,7 @@
 						  </thead>
 						  <tbody>
 						    <tr>
-						      <th scope="row">Директор</th>
+						      <th scope="row">Керівник</th>
 						      <td><i><%= consumer.director_name %></i></td>
 						      <td><i><%= consumer.director_phone %></i></td>
 						      <td><i><%= mail_to consumer.director_mail %></i></td>
@@ -103,22 +102,15 @@
 						      <td><i><%= consumer.engineer_phone %></i></td>
 						      <td><i><%= mail_to consumer.engineer_mail %></i></td>
 						    </tr>
+						    <% if current_user.admin_role? %>
+							    <tr>
+							      <th scope="row">Користувачі кабінету</th>
+							      <td><i><%= client&.name %></i></td>
+							      <td><i><%= client&.phone %></i></td>
+							      <td><i><%= mail_to client&.email %></i></td>
+							    </tr>
+							<% end %>
 						    <tr>
-						      <th scope="row">Кліент</th>
-						      <td><i><%= client&.name %></i></td>
-						      <td><i><%= client&.phone %></i></td>
-						      <td><i><%= mail_to client&.email %></i></td>
-						    </tr>
-						    <tr>
-					    	<% if style == 'gas' %>
-					    	  <th scope="row">Менеджер газ</th>
-					    	<% else %>
-					    	  <th scope="row">Менеджер е/е</th>
-					    	<% end %>
-					    	  <td><i><%= manager&.name %></i></td>
-					    	  <td><i><%= manager&.phone %></i></td>
-						      <td><i><%= mail_to manager&.email %></i></td>
-						    </tr>
 						  </tbody>
 						</table>
 					</div>
@@ -159,17 +151,17 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+							<tr>
+						      <td><b>Приймальня</b><br><small>(договірні документи, питання щодо умов постачання)</small></td>
+						      <td><i><%= @receiver.dog_name %></i></td>
+						      <td><i><%= @receiver.dog_phone %></i></td>
+						      <td><i><%= mail_to @receiver.dog_mail %></i></td>
+						    </tr>
 						    <tr>
 						      <td><b>Бухгалтерія</b><br><small>(рахунки, акти, розрахунки)</small></td>
 						      <td><i><%= @receiver.buh_name %></i></td>
 						      <td><i><%= @receiver.buh_phone %></i></td>
 						      <td><i><%= mail_to @receiver.buh_mail %></i></td>
-						    </tr>
-							<tr>
-						      <td><b>Договірний відділ</b><br><small>(договірні документи, питання щодо умов постачання)</small></td>
-						      <td><i><%= @receiver.dog_name %></i></td>
-						      <td><i><%= @receiver.dog_phone %></i></td>
-						      <td><i><%= mail_to @receiver.dog_mail %></i></td>
 						    </tr>
 						    <tr>
 						      <td><b>Технічний відділ</b><br><small>(ліміти, коригування, вичитка даних)</small></td>
@@ -178,7 +170,7 @@
 						      <td><i><%= mail_to @receiver.teh_mail %></i></td>
 						    </tr>
 						    <tr>
-						      <td><b>Комерційний відділ</b><br><small>(гострі питання постачання)</small></td>
+						      <td><b>Відділ супроводу</b><br><small>(гострі питання постачання)</small></td>
 						      <td><i><%= @receiver.com_name %></i></td>
 						      <td><i><%= @receiver.com_phone %></i></td>
 						      <td><i><%= mail_to @receiver.com_mail %></i></td>
