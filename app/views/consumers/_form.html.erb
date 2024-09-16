@@ -89,6 +89,12 @@
 
 	<% if can? :manage, Consumer %>
 		<div class="form-row">
+			<div class="form-group col">
+			<%= f.label :eic,"ЕІС-коди споживача" %>
+			<%= f.text_field :eic, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-row">
 			<div class="form-group col-md-3">
 			<%= f.label :dog_num, "Договір" %>
 			<%= f.text_field :dog_num, class: "form-control" %>

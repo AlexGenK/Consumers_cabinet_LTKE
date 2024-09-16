@@ -72,7 +72,7 @@ class ConsumersController < ApplicationController
                                        :dog_gas_num, :dog_gas_date,
                                        :energy_consumer, :gas_consumer, :has_hourly,
                                        :manager_en_username, :manager_gas_username,
-                                       :client_username, :address, :add_clients_username)
+                                       :client_username, :address, :add_clients_username, :eic)
     else
       params.require(:consumer).permit(:director_name, :director_phone, :director_mail,
                                        :engineer_name, :engineer_phone, :engineer_mail,

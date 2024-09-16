@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_061921) do
+ActiveRecord::Schema.define(version: 2024_09_16_091346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_061921) do
     t.string "accountant_phone"
     t.string "accountant_mail"
     t.boolean "has_hourly", default: false
+    t.text "eic"
   end
 
   create_table "consumers_users", id: false, force: :cascade do |t|
