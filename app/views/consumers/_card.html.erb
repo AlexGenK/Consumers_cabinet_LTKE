@@ -46,6 +46,7 @@
 					<div class="col-md-12">
 						<% if consumer.energy_consumer && style == 'energy' %>
 							<b>Договір з постачання електроенергії:</b><i> <%= "№#{consumer.dog_num} від #{consumer.dog_date&.strftime('%d.%m.%Y')}" %>&nbsp; &nbsp;</i>
+							<br>Строк дії Договору та умови пролонгації визначені пунктом 10 комерційної пропозиції Споживача
 						<% end %>
 						<% if consumer.gas_consumer && style == 'gas' %>
 							<b>Договір з постачання газу:</b><i> <%= "№#{consumer.dog_num} від #{consumer.dog_date&.strftime('%d.%m.%Y')}" %></i>
