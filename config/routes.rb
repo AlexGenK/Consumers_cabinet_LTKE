@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     get 'filling_current_en_consumptions',  to: 'filling_current_en_consumptions#set_params'
     post 'filling_current_en_consumptions', to: 'filling_current_en_consumptions#start'
 
+    get 'filling_en_payments',  to: 'filling_en_payments#set_params'
+    post 'filling_en_payments', to: 'filling_en_payments#start'
+
     get 'filling_current_gas_consumptions',  to: 'filling_current_gas_consumptions#set_params'
     post 'filling_current_gas_consumptions', to: 'filling_current_gas_consumptions#start'
 
