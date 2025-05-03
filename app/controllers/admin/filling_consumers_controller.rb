@@ -26,7 +26,15 @@ class Admin::FillingConsumersController < ApplicationController
                       dog_date: to_dog_date(record[6]),
                       address: record[9],
                       energy_consumer: record[8]=='Електроенергія',
-                      gas_consumer: record[8]=='ГАЗ'
+                      gas_consumer: record[8]=='ГАЗ',
+                      director_phone: record[10],
+                      director_mail: record[11],
+                      accountant_name: record[12],
+                      accountant_phone: record[13],
+                      accountant_mail: record[14],
+                      engineer_name: record[15],
+                      engineer_phone: record[16],
+                      engineer_mail: record[17]
                       ).save
           @imported << "#{to_1cid(record[0])} - #{record[2]} - Дог. №#{record[7]}"
         end
