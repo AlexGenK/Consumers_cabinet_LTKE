@@ -42,7 +42,18 @@ class Admin::FillingEnPaymentsController < ApplicationController
         @consumer.en_payments&.destroy_all
         summary_percent = 0
         item.each do |enp|
-          @consumer.en_payments.create(day: enp[0], percent: enp[1], month: enp[2])
+
+          # reverse month notation
+          month = case enp[2]
+          when '1'
+            '-1'
+          when '-1'
+            '1'
+          else
+            '0'
+          end
+
+          @consumer.en_payments.create(day: enp[0], percent: enp[1], month: month)
           summary_percent += enp[1].to_i
         end
         imported << "#{@consumer.name} #{summary_percent == 100 ? '' : ' - неповний графік!'}"
