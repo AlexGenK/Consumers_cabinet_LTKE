@@ -58,6 +58,9 @@ Rails.application.routes.draw do
     get 'filling_gas_certificates', to: 'filling_gas_certificates#start'
 
     get 'report_clients', to: 'report_clients#show'
+
+    get  'send_messages', to: 'send_messages#set_params'
+    post 'send_messages', to: 'send_messages#start'
   end
 
   root to: 'consumers#index'

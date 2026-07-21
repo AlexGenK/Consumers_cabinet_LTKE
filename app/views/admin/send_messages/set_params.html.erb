@@ -1,0 +1,37 @@
+<h5>Розсилка повідомлень споживачам</h5>
+<%= form_tag(admin_send_messages_path, multipart: true) do %>
+  <div class="form-group">
+    <%= label_tag :consumer_ids, "Споживачі" %>
+    <%= select_tag 'consumer_ids[]',
+          options_for_select(@consumers.pluck(:name, :id)),
+          multiple: true,
+          class: "selectpicker form-control",
+          data: { 'live-search' => true, 'actions-box' => true } %>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-3">
+      <%= label_tag :date, "Дата" %>
+      <%= date_field_tag :date, Date.current, class: "form-control" %>
+    </div>
+    <div class="form-group col-sm-9">
+      <%= label_tag :text, "Текст повідомлення" %>
+      <%= text_area_tag :text, nil, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='custom-file'>
+      <%= file_field_tag :datafile, class: 'custom-file-input' %>
+      <%= label_tag :datafile, 'Виберіть файл для надсилання', class: 'custom-file-label' %>
+    </div>
+  </div>
+  <%= button_tag 'Надіслати', class: 'btn btn-outline-primary',
+        data: { disable_with: '<span class="spinner-border spinner-border-sm"></span> Зачекайте...'.html_safe} %>
+<% end %>
+
+<script>
+document.querySelector('.custom-file-input').addEventListener('change',function(e){
+  var fileName = e.target.files[0] ? e.target.files[0].name : '';
+  var nextSibling = e.target.nextElementSibling
+  nextSibling.innerText = fileName
+});
+</script>
