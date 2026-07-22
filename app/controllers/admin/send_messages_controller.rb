@@ -17,7 +17,7 @@ class Admin::SendMessagesController < ApplicationController
     end
 
     Consumer.where(id: params[:consumer_ids]).each do |consumer|
-      message = consumer.messages.new(text: params[:text], created_at: date)
+      message = consumer.messages.new(text: params[:text], created_at: date, state: 1)
       message.attach.attach(blob) if blob
       message.save
       @sent << consumer.name
