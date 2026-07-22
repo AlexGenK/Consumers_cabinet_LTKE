@@ -3,7 +3,7 @@
   <div class="form-group">
     <%= label_tag :consumer_ids, "Споживачі" %>
     <%= select_tag 'consumer_ids[]',
-          options_for_select(@consumers.pluck(:name, :id)),
+          options_for_select(@consumers.map { |c| ["#{c.name} (№#{c.dog_num} від #{c.dog_date&.strftime('%d.%m.%Y')})", c.id] }),
           multiple: true,
           class: "selectpicker form-control",
           data: { 'live-search' => true, 'actions-box' => true } %>

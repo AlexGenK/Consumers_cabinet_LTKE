@@ -3,7 +3,7 @@ class Admin::SendMessagesController < ApplicationController
   authorize_resource :class => false
 
   def set_params
-    @consumers = Consumer.order(:name)
+    @consumers = Consumer.where(energy_consumer: true).order(:name)
   end
 
   def start
